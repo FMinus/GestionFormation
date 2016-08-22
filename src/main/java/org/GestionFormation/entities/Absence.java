@@ -7,6 +7,7 @@ package org.GestionFormation.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,11 +26,11 @@ public class Absence implements Serializable
     private Long idAbsence;
     
      
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CODE_COLABORATEUR")
     private Collaborateur collaborateur;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CODE_SESSIONFORMATION")
     private SessionFormation sessionFormation;
 

@@ -5,40 +5,45 @@
  */
 package org.GestionFormation.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.JoinTable;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 /**
  *
  * @author Ayoub
  */
 @Entity
-@Table(name="FORMATEUR")
-public class Formateur extends Staff
+@DiscriminatorValue("FORMATEUR")
+public class Formateur extends Utilisateur implements Serializable
 {
-    @ManyToMany
-    @JoinTable(name = "FORMATEUR_FORMATION")
+    @ManyToMany(mappedBy = "formateurs",fetch = FetchType.LAZY)
     private Collection<Formation> formations;
 
     public Formateur()
     {
     }
 
-    public Formateur(Collection<Formation> formations, String nom, String prenom, Date joinDate)
+    public Formateur(Collection<Formation> formations, String nomUtilisateur, String prenomUtilisateur, Date joinDate, String passwordUtilisateur, String emailUtilisateur)
     {
-        super(nom, prenom, joinDate);
+        super(nomUtilisateur, prenomUtilisateur, joinDate, passwordUtilisateur, emailUtilisateur);
         this.formations = formations;
     }
 
+   
+    @JsonIgnore
     public Collection<Formation> getFormations()
     {
         return formations;
     }
-
+    
+    @JsonSetter
     public void setFormations(Collection<Formation> formations)
     {
         this.formations = formations;

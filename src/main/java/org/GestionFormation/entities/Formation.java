@@ -5,6 +5,8 @@
  */
 package org.GestionFormation.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -17,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -42,26 +45,33 @@ public class Formation implements Serializable
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateFormation;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CODE_RESP")
     private ResponsableFormation responsableFormation;
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "COLLABORATEUR_FORMATION",
-            joinColumns = @JoinColumn(name="formation_id", referencedColumnName="idFormation"),
-            inverseJoinColumns=@JoinColumn(name="collaborateur_id", referencedColumnName="id")
+            joinColumns = @JoinColumn(name="formation_id"),
+            inverseJoinColumns=@JoinColumn(name="collaborateur_id")
             )
     private Collection<Collaborateur> collaborateurs;
     
-    @ManyToMany
-    @JoinTable(name = "FORMATEUR_FORMATION")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "FORMATEUR_FORMATION",
+            joinColumns = @JoinColumn(name="formation_id"),
+            inverseJoinColumns=@JoinColumn(name="formateur_id"))
     private Collection<Formateur> formateurs;
-
+    
+    @OneToMany(mappedBy = "formation",fetch = FetchType.LAZY)
+    private Collection<SessionFormation> sessionFormations;
+    
     public Formation()
     {
     }
-
+    
+    
     public Formation(String nomFormation, String Description, Date dateFormation, ResponsableFormation responsableFormation, Collection<Collaborateur> collaborateurs, Collection<Formateur> formateurs)
     {
         this.nomFormation = nomFormation;
@@ -72,6 +82,17 @@ public class Formation implements Serializable
         this.formateurs = formateurs;
     }
 
+    public Collection<SessionFormation> getSessionFormations()
+    {
+        return sessionFormations;
+    }
+
+    public void setSessionFormations(Collection<SessionFormation> sessionFormations)
+    {
+        this.sessionFormations = sessionFormations;
+    }
+    
+    
     public Long getIdFormation()
     {
         return idFormation;
@@ -86,7 +107,7 @@ public class Formation implements Serializable
     {
         return nomFormation;
     }
-
+    
     public void setNomFormation(String nomFormation)
     {
         this.nomFormation = nomFormation;
@@ -111,32 +132,38 @@ public class Formation implements Serializable
     {
         this.dateFormation = dateFormation;
     }
-
+    
+    @JsonIgnore
     public ResponsableFormation getResponsableFormation()
     {
         return responsableFormation;
     }
-
+    
+    @JsonSetter
     public void setResponsableFormation(ResponsableFormation responsableFormation)
     {
         this.responsableFormation = responsableFormation;
     }
-
+    
+    @JsonIgnore
     public Collection<Collaborateur> getCollaborateurs()
     {
         return collaborateurs;
     }
-
+    
+    @JsonSetter
     public void setCollaborateurs(Collection<Collaborateur> collaborateurs)
     {
         this.collaborateurs = collaborateurs;
     }
-
+    
+    @JsonIgnore
     public Collection<Formateur> getFormateurs()
     {
         return formateurs;
     }
-
+    
+    @JsonSetter
     public void setFormateurs(Collection<Formateur> formateurs)
     {
         this.formateurs = formateurs;

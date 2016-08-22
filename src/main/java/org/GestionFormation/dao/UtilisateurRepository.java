@@ -5,17 +5,19 @@
  */
 package org.GestionFormation.dao;
 
+
 import java.util.List;
-import org.GestionFormation.entities.ResponsableFormation;
+import org.GestionFormation.entities.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
  * @author Ayoub
  */
-public interface ResponsableFormationRepository extends JpaRepository<ResponsableFormation,Long>
+public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>
 {
-    @Query("select r from ResponsableFormation r where r.nomUtilisateur=?")
-    public List<ResponsableFormation> findByName(String name);
+    @Query("select u from Utilisateur u where u.nomUtilisateur = :nom and u.prenomUtilisateur = :prenom")
+    public List<Utilisateur> findByFullName(@Param("nom")String nom,@Param("prenom") String prenom);
 }

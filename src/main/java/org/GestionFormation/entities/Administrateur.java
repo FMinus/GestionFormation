@@ -5,27 +5,30 @@
  */
 package org.GestionFormation.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /**
  *
  * @author Ayoub
  */
 @Entity
-@Table(name="ADMINISTRATEUR")
-public class Administrateur extends Staff
+@DiscriminatorValue("ADMINISTRATEUR" )
+public class Administrateur extends Utilisateur implements Serializable
 {
 
     public Administrateur()
     {
     }
 
-    public Administrateur(String nom, String prenom, Date joinDate)
+    public Administrateur(String nomUtilisateur, String prenomUtilisateur, Date joinDate, String passwordUtilisateur, String emailUtilisateur)
     {
-        super(nom, prenom, joinDate);
+        super(nomUtilisateur, prenomUtilisateur, joinDate, passwordUtilisateur, emailUtilisateur);
     }
+
+    
 
     @Override
     public String toString()

@@ -32,7 +32,7 @@ public class SessionFormation implements Serializable
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateSession;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CODE_FORMATION")
     private Formation formation;
     
@@ -41,7 +41,8 @@ public class SessionFormation implements Serializable
     
     @OneToMany(mappedBy = "sessionFormation",fetch = FetchType.LAZY)
     private Collection<Absence> absences;
-
+    
+    
     public SessionFormation()
     {
     }

@@ -5,8 +5,12 @@
  */
 package org.GestionFormation.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
@@ -14,8 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="COLLABORATEUR")
-public class Collaborateur extends Staff
+@DiscriminatorValue("COLLABORATEUR") 
+public class Collaborateur extends Utilisateur implements Serializable
 {
     @ManyToMany(mappedBy = "collaborateurs",fetch = FetchType.LAZY)
     private Collection<Formation> formations;
@@ -24,17 +28,20 @@ public class Collaborateur extends Staff
     {
     }
 
-    public Collaborateur(Collection<Formation> formations, String nom, String prenom, Date joinDate)
+    public Collaborateur(Collection<Formation> formations, String nomUtilisateur, String prenomUtilisateur, Date joinDate, String passwordUtilisateur, String emailUtilisateur)
     {
-        super(nom, prenom, joinDate);
+        super(nomUtilisateur, prenomUtilisateur, joinDate, passwordUtilisateur, emailUtilisateur);
         this.formations = formations;
     }
 
+    
+    @JsonIgnore
     public Collection<Formation> getFormations()
     {
         return formations;
     }
-
+    
+    @JsonSetter
     public void setFormations(Collection<Formation> formations)
     {
         this.formations = formations;

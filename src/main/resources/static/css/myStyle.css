@@ -1,0 +1,17 @@
+
+@CHARSET "ISO-8859-1";
+
+.spacer
+{
+    margin-top: 20px;
+}
+
+.clickable
+{
+    cursor: pointer;
+}
+
+.error
+{
+    color: red;
+}
