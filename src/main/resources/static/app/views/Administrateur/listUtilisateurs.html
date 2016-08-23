@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>List Utilisateurs</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/myStyle.css" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    </head>
+    
+    <body ng-app="GestionFormation" ng-controller="listUtilisateursController">
+        
+        {{test}}
+        
+        <div class="col-md-6 col-sm-6 spacer">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Date Join</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="e in pageUtilisateurs.content">
+                        <td>{{e.idUtilisateur}}</td>
+                        <td>{{e.nomUtilisateur}}</td>
+                        <td>{{e.prenomUtilisateur}}</td>
+                        <td>{{e.joinDate|date:'yyyy-MM-dd'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+      
+        </div>
+        
+        <script type="text/javascript" src="/js/angular.min.js" ></script>
+        <script type="text/javascript" src="/app/controllers/administrateur/listUtilisateursController.js" ></script>
+    </body>
+</html>

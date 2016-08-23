@@ -7,6 +7,8 @@ package org.GestionFormation.metier;
 
 import java.util.List;
 import org.GestionFormation.entities.Utilisateur;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  *
@@ -18,4 +20,6 @@ public interface UtilisateurMetier
     public List<Utilisateur> listUtilisateurs();
     public Utilisateur getUtilisateur(Long idUtilisateur);
     public List<Utilisateur> findByFullName(String nom,String prenom);
+    public Page<Utilisateur> findUtilisateurs(String mc,Pageable pageable);
+     public Page<Utilisateur> findAllUtilisateurs(Pageable pgbl);
 }

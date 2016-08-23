@@ -1,21 +1,23 @@
 
-
 var myApp = angular.module("GestionFormation", []);
 myApp.controller("ajouterUtilisateurController", function($http, $scope)
 {
-    $scope.utilisateur = {};
-    $scope.errorMessage = null;
-    $scope.exception = {message:null};
+    $scope.test="myTest";
     
+    
+    $scope.utilisateur = {};
+    $scope.errors = null;
+    $scope.exception = {message:null};
+    $scope.mode={value:"form"};
     
     $scope.ajouterUtilisateur = function()
     {
-        $http.post("saveEtudiant",$scope.etudiant)
-                .success(function(data)
+        $http.post("/utilisateurs",$scope.utilisateur)
+        .success(function(data)
         {
             if(!data.errors)
             {
-                $scope.etudiant = data;
+                $scope.utilisateur = data;
                 $scope.errors = null;
                 $scope.mode.value = "confirm";
             }
@@ -26,7 +28,7 @@ myApp.controller("ajouterUtilisateurController", function($http, $scope)
             }
             
         })
-                .error(function(data)
+        .error(function(data)
         {
             $scope.exception.message = data.message;
         });

@@ -9,6 +9,8 @@ import java.util.List;
 import org.GestionFormation.dao.UtilisateurRepository;
 import org.GestionFormation.entities.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -48,6 +50,18 @@ public class UtilisateurMetierImpl implements UtilisateurMetier
     public List<Utilisateur> findByFullName(String nom, String prenom)
     {
         return utilisateurRepository.findByFullName(nom, prenom);
+    }
+
+    @Override
+    public Page<Utilisateur> findUtilisateurs(String mc, Pageable pageable)
+    {
+        return utilisateurRepository.findUtilisateur(mc, pageable);
+    }
+
+    @Override
+    public Page<Utilisateur> findAllUtilisateurs(Pageable pgbl)
+    {
+        return  utilisateurRepository.findAll(pgbl);
     }
     
     
