@@ -7,6 +7,7 @@ package org.GestionFormation.metier;
 
 import java.util.List;
 import org.GestionFormation.entities.Collaborateur;
+import org.GestionFormation.entities.Formation;
 
 /**
  *
@@ -17,4 +18,6 @@ public interface CollaborateurMetier
     public Collaborateur saveCollaborateur(Collaborateur collaborateur);
     public List<Collaborateur> listCollaborateur();
     public Collaborateur getCollaborateur(Long idCollaborateur);
+    public Collaborateur ajoutFormation(Long idFormation,Long idCollaborateur);
+    public List<Formation> getFormationsOfCollab(Long idCollab);
 }

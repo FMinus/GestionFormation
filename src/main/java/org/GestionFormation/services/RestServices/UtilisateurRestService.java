@@ -5,7 +5,6 @@
  */
 package org.GestionFormation.services.RestServices;
 
-import static groovy.transform.AutoExternalize.value;
 import java.util.List;
 import org.GestionFormation.entities.Utilisateur;
 import org.GestionFormation.metier.UtilisateurMetier;
@@ -25,24 +24,25 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Ayoub
  */
 @RestController
+@RequestMapping(value = "/utilisateurs")
 public class UtilisateurRestService
 {
     @Autowired
     private UtilisateurMetier utilisateurMetier;
     
-    @RequestMapping(value = "/utilisateurs" , method = RequestMethod.POST)
+    @RequestMapping(value = "ajout" , method = RequestMethod.POST)
     public Utilisateur saveUtilisateur(@RequestBody Utilisateur u)
     {
         return utilisateurMetier.saveUtilisateur(u);
     }
 
-    @RequestMapping(value = "/utilisateurs" , method = RequestMethod.GET)
+    @RequestMapping(value = "list" , method = RequestMethod.GET)
     public List<Utilisateur> listUtilisateurs()
     {
         return utilisateurMetier.listUtilisateurs();
     }
     
-    @RequestMapping(value = "/utilisateurs/{id}" , method = RequestMethod.GET)
+    @RequestMapping(value = "{id}" , method = RequestMethod.GET)
     public Utilisateur getUtilisateur(@PathVariable Long id)
     {
         return utilisateurMetier.getUtilisateur(id);
@@ -80,7 +80,7 @@ public class UtilisateurRestService
         return "listUtilisateurs";
     }
     
-    @RequestMapping(value = "/listUtilisateurs")
+    @RequestMapping(value = "listUtilisateurs")
     public Page<Utilisateur> listUtilisateurs(@RequestParam(name = "page") int page,@RequestParam(name = "size") int size)
     {
         //return utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(page,5));

@@ -10,37 +10,41 @@
     <body>
        <div class="col-md-6 col-sm-6 col-xs-12 spacer">
             <div class="panel panel-info">
-                <div class="panel-heading">Inscription Utilisateur : {{test}}</div>
+                <div class="panel-heading">Inscription Utilisateur :</div>
                 <div class="panel-body">
-                    <div class="" ng-if="mode.value=='form'">
-                        <form>
+                    
+                    <#if true >
+                    <div class="">
+                        <form action="/admin/ajout" name="user" method="post">
                             <div class="form-group">
                                 <label class="control-label">Nom : </label>
-                                <input type="text" ng-model="utilisateur.nomUtilisateur" class="form-control"/>
+                                <input type="text" name="nomUtilisateur" class="form-control"/>
                                 <span ng-if="errors" class="error">{{errors.nomUtilisateur}}</span>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Prénom : </label>
-                                <input type="text" ng-model="utilisateur.prenomUtilisateur" class="form-control"/>
+                                <input type="text" name="prenomUtilisateur" class="form-control"/>
                                 <span ng-if="errors" class="error">{{errors.prenomUtilisateur}}</span>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Email : </label>
-                                <input type="text" ng-model="utilisateur.emailUtilisateur" class="form-control"/>
+                                <input type="text" name="emailUtilisateur" class="form-control"/>
                                 <span ng-if="errors" class="error">{{errors.emailUtilisateur}}</span>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Date de Naissance : </label>
-                                <input type="date" ng-model="utilisateur.joinDate" class="form-control" />
+                                <input type="date" name="joinDate" class="form-control" />
                                 <span ng-if="errors" class="error">{{errors.joinDate}}</span>
                             </div>
                             <div class="">
-                                <button class="btn btn-primary" ng-click="ajouterUtilisateur()">Enregister</button>
+                                <input type="submit" value="Save" class="btn btn-primary"/>
                             </div>
                         </form>
                     </div>
+                    </#if> 
                     
-                    <div class="" ng-if="mode.value=='confirm'">
+                    <#if true >
+                    <div class="">
                         <div class="panel-heading">Confirmation : L'utilisateur a été inscrit avce succès</div>
                         <div class="form-group">
                             <label class="control-label">Id : </label>
@@ -48,7 +52,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Nom : </label>
-                            <label class="control-label">{{utilisateur.nomUtilisateur}}</label>
+                            <label class="control-label">{{model.user.nomUtilisateur}}</label>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Prenom : </label>
@@ -63,7 +67,7 @@
                             <label class="control-label">{{utilisateur.joinDate|date:'yyyy-MM-dd'}}</label>
                         </div>
                     </div>
-                    
+                    </#if>
                     <div class="" ng-if="exception.message">
                         <span class="error">{{exception.message}}</span>
                     </div>

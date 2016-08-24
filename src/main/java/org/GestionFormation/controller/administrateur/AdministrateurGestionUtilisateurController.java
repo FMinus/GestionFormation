@@ -6,12 +6,18 @@
 package org.GestionFormation.controller.administrateur;
 
 import java.util.List;
+import javax.validation.Valid;
 import org.GestionFormation.entities.Utilisateur;
 import org.GestionFormation.metier.UtilisateurMetier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,9 +33,28 @@ public class AdministrateurGestionUtilisateurController
     private UtilisateurMetier utilisateurMetier;
     
     @RequestMapping(value = "ajout" , method = RequestMethod.POST)
-    public Utilisateur saveUtilisateur(Utilisateur u)
+    public String saveUtilisateur(@ModelAttribute("user") @Valid Utilisateur u,Model model,BindingResult bindingResult)
     {
-        return utilisateurMetier.saveUtilisateur(u);
+        if(bindingResult.hasErrors())
+        {
+            System.out.println("has errors");
+            
+            
+            
+            return "/admin/formAjout";
+        }
+        
+        for(ObjectError e : bindingResult.getAllErrors())
+            {
+                System.out.println("error "+e);
+            }
+            
+        
+        //utilisateurMetier.saveUtilisateur(u);
+        System.out.println("user "+u);
+        
+        
+        return "/admin/formAjout";
     }
     
     @RequestMapping(value = "formAjout")
@@ -37,10 +62,12 @@ public class AdministrateurGestionUtilisateurController
     {
         return "/administrateur/ajoutUtilisateur";
     }
-
-    public List<Utilisateur> listUtilisateurs()
+    
+    @RequestMapping(value = "listUsers" , method = RequestMethod.GET)
+    public String listUtilisateurs(@ModelAttribute("model") ModelMap model)
     {
-        return utilisateurMetier.listUtilisateurs();
+        model.addAttribute("users", utilisateurMetier.listUtilisateurs());
+        return "/administrateur/listUtilisateurs";
     }
 
     public Utilisateur getUtilisateur(Long idUtilisateur)

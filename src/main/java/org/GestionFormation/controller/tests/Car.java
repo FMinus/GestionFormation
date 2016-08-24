@@ -3,24 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.GestionFormation.controller;
+package org.GestionFormation.controller.tests;
 
 /**
  *
  * @author Ayoub
  */
-public class car
+public class Car
 {
     public String model;
     public String make;
 
-    public car(String model, String make)
+    public Car(String model, String make)
     {
         this.model = model;
         this.make = make;
     }
 
-    public car()
+    public Car()
     {
     }
 

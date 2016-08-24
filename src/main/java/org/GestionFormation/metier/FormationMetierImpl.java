@@ -7,6 +7,7 @@ package org.GestionFormation.metier;
 
 import java.util.List;
 import org.GestionFormation.dao.FormationRepository;
+import org.GestionFormation.entities.Collaborateur;
 import org.GestionFormation.entities.Formation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,13 @@ public class FormationMetierImpl implements FormationMetier
             throw new RuntimeException("Formation Inexistante");
         
         return f;
+    }
+
+    @Override
+    public List<Collaborateur> getCollaborateurs(Long idFormation)
+    {
+        Formation f = getFormations(idFormation);
+        return (List<Collaborateur>) f.getCollaborateurs();
     }
     
     

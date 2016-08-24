@@ -21,15 +21,17 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Email;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
  * @author Ayoub
  */
 @Entity
-@Inheritance( strategy = InheritanceType.SINGLE_TABLE )
-@DiscriminatorColumn( name = "ROLE",discriminatorType = DiscriminatorType.STRING )
-@Table(uniqueConstraints=@UniqueConstraint(columnNames={"emailUtilisateur"}))
+@Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
+//@DiscriminatorColumn( name = "ROLE",discriminatorType = DiscriminatorType.STRING )
+//@Table(uniqueConstraints=@UniqueConstraint(columnNames={"emailUtilisateur"}))
 public class Utilisateur implements Serializable
 {
     
@@ -43,7 +45,7 @@ public class Utilisateur implements Serializable
     @NotNull
     private String prenomUtilisateur;
     
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date joinDate;
     
     private String urlPhotoUtilisateur="";
@@ -51,6 +53,7 @@ public class Utilisateur implements Serializable
     @JsonIgnore
     private String passwordUtilisateur;
     
+    @Email
     private String emailUtilisateur;
     
     public Utilisateur()

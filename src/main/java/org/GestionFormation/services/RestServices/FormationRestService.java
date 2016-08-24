@@ -6,6 +6,7 @@
 package org.GestionFormation.services.RestServices;
 
 import java.util.List;
+import org.GestionFormation.entities.Collaborateur;
 import org.GestionFormation.entities.Formateur;
 import org.GestionFormation.entities.Formation;
 import org.GestionFormation.metier.FormateurMetier;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -21,21 +23,27 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Ayoub
  */
 @RestController
+@RequestMapping(value = "/formations")
 public class FormationRestService
 {
     @Autowired
     private FormationMetier formationMetier;
     
-    @RequestMapping(value = "/formations" , method = RequestMethod.POST)
-    public Formation saveFormateur(@RequestBody Formation f)
+    @RequestMapping(value = "ajout" , method = RequestMethod.POST)
+    public Formation saveFormation(@RequestBody Formation f)
     {
         return formationMetier.saveFormation(f);
     }
     
-    @RequestMapping(value = "/formations" , method = RequestMethod.GET)
-    public List<Formation> listFormateur()
+    @RequestMapping(value = "list" , method = RequestMethod.GET)
+    public List<Formation> listFormation()
     {
         return formationMetier.listFormations();
     }
     
+    @RequestMapping(value = "collabs" , method = RequestMethod.GET)
+    public List<Collaborateur> listCollaborateurs(@RequestParam(name = "idFormation") Long idForm)
+    {
+        return formationMetier.getCollaborateurs(idForm);
+    }
 }

@@ -15,7 +15,7 @@ and open the template in the editor.
     <body>
         Hello
         
-        
+<!--        
         <div id="content">
             <fieldset>
                 <legend>Add Car</legend>
@@ -40,7 +40,7 @@ and open the template in the editor.
                 </tr>
                 </#list>
             </table>
-            </div>
+            </div>-->
         
         <p>${model.test}</p>
         

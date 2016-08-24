@@ -35,7 +35,7 @@ public class Collaborateur extends Utilisateur implements Serializable
     }
 
     
-    @JsonIgnore
+    //@JsonIgnore
     public Collection<Formation> getFormations()
     {
         return formations;
