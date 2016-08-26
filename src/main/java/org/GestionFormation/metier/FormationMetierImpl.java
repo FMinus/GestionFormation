@@ -67,12 +67,7 @@ public class FormationMetierImpl implements FormationMetier
         return (List<SessionFormation>) f.getSessionFormations();
     }
     
-    @Override
-    public List<Formateur> getFormateurs(Long idFormation)
-    {
-        Formation f = getFormations(idFormation);
-        return (List<Formateur>) f.getFormateurs();   
-    }
+    
 
     @Override
     public Formation ajoutSession(Long idFormation,Long idsessionFormation)

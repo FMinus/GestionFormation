@@ -68,11 +68,7 @@ public class FormationRestService
         return formationMetier.getSessionFormations(idFormation);
     }
     
-    @RequestMapping(value = "getFormateurs" , method = RequestMethod.GET)
-    public List<Formateur> getFormateurs(@RequestParam(name = "idFormation") Long idFormation)
-    {
-        return formationMetier.getFormateurs(idFormation);
-    }
+    
     
     @RequestMapping(value = "ajout" , method = RequestMethod.POST)
     public Formation saveFormation(@RequestBody Formation f)
@@ -98,15 +94,9 @@ public class FormationRestService
         return formationMetier.ajoutSession(idForm, idSession);
     }
     
-    @RequestMapping(value = "testajout" , method = RequestMethod.POST)
-    public void testFormations(@RequestBody Formation f)
+    @RequestMapping(value = "creer" , method = RequestMethod.POST)
+    public void creerFormations(@RequestBody Formation f)
     {
-        System.out.println("ajout formation"+f);
-        System.out.println("repsonsable "+f.getResponsableFormation().getIdUtilisateur());
-        
-        
-        //formationMetier.saveFormation(f);
-        
         List<Collaborateur> listCol = new ArrayList<>();
         Utilisateur u;
         
@@ -118,16 +108,9 @@ public class FormationRestService
         
         List<Formateur> listFormateurs = new ArrayList<>();
         
-        for(Formateur form : f.getFormateurs())
-        {
-            u = utilisateurMetier.getUtilisateur(form.getIdUtilisateur());
-            listFormateurs.add(UserClassesConverter.userToFormateur(u));
-        }
-
         ResponsableFormation resp = UserClassesConverter.userToResponsableFormation(utilisateurMetier.getUtilisateur(f.getResponsableFormation().getIdUtilisateur()));
         
         f.setCollaborateurs(listCol);
-        f.setFormateurs(listFormateurs);
         f.setResponsableFormation(resp);
         
         responsableFormationMetier.saveResponsableFormation(resp);
@@ -142,9 +125,5 @@ public class FormationRestService
         }
 
         Formation formation = formationMetier.saveFormation(f);
-        
-        
-       
-       
     }
 }

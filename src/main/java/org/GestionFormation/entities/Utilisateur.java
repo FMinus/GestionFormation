@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
@@ -25,11 +27,21 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
+@NamedNativeQueries(
+        {
+            @NamedNativeQuery
+            (
+                name    =   "getAllUsers",
+                query   =   "SELECT * FROM Utilisateur", 
+                resultClass=Utilisateur.class
+            )
+        })
 //@DiscriminatorColumn( name = "ROLE",discriminatorType = DiscriminatorType.STRING )
 //@Table(uniqueConstraints=@UniqueConstraint(columnNames={"emailUtilisateur"}))
 @Table(name = "Utilisateur")
 public class Utilisateur implements Serializable
 {
+    private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

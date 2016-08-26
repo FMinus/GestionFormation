@@ -16,7 +16,7 @@ myApp.controller("ajoutFormationController", function($http, $scope)
             idUtilisateur: null
         },
         collaborateurs : null,
-        formateurs : null,
+       
         sessionFormations : null
     };
     
@@ -49,12 +49,12 @@ myApp.controller("ajoutFormationController", function($http, $scope)
     $scope.valider = function()
     {
         $scope.formation.collaborateurs = $scope.arrayIdUsers($scope.formation.collaborateurs);
-        $scope.formation.formateurs = $scope.arrayIdUsers($scope.formation.formateurs);
+       
         
         $http
         ({
             method : 'post',
-            url : "/formations/testajout",
+            url : "/formations/creer",
             data : $scope.formation,
             headers : {'Content-Type' : 'application/json'}
             

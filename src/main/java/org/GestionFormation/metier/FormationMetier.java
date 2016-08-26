@@ -22,6 +22,5 @@ public interface FormationMetier
     public Formation getFormations(Long id);
     public List<Collaborateur> getCollaborateurs(Long idFormation); 
     public List<SessionFormation> getSessionFormations(Long idFormation);
-    public List<Formateur> getFormateurs(Long idFormation);
     public Formation ajoutSession(Long idFormation,Long idSessionFormation);
 }

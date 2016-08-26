@@ -53,14 +53,7 @@ and open the template in the editor.
                                 </select>
                             </div>
                             
-                            <div class="form-group">
-                                <label for="repeatSelectFormateurs"> Formateurs :  </label>
-                                <select name="repeatSelectFormateurs" id="repeatSelectFormateurs" ng-model="formation.formateurs" multiple>
-                                    <option ng-repeat="option in optionsUtilisateurs" value="{{option.idUtilisateur}}">
-                                        {{option.idUtilisateur}} - {{option.nomUtilisateur}} {{option.prenomUtilisateur}}
-                                    </option>
-                                </select>
-                            </div>
+                            
                             
                             <button ng-click="valider()">Send</button>
                         </form>

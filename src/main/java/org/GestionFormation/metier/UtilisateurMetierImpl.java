@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package org.GestionFormation.metier;
 
 import java.util.List;
@@ -22,19 +22,19 @@ public class UtilisateurMetierImpl implements UtilisateurMetier
 {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
-
+    
     @Override
     public Utilisateur saveUtilisateur(Utilisateur u)
     {
         return utilisateurRepository.save(u);
     }
-
+    
     @Override
     public List<Utilisateur> listUtilisateurs()
     {
         return utilisateurRepository.findAll();
     }
-
+    
     @Override
     public Utilisateur getUtilisateur(Long idUtilisateur)
     {
@@ -45,37 +45,48 @@ public class UtilisateurMetierImpl implements UtilisateurMetier
         
         return user;
     }
-
+    
     @Override
     public List<Utilisateur> findByFullName(String nom, String prenom)
     {
         return utilisateurRepository.findByFullName(nom, prenom);
     }
-
+    
     @Override
     public Page<Utilisateur> findUtilisateurs(String mc, Pageable pageable)
     {
         return utilisateurRepository.findUtilisateur(mc, pageable);
     }
-
+    
     @Override
     public Page<Utilisateur> findAllUtilisateurs(Pageable pgbl)
     {
         return  utilisateurRepository.findAll(pgbl);
     }
-
+    
     @Override
     public List<Utilisateur> listUtilisateursOnly()
     {
-         return  utilisateurRepository.findUtilisateursOnly();
+        return  utilisateurRepository.findUtilisateursOnly();
     }
+    
+    
     
     /*
     @Override
     public Page<Utilisateur> pageUtilisateursOnly(Pageable pgbl)
     {
-        return  utilisateurRepository.findPageUtilisateursOnly(pgbl);
+    return  utilisateurRepository.findPageUtilisateursOnly(pgbl);
     }
     */
+    
+    @Override
+    public List<Utilisateur> listUsersOnly()
+    {
+        //List<Utilisateur> employees = utilisateurRepository.createNamedQuery("getAllUsers", Utilisateur.class)
+        //        .getResultList();
+        return null;
+        
+    }
     
 }

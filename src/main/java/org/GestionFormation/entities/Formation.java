@@ -57,29 +57,26 @@ public class Formation implements Serializable
             )
     private Collection<Collaborateur> collaborateurs;
     
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "FORMATEUR_FORMATION",
-            joinColumns = @JoinColumn(name="formation_id"),
-            inverseJoinColumns=@JoinColumn(name="formateur_id"))
-    private Collection<Formateur> formateurs;
     
     @OneToMany(mappedBy = "formation",fetch = FetchType.LAZY)
     private Collection<SessionFormation> sessionFormations;
     
+    @OneToMany(mappedBy = "formation",fetch = FetchType.LAZY)
+    private Collection<EvaluationFormation> evaluationFormations;
+     
     public Formation()
     {
     }
     
     
-    public Formation(String nomFormation, String Description, Date dateFormation, ResponsableFormation responsableFormation, Collection<Collaborateur> collaborateurs, Collection<Formateur> formateurs)
+    public Formation(String nomFormation, String Description, Date dateFormation, ResponsableFormation responsableFormation, Collection<Collaborateur> collaborateurs)
     {
         this.nomFormation = nomFormation;
         this.Description = Description;
         this.dateFormation = dateFormation;
         this.responsableFormation = responsableFormation;
         this.collaborateurs = collaborateurs;
-        this.formateurs = formateurs;
+       
     }
     
     @JsonIgnore
@@ -158,23 +155,23 @@ public class Formation implements Serializable
     {
         this.collaborateurs = collaborateurs;
     }
-    
-    @JsonIgnore
-    public Collection<Formateur> getFormateurs()
+
+    public Collection<EvaluationFormation> getEvaluationFormations()
     {
-        return formateurs;
+        return evaluationFormations;
+    }
+
+    public void setEvaluationFormations(Collection<EvaluationFormation> evaluationFormations)
+    {
+        this.evaluationFormations = evaluationFormations;
     }
     
-    @JsonSetter
-    public void setFormateurs(Collection<Formateur> formateurs)
-    {
-        this.formateurs = formateurs;
-    }
+    
 
     @Override
     public String toString()
     {
-        return "Formation{" + "idFormation=" + idFormation + ", nomFormation=" + nomFormation + ", Description=" + Description + ", dateFormation=" + dateFormation + ", responsableFormation=" + responsableFormation + ", collaborateurs=" + collaborateurs + ", formateurs=" + formateurs + '}';
+        return "Formation{" + "idFormation=" + idFormation + ", nomFormation=" + nomFormation + ", Description=" + Description + ", dateFormation=" + dateFormation + ", responsableFormation=" + responsableFormation + ", collaborateurs=" + collaborateurs + "}";
     }
     
     

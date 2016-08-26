@@ -38,6 +38,10 @@ public class SessionFormation implements Serializable
     @JoinColumn(name = "CODE_FORMATION")
     private Formation formation;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CODE_FORMATEUR")
+    private Formateur formateur;
+    
     @OneToMany(mappedBy = "sessionFormation",fetch = FetchType.LAZY)
     private Collection<Document> documents;
     
@@ -114,7 +118,20 @@ public class SessionFormation implements Serializable
     {
         this.absences = absences;
     }
-
+    
+    @JsonIgnore
+    public Formateur getFormateur()
+    {
+        return formateur;
+    }
+    
+    @JsonSetter
+    public void setFormateur(Formateur formateur)
+    {
+        this.formateur = formateur;
+    }
+    
+    
     @Override
     public String toString()
     {

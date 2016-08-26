@@ -19,6 +19,7 @@ public interface UtilisateurMetier
     public Utilisateur saveUtilisateur(Utilisateur u);
     public List<Utilisateur> listUtilisateurs();
     public List<Utilisateur> listUtilisateursOnly();
+    public List<Utilisateur> listUsersOnly();
     //public Page<Utilisateur> pageUtilisateursOnly(Pageable pgbl);
     public Utilisateur getUtilisateur(Long idUtilisateur);
     public List<Utilisateur> findByFullName(String nom,String prenom);

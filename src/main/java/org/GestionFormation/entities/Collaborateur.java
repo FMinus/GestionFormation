@@ -15,14 +15,21 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 //@DiscriminatorValue("COLLABORATEUR") 
 public class Collaborateur extends Utilisateur implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+    
     @ManyToMany(mappedBy = "collaborateurs",fetch = FetchType.LAZY)
     private Collection<Formation> formations;
+    
+    @OneToMany(mappedBy = "collaborateur",fetch = FetchType.LAZY)
+    private Collection<EvaluationFormation> evaluationFormations;
     
     private boolean confirmationInscription = false;
     
