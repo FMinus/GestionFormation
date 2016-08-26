@@ -3,6 +3,7 @@ package org.GestionFormation;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,10 +13,12 @@ import org.GestionFormation.dao.FormateurRepository;
 import org.GestionFormation.dao.FormationRepository;
 import org.GestionFormation.dao.ResponsableFormationRepository;
 import org.GestionFormation.dao.SessionFormationRepository;
+import org.GestionFormation.entities.Collaborateur;
 import org.GestionFormation.entities.Document;
 import org.GestionFormation.entities.Formation;
 import org.GestionFormation.entities.ResponsableFormation;
 import org.GestionFormation.entities.SessionFormation;
+import org.GestionFormation.entities.Utilisateur;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -113,7 +116,6 @@ public class GestionFormationApplication
         //System.out.println("sessions : "+sessionFormation);
         //Document doc3_fetch = doc;
         //Document doc4_fetch = doc;
-        
         
         
     }

@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author Ayoub
  */
 @Entity
-@DiscriminatorValue("RESPONSABLEFORMATION")
+//@DiscriminatorValue("RESPONSABLEFORMATION")
 public class ResponsableFormation extends Utilisateur implements Serializable
 {
     @OneToMany(mappedBy = "responsableFormation",fetch = FetchType.LAZY)

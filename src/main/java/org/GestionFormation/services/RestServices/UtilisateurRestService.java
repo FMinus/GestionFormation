@@ -42,6 +42,12 @@ public class UtilisateurRestService
         return utilisateurMetier.listUtilisateurs();
     }
     
+     @RequestMapping(value = "listOnlyUsers" , method = RequestMethod.GET)
+    public List<Utilisateur> listUtilisateursOnly()
+    {
+        return utilisateurMetier.listUtilisateursOnly();
+    }
+    
     @RequestMapping(value = "{id}" , method = RequestMethod.GET)
     public Utilisateur getUtilisateur(@PathVariable Long id)
     {
@@ -49,8 +55,8 @@ public class UtilisateurRestService
     }
     
     //FIXME 
-    @RequestMapping(value = "/utilisateurs/{nom}?{prenom}" , method = RequestMethod.GET)
-    public List<Utilisateur> getUtilisateurByFullName(@PathVariable String prenom,@PathVariable String nom)
+    @RequestMapping(value = "find" , method = RequestMethod.GET)
+    public List<Utilisateur> getUtilisateurByFullName(@RequestParam(name = "prenom") String prenom,@RequestParam(name="nom") String nom)
     {
         return utilisateurMetier.findByFullName(nom, prenom);
     }
@@ -80,10 +86,18 @@ public class UtilisateurRestService
         return "listUtilisateurs";
     }
     
-    @RequestMapping(value = "listUtilisateurs")
+    @RequestMapping(value = "pageUsers")
     public Page<Utilisateur> listUtilisateurs(@RequestParam(name = "page") int page,@RequestParam(name = "size") int size)
     {
         //return utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(page,5));
         return utilisateurMetier.findAllUtilisateurs(new PageRequest(page,size));
     }
+    /*
+    @RequestMapping(value = "pageUsersOnly")
+    public Page<Utilisateur> pageUtilisateurs(@RequestParam(name = "page") int page,@RequestParam(name = "size") int size)
+    {
+        //return utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(page,5));
+        return utilisateurMetier.pageUtilisateursOnly(new PageRequest(page,size));
+    }
+*/
 }

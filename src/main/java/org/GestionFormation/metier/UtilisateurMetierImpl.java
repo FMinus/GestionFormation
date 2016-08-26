@@ -63,6 +63,19 @@ public class UtilisateurMetierImpl implements UtilisateurMetier
     {
         return  utilisateurRepository.findAll(pgbl);
     }
+
+    @Override
+    public List<Utilisateur> listUtilisateursOnly()
+    {
+         return  utilisateurRepository.findUtilisateursOnly();
+    }
     
+    /*
+    @Override
+    public Page<Utilisateur> pageUtilisateursOnly(Pageable pgbl)
+    {
+        return  utilisateurRepository.findPageUtilisateursOnly(pgbl);
+    }
+    */
     
 }

@@ -10,6 +10,8 @@ import org.GestionFormation.entities.Collaborateur;
 import org.GestionFormation.entities.Formation;
 import org.GestionFormation.metier.CollaborateurMetier;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Ayoub
  */
 @RestController
-@RequestMapping(value = "/collaborateur")
+@RequestMapping(value = "/collaborateurs")
 public class CollaborateurRestService
 {
     @Autowired
@@ -33,7 +35,7 @@ public class CollaborateurRestService
         return collaborateurMetier.saveCollaborateur(collaborateur);
     }
     
-    @RequestMapping(value = "getAll" , method = RequestMethod.GET)
+    @RequestMapping(value = "list" , method = RequestMethod.GET)
     public List<Collaborateur> listCollaborateur()
     {
         return collaborateurMetier.listCollaborateur();
@@ -49,5 +51,12 @@ public class CollaborateurRestService
     public List<Formation> listFormationsCollaborateur(@RequestParam(name = "idCollab") Long idcol)
     {
         return collaborateurMetier.getFormationsOfCollab(idcol);
+    }
+    
+    @RequestMapping(value = "pageCollaborateurs")
+    public Page<Collaborateur> listCollaborateur(@RequestParam(name = "page") int page,@RequestParam(name = "size") int size)
+    {
+        //return utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(page,5));
+        return collaborateurMetier.findAllCollaborateur(new PageRequest(page,size));
     }
 }

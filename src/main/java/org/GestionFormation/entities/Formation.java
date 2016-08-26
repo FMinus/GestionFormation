@@ -81,12 +81,14 @@ public class Formation implements Serializable
         this.collaborateurs = collaborateurs;
         this.formateurs = formateurs;
     }
-
+    
+    @JsonIgnore
     public Collection<SessionFormation> getSessionFormations()
     {
         return sessionFormations;
     }
-
+    
+    @JsonSetter
     public void setSessionFormations(Collection<SessionFormation> sessionFormations)
     {
         this.sessionFormations = sessionFormations;

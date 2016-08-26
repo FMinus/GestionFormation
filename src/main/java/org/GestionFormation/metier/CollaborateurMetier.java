@@ -8,6 +8,8 @@ package org.GestionFormation.metier;
 import java.util.List;
 import org.GestionFormation.entities.Collaborateur;
 import org.GestionFormation.entities.Formation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  *
@@ -16,8 +18,11 @@ import org.GestionFormation.entities.Formation;
 public interface CollaborateurMetier 
 {
     public Collaborateur saveCollaborateur(Collaborateur collaborateur);
+    public Collaborateur ajoutCollaborateur(Long idUser,Long idFormation);
     public List<Collaborateur> listCollaborateur();
     public Collaborateur getCollaborateur(Long idCollaborateur);
     public Collaborateur ajoutFormation(Long idFormation,Long idCollaborateur);
     public List<Formation> getFormationsOfCollab(Long idCollab);
+    public Page<Collaborateur> findCollaborateur(String mc,Pageable pageable);
+    public Page<Collaborateur> findAllCollaborateur(Pageable pgbl);
 }

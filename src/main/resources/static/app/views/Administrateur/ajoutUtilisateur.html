@@ -36,7 +36,12 @@ and open the template in the editor.
                                 <span ng-if="errors" class="error">{{errors.emailUtilisateur}}</span>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Date de Naissance : </label>
+                                <label class="control-label">Password : </label>
+                                <input type="text" ng-model="utilisateur.passwordUtilisateur" class="form-control"/>
+                                <span ng-if="errors" class="error">{{errors.passwordUtilisateur}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Date de Join : </label>
                                 <input type="date" ng-model="utilisateur.joinDate" class="form-control" />
                                 <span ng-if="errors" class="error">{{errors.joinDate}}</span>
                             </div>
@@ -65,7 +70,7 @@ and open the template in the editor.
                             <label class="control-label">{{utilisateur.emailUtilisateur}}</label>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Date de Naissance : </label>
+                            <label class="control-label">Date de join : </label>
                             <label class="control-label">{{utilisateur.joinDate|date:'yyyy-MM-dd'}}</label>
                         </div>
                     </div>

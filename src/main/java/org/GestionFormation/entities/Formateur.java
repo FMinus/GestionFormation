@@ -20,7 +20,7 @@ import javax.persistence.ManyToMany;
  * @author Ayoub
  */
 @Entity
-@DiscriminatorValue("FORMATEUR")
+//@DiscriminatorValue("FORMATEUR")
 public class Formateur extends Utilisateur implements Serializable
 {
     @ManyToMany(mappedBy = "formateurs",fetch = FetchType.LAZY)

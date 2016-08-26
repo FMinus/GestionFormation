@@ -18,12 +18,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@DiscriminatorValue("COLLABORATEUR") 
+//@DiscriminatorValue("COLLABORATEUR") 
 public class Collaborateur extends Utilisateur implements Serializable
 {
     @ManyToMany(mappedBy = "collaborateurs",fetch = FetchType.LAZY)
     private Collection<Formation> formations;
-
+    
+    private boolean confirmationInscription = false;
+    
     public Collaborateur()
     {
     }
@@ -34,6 +36,16 @@ public class Collaborateur extends Utilisateur implements Serializable
         this.formations = formations;
     }
 
+    public boolean isConfirmationInscription()
+    {
+        return confirmationInscription;
+    }
+
+    public void setConfirmationInscription(boolean confirmationInscription)
+    {
+        this.confirmationInscription = confirmationInscription;
+    }
+    
     
     //@JsonIgnore
     public Collection<Formation> getFormations()
@@ -50,9 +62,10 @@ public class Collaborateur extends Utilisateur implements Serializable
     @Override
     public String toString()
     {
-        super.toString();
-        return "Collaborateur{" + "formations=" + formations + '}';
+        return "Collaborateur{" + "formations=" + formations + ", confirmationInscription=" + confirmationInscription + '}';
     }
+
+    
     
     
 }

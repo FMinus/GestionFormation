@@ -6,14 +6,14 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>List Utilisateurs</title>
+        <title>List Collaborateurs</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/myStyle.css" />
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
     </head>
     
-    <body ng-app="GestionFormation" ng-controller="listUtilisateursController">
+    <body ng-app="GestionFormation" ng-controller="listCollaborateursController">
         
         {{test}}
         
@@ -25,6 +25,7 @@ and open the template in the editor.
                         <th>Nom</th>
                         <th>Prenom</th>
                         <th>Date Join</th>
+                        <th>Formations</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,9 @@ and open the template in the editor.
                         <td>{{e.nomUtilisateur}}</td>
                         <td>{{e.prenomUtilisateur}}</td>
                         <td>{{e.joinDate|date:'yyyy-MM-dd'}}</td>
+                        <td ng-repeat="f in e.formations">
+                             - {{f.nomFormation}} 
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -47,6 +51,6 @@ and open the template in the editor.
         </div>
         
         <script type="text/javascript" src="/js/angular.min.js" ></script>
-        <script type="text/javascript" src="/app/controllers/administrateur/listUtilisateursController.js" ></script>
+        <script type="text/javascript" src="/app/controllers/administrateur/listCollaborateursController.js" ></script>
     </body>
 </html>

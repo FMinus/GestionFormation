@@ -6,7 +6,12 @@
 package org.GestionFormation.dao;
 
 import org.GestionFormation.entities.Collaborateur;
+import org.GestionFormation.entities.Utilisateur;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -14,5 +19,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface CollaborateurRepository extends JpaRepository<Collaborateur,Long>
 {
-    
+    @Query("select c from Collaborateur c where c.nomUtilisateur like :x or c.prenomUtilisateur like :x")
+    public Page<Collaborateur> findCollaborateur(@Param("x") String mc,Pageable pageable);
 }

@@ -8,8 +8,6 @@ package org.GestionFormation.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,9 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,6 +27,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
 //@DiscriminatorColumn( name = "ROLE",discriminatorType = DiscriminatorType.STRING )
 //@Table(uniqueConstraints=@UniqueConstraint(columnNames={"emailUtilisateur"}))
+@Table(name = "Utilisateur")
 public class Utilisateur implements Serializable
 {
     

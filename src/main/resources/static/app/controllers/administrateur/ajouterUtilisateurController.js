@@ -12,7 +12,7 @@ myApp.controller("ajouterUtilisateurController", function($http, $scope)
     
     $scope.ajouterUtilisateur = function()
     {
-        $http.post("/utilisateurs",$scope.utilisateur)
+        $http.post("/utilisateurs/ajout",$scope.utilisateur)
         .success(function(data)
         {
             if(!data.errors)

@@ -5,6 +5,8 @@
  */
 package org.GestionFormation.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -56,12 +58,13 @@ public class SessionFormation implements Serializable
     }
 
     
-
+    @JsonIgnore
     public Formation getFormation()
     {
         return formation;
     }
-
+    
+    @JsonSetter
     public void setFormation(Formation formation)
     {
         this.formation = formation;
@@ -87,22 +90,26 @@ public class SessionFormation implements Serializable
     {
         this.dateSession = dateSession;
     }
-
+    
+    @JsonIgnore
     public Collection<Document> getDocuments()
     {
         return documents;
     }
-
+    
+    @JsonSetter 
     public void setDocuments(Collection<Document> documents)
     {
         this.documents = documents;
     }
-
+    
+    @JsonIgnore
     public Collection<Absence> getAbsences()
     {
         return absences;
     }
-
+    
+    @JsonSetter 
     public void setAbsences(Collection<Absence> absences)
     {
         this.absences = absences;

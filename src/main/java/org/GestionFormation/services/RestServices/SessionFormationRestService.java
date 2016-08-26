@@ -19,18 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Ayoub
  */
 @RestController
+@RequestMapping(value = "/sessionFormations")
 public class SessionFormationRestService
 {
     @Autowired
     private SessionFormationMetier sessionFormationMetier;
     
-    @RequestMapping(value = "/sessionFormations" , method = RequestMethod.POST)
+    @RequestMapping(value = "/ajout" , method = RequestMethod.POST)
     public SessionFormation saveSessionFormation(@RequestBody SessionFormation sf)
     {
         return sessionFormationMetier.saveSessionFormation(sf);
     }
     
-    @RequestMapping(value = "/sessionFormations" , method = RequestMethod.GET)
+    @RequestMapping(value = "/list" , method = RequestMethod.GET)
     public List<SessionFormation> listSessionFormations()
     {
         return sessionFormationMetier.listSessionFormations();

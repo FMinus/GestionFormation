@@ -1,5 +1,5 @@
 var myApp = angular.module("GestionFormation", []);
-myApp.controller("listUtilisateursController", function($http, $scope)
+myApp.controller("listCollaborateursController", function($http, $scope)
 {
     $scope.test="myTest";
     $scope.pageUtilisateurs = [];
@@ -7,10 +7,10 @@ myApp.controller("listUtilisateursController", function($http, $scope)
     $scope.size = 2;
      $scope.pages = [];
      
-    $scope.listUtilisateurs = function()
+    $scope.listCollaborateurs = function()
     {
         
-        $http.get("/utilisateurs/pageUsers?page="+$scope.pageCourante+"&size="+$scope.size)
+        $http.get("/collaborateur/pageCollaborateurs?page="+$scope.pageCourante+"&size="+$scope.size)
                 .success(function(data)
                 {
                     $scope.pageUtilisateurs = data;
@@ -24,5 +24,5 @@ myApp.controller("listUtilisateursController", function($http, $scope)
         $scope.listUtilisateurs();
     };
     
-    $scope.listUtilisateurs();
+    $scope.listCollaborateurs();
 });

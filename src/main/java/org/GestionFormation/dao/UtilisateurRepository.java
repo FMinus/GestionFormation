@@ -26,6 +26,13 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>
     @Query("select e from Utilisateur e where e.nomUtilisateur like :x or e.prenomUtilisateur like :x")
     public Page<Utilisateur> findUtilisateur(@Param("x") String mc,Pageable pageable);
     
-   
+    @Query(value = "select * from utilisateur", nativeQuery = true)
+    public List<Utilisateur> findUtilisateursOnly();
     
+    /*
+    @Query(value = "SELECT * FROM Utilisateur",
+    countQuery = "SELECT count(*) FROM Utilisateur",
+    nativeQuery = true)
+    public Page<Utilisateur> findPageUtilisateursOnly(Pageable pageable);
+    */
 }

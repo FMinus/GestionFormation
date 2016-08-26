@@ -18,13 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Ayoub
  */
 @RestController
+@RequestMapping(value = "/absences" )
 public class AbsenceRestService
 {
     @Autowired 
     private AbsenceMetier absenceMetier;
     
     
-    @RequestMapping(value = "/absences" , method = RequestMethod.GET)
+    @RequestMapping(value = "/list" , method = RequestMethod.GET)
     public List<Absence> listAbsences()
     {
         return absenceMetier.listAbsences();
