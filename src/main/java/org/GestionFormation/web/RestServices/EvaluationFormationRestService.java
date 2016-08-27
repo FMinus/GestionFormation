@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.GestionFormation.services.RestServices;
+package org.GestionFormation.web.RestServices;
 
 import java.util.List;
 import org.GestionFormation.entities.EvaluationFormation;

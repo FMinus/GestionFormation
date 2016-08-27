@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-//@DiscriminatorValue("COLLABORATEUR") 
+@DiscriminatorValue("COLLABORATEUR") 
 public class Collaborateur extends Utilisateur implements Serializable
 {
     private static final long serialVersionUID = 1L;

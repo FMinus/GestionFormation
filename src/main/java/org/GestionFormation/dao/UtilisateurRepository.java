@@ -11,6 +11,7 @@ import org.GestionFormation.entities.Utilisateur;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -26,13 +27,23 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>
     @Query("select e from Utilisateur e where e.nomUtilisateur like :x or e.prenomUtilisateur like :x")
     public Page<Utilisateur> findUtilisateur(@Param("x") String mc,Pageable pageable);
     
-    @Query(value = "SELECT * FROM UTILISATEUR WHERE idUtilisateur = 1", nativeQuery = true)
+    @Query("select e from Utilisateur e where role = Utilisateur")
     public List<Utilisateur> findUtilisateursOnly();
     
-    /*
-    @Query(value = "SELECT * FROM Utilisateur",
-    countQuery = "SELECT count(*) FROM Utilisateur",
-    nativeQuery = true)
-    public Page<Utilisateur> findPageUtilisateursOnly(Pageable pageable);
-    */
+    
+    @Query("select e from Utilisateur e where role = Utilisateur and (e.nomUtilisateur like :x or e.prenomUtilisateur like :x)")
+    public Page<Utilisateur> findPageUtilisateursOnly(@Param("x") String mc,Pageable pageable);
+    
+    @Query("select u from Utilisateur u where u.emailUtilisateur=?1 and u.passwordUtilisateur= ?2") 
+    public Utilisateur login(String emailUtilisateur,String passwordUtilisateur);
+    
+    @Modifying
+    @Query("UPDATE Utilisateur u SET u.urlPhotoUtilisateur = ?2 WHERE u.idUtilisateur = ?1")
+    public void updateUrlPhotoUtilisateur(Long idUtilisateur, String urlPhotoUtilisateur);
+    
+    public Utilisateur findUserByEmailUtilisateur(String email);
+    
+    @Modifying
+    @Query("UPDATE Utilisateur u SET u.passwordUtilisateur = ?1 WHERE u.idUtilisateur = ?2")
+    public void updatePassword(String newPassword, Long id);
 }

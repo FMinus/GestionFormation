@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.GestionFormation.services.RestServices;
+package org.GestionFormation.web.RestServices;
 
 import java.util.List;
 import org.GestionFormation.entities.Utilisateur;
@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author Ayoub
- */
+
 @RestController
 @RequestMapping(value = "/utilisateurs")
 public class UtilisateurRestService
@@ -92,12 +89,12 @@ public class UtilisateurRestService
         //return utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(page,5));
         return utilisateurMetier.findAllUtilisateurs(new PageRequest(page,size));
     }
-    /*
+   
     @RequestMapping(value = "pageUsersOnly")
-    public Page<Utilisateur> pageUtilisateurs(@RequestParam(name = "page") int page,@RequestParam(name = "size") int size)
+    public Page<Utilisateur> pageUtilisateursOnly(@RequestParam(name = "mc",defaultValue = "") String mc,@RequestParam(name = "page",defaultValue = "0") int page,@RequestParam(name = "size",defaultValue ="5") int size)
     {
         //return utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(page,5));
-        return utilisateurMetier.pageUtilisateursOnly(new PageRequest(page,size));
+        return utilisateurMetier.findPageUtilisateursOnly("%"+mc+"%",new PageRequest(page,size));
     }
-*/
+
 }

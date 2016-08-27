@@ -15,7 +15,7 @@ import javax.persistence.Entity;
  * @author Ayoub
  */
 @Entity
-//@DiscriminatorValue("ADMINISTRATEUR" )
+@DiscriminatorValue("ADMINISTRATEUR" )
 public class Administrateur extends Utilisateur implements Serializable
 {
     private static final long serialVersionUID = 1L;

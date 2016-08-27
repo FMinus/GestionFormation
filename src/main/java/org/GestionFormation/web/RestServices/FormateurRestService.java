@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.GestionFormation.services.RestServices;
+package org.GestionFormation.web.RestServices;
 
 import java.util.List;
-import org.GestionFormation.entities.Document;
-import org.GestionFormation.metier.DocumentMetier;
+import org.GestionFormation.entities.Formateur;
+import org.GestionFormation.metier.FormateurMetier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,21 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Ayoub
  */
 @RestController
-public class DocumentRestService
+public class FormateurRestService
 {
     @Autowired
-    private DocumentMetier documentMetier;
+    private FormateurMetier formateurMetier;
     
-    @RequestMapping(value = "/documents" , method = RequestMethod.POST)
-    public Document saveDocument(@RequestBody Document d)
+    @RequestMapping(value = "/formateurs" , method = RequestMethod.POST)
+    public Formateur saveFormateur(@RequestBody Formateur f)
     {
-        return documentMetier.saveDocument(d);
+        return formateurMetier.saveFormateur(f);
     }
     
-    @RequestMapping(value = "/documents" , method = RequestMethod.GET)
-    public List<Document> listDocuments()
+    @RequestMapping(value = "/formateurs" , method = RequestMethod.GET)
+    public List<Formateur> listFormateur()
     {
-        return documentMetier.listDocuments();
+        return formateurMetier.listFormateur();
     }
     
 }

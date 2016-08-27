@@ -8,37 +8,25 @@ package org.GestionFormation.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.format.annotation.DateTimeFormat;
 
-/**
- *
- * @author Ayoub
- */
+
 @Entity
-@Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
-@NamedNativeQueries(
-        {
-            @NamedNativeQuery
-            (
-                name    =   "getAllUsers",
-                query   =   "SELECT * FROM Utilisateur", 
-                resultClass=Utilisateur.class
-            )
-        })
-//@DiscriminatorColumn( name = "ROLE",discriminatorType = DiscriminatorType.STRING )
-//@Table(uniqueConstraints=@UniqueConstraint(columnNames={"emailUtilisateur"}))
-@Table(name = "Utilisateur")
+@Inheritance( strategy = InheritanceType.SINGLE_TABLE )
+@DiscriminatorColumn( name = "ROLE",discriminatorType = DiscriminatorType.STRING )
+@Table(name = "Utilisateur",uniqueConstraints=@UniqueConstraint(columnNames={"emailUtilisateur"}))
 public class Utilisateur implements Serializable
 {
     private static final long serialVersionUID = 1L;
@@ -53,16 +41,16 @@ public class Utilisateur implements Serializable
     @NotNull
     private String prenomUtilisateur;
     
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date joinDate;
-    
-    private String urlPhotoUtilisateur="";
+    @Email
+    private String emailUtilisateur;
     
     @JsonIgnore
     private String passwordUtilisateur;
     
-    @Email
-    private String emailUtilisateur;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date joinDate;
+    
+    private String urlPhotoUtilisateur="";
     
     public Utilisateur()
     {

@@ -88,5 +88,11 @@ public class UtilisateurMetierImpl implements UtilisateurMetier
         return null;
         
     }
+
+    @Override
+    public Page<Utilisateur> findPageUtilisateursOnly(String mc, Pageable pageable)
+    {
+       return utilisateurRepository.findPageUtilisateursOnly(mc, pageable);
+    }
     
 }

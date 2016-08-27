@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -19,7 +20,7 @@ import javax.persistence.OneToMany;
  * @author Ayoub
  */
 @Entity
-//@DiscriminatorValue("RESPONSABLEFORMATION")
+@DiscriminatorValue("RESPONSABLEFORMATION")
 public class ResponsableFormation extends Utilisateur implements Serializable
 {
     private static final long serialVersionUID = 1L;

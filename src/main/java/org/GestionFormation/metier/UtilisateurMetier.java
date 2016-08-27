@@ -20,7 +20,7 @@ public interface UtilisateurMetier
     public List<Utilisateur> listUtilisateurs();
     public List<Utilisateur> listUtilisateursOnly();
     public List<Utilisateur> listUsersOnly();
-    //public Page<Utilisateur> pageUtilisateursOnly(Pageable pgbl);
+    public Page<Utilisateur> findPageUtilisateursOnly(String mc,Pageable pageable);
     public Utilisateur getUtilisateur(Long idUtilisateur);
     public List<Utilisateur> findByFullName(String nom,String prenom);
     public Page<Utilisateur> findUtilisateurs(String mc,Pageable pageable);

@@ -16,8 +16,15 @@ and open the template in the editor.
     <body ng-app="GestionFormation" ng-controller="listUtilisateursController">
         
         {{test}}
-        
+        <a href="/app/views/Administrateur/ajoutUtilisateur.html">Ajout Utilisateur</a>
         <div class="col-md-6 col-sm-6 spacer">
+            <form>
+                <div class="form-group">
+                    <label>Mot Clé : </label>
+                    <input type="text" ng-model="motCle" />
+                    <button class="btn btn-success" ng-click="recherche()">Recherche</button>
+                </div>
+            </form>
             <table class="table table-striped">
                 <thead>
                     <tr>

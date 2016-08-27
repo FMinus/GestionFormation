@@ -8,16 +8,14 @@ package org.GestionFormation.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
-/**
- *
- * @author Ayoub
- */
+
 @Entity
-//@DiscriminatorValue("FORMATEUR")
+@DiscriminatorValue("FORMATEUR")
 public class Formateur extends Utilisateur implements Serializable
 {
     private static final long serialVersionUID = 1L;
