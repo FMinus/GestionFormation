@@ -11,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Ayoub
  */
+@Service
 public class AppUserDetailsService  implements UserDetailsService
 {
     @Autowired
@@ -30,9 +32,12 @@ public class AppUserDetailsService  implements UserDetailsService
         
         if (user == null) 
             throw new UsernameNotFoundException(String.format("login [%s] inexistant", email));
-		
+	
+        System.out.println("execution app user repository");
 	// on rend les détails de l'utilsateur
 	return new AppUserDetails(user);
+        
+        
     }
     
     

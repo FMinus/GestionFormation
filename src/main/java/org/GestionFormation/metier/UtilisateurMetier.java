@@ -25,4 +25,5 @@ public interface UtilisateurMetier
     public List<Utilisateur> findByFullName(String nom,String prenom);
     public Page<Utilisateur> findUtilisateurs(String mc,Pageable pageable);
     public Page<Utilisateur> findAllUtilisateurs(Pageable pgbl);
+    public Utilisateur login(String email,String password);
 }

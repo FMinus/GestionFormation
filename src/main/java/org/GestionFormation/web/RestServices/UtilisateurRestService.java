@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package org.GestionFormation.web.RestServices;
 
 import java.util.List;
@@ -11,6 +11,8 @@ import org.GestionFormation.metier.UtilisateurMetier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/utilisateurs")
+//@Secured(value = {"ROLE_ADMINISTRATEUR"})
 public class UtilisateurRestService
 {
     @Autowired
@@ -32,14 +35,14 @@ public class UtilisateurRestService
     {
         return utilisateurMetier.saveUtilisateur(u);
     }
-
+    
     @RequestMapping(value = "list" , method = RequestMethod.GET)
     public List<Utilisateur> listUtilisateurs()
     {
         return utilisateurMetier.listUtilisateurs();
     }
     
-     @RequestMapping(value = "listOnlyUsers" , method = RequestMethod.GET)
+    @RequestMapping(value = "listOnlyUsers" , method = RequestMethod.GET)
     public List<Utilisateur> listUtilisateursOnly()
     {
         return utilisateurMetier.listUtilisateursOnly();
@@ -51,7 +54,7 @@ public class UtilisateurRestService
         return utilisateurMetier.getUtilisateur(id);
     }
     
-    //FIXME 
+    //FIXME
     @RequestMapping(value = "find" , method = RequestMethod.GET)
     public List<Utilisateur> getUtilisateurByFullName(@RequestParam(name = "prenom") String prenom,@RequestParam(name="nom") String nom)
     {
@@ -89,12 +92,18 @@ public class UtilisateurRestService
         //return utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(page,5));
         return utilisateurMetier.findAllUtilisateurs(new PageRequest(page,size));
     }
-   
+    
     @RequestMapping(value = "pageUsersOnly")
     public Page<Utilisateur> pageUtilisateursOnly(@RequestParam(name = "mc",defaultValue = "") String mc,@RequestParam(name = "page",defaultValue = "0") int page,@RequestParam(name = "size",defaultValue ="5") int size)
     {
         //return utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(page,5));
         return utilisateurMetier.findPageUtilisateursOnly("%"+mc+"%",new PageRequest(page,size));
     }
-
+    
+    @RequestMapping(value="/login",method = RequestMethod.POST, consumes = "application/json; charset=UTF-8")
+    public Utilisateur login(@RequestBody Utilisateur utilisateur)
+    {
+        System.out.println("login : "+utilisateur.getEmailUtilisateur()+ " " +utilisateur.getPasswordUtilisateur());
+       return utilisateurMetier.login(utilisateur.getEmailUtilisateur(), utilisateur.getPasswordUtilisateur());
+    }
 }

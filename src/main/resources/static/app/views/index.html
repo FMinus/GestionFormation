@@ -9,11 +9,11 @@ and open the template in the editor.
         <title>Index</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/mystyle.css" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/mystyle.css" />
     </head>
     
-    <body ng-app="GestionFormation" >
+    <body ng-app="GestionFormation">
         
         <div class="col-md-6 col-sm-6 col-xs-12 spacer">
             <div class="panel panel-info">
@@ -26,6 +26,9 @@ and open the template in the editor.
                         <li><a href="/app/views/Administrateur/ajoutUtilisateur.html">Ajout Utilisateur</a></li>
                         
                     </ul>
+                </div>
+                <div ng-controller="navigation">
+                    {{test}}
                 </div>
             </div>
         </div>
@@ -69,8 +72,8 @@ and open the template in the editor.
         -->
         
         
-        <script type="text/javascript" src="/js/angular.min.js" ></script>
-        <script type="text/javascript" src="/app/controllers/administrateur/listUtilisateursController.js" ></script>
-        
+        <script type="text/javascript" src="/js/angular-1.5.0/angular.min.js" ></script>
+        <script type="text/javascript" src="/app/controllers/navigation.js" ></script>
+        <script type="text/javascript" src="/app/services/currentUser.js"></script>
     </body>
 </html>

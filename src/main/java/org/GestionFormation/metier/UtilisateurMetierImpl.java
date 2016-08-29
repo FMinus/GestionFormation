@@ -94,5 +94,16 @@ public class UtilisateurMetierImpl implements UtilisateurMetier
     {
        return utilisateurRepository.findPageUtilisateursOnly(mc, pageable);
     }
+
+    @Override
+    public Utilisateur login(String email, String password)
+    {
+        Utilisateur user = utilisateurRepository.login(email, password);
+        
+        if(user==null)
+            throw new RuntimeException("Utilisateur Innexistant");
+        
+        return user;
+    }
     
 }

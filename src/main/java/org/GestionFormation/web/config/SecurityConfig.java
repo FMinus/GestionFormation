@@ -6,25 +6,30 @@
 package org.GestionFormation.web.config;
 
 import javax.ws.rs.HttpMethod;
+import org.GestionFormation.web.config.handlers.CustomSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
+import org.springframework.security.config.http.SessionCreationPolicy;
 /**
  *
  * @author Ayoub
  */
-@Configuration
+@EnableAutoConfiguration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
+     public static final String REMEMBER_ME_KEY = "rememberme_key";
+     
     @Autowired
     private AppUserDetailsService appUserDetailsService;
+    
+    @Autowired
+    CustomSuccessHandler customSuccessHandler;
+ 
     
     @Override
     protected void configure(AuthenticationManagerBuilder registry) throws Exception
@@ -42,9 +47,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         // l'authentification est faite par le header Authorization: Basic xxxx
         http.httpBasic();
         
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        
+        
+        
         // le dossier [app] est accessible à tous
-        http.authorizeRequests() //
-            .antMatchers(HttpMethod.GET, "/app", "/app/**").permitAll();
+        http
+            .authorizeRequests() //
+                .antMatchers("/css/**" , "/js/**","/images/**","/app/**","/favicon.ico").permitAll()
+                .antMatchers("/app/views/login").permitAll()
+                .anyRequest().authenticated()
+//                .antMatchers(HttpMethod.GET, "/app", "/app/**").permitAll()
+//                .antMatchers("/utilisateurs").hasRole("ADMINISTRATEUR")
+//                .antMatchers(HttpMethod.GET,"/utilisateurs/*").hasRole("ADMINISTRATEUR")
+//                .antMatchers(HttpMethod.POST,"/utilisateurs/*").hasRole("ADMINISTRATEUR")
+            .and()
+                .formLogin()
+                    .loginPage("/app/views/login.html").permitAll()
+                    .usernameParameter("emailUtilisateur")
+                    .passwordParameter("passwordUtilisateur")
+                    .defaultSuccessUrl("/app/views/index.html")
+            .and()
+                .logout()
+                    .invalidateHttpSession(true)
+                    .logoutUrl("/logout")
+                    .permitAll()
+            
+                ;
     }
     
 }

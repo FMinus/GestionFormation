@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/mystyle.css" />
+        <link rel="stylesheet" href="/css/pure-min.css" />
+    </head>
+    
+     <body ng-app="GestionFormation" ng-controller="loginController">
+  
+        <div class="col-md-6 col-xs-12 spacer">
+            <div class="panel panel-info">
+                <div class="panel panel-heading">Login : {{test}}</div>
+                <div class="panel panel-body">
+                    <form class="pure-form pure-form-aligned">
+                        <fieldset>
+                            <div class="pure-control-group">
+                                <label class="control-label" for="email">Email : </label>
+                                <input type="text" ng-model="user.emailUtilisateur" id="email" class="input-sm" placeholder="Votre Adresse Email"/>
+                            </div>
+                            <div class="pure-control-group">
+                                <label class="control-label" for="password">Mot De Passe : </label>
+                                <input type="text" ng-model="user.passwordUtilisateur" id="password" class="input-sm" placeholder="Votre Mot De Passe"/>
+                            </div>
+                            <div class="center-block">
+                                <span ng-if="error" class="error center-block ng-cloak">{{error}}</span>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary center-block" ng-click="authenticate ()">Envoyer</button>
+                                <button class="btn btn-primary center-block" ng-click="toIndex()">index</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        <!--        
+                <div ng-include="'/app/views/includes/header_page.html'">
+                </div>
+                <div ng-include="'/app/views/Administrateur/listUtilisateurs.html'" ng-controller="listUtilisateursController">
+                </div>
+                
+                <ul class="nav nav-pills">
+                    <li ng-repeat="m in menu" class="clickable" ng-click="select(m)" ng-class="{active:m==selectedMenu}">
+                        <a>{{m}}</a>
+                    </li>
+                </ul>
+                
+                
+                <div class="" ng-if="selectedMenu=='Inscrire'" ng-controller="ajouterUtilisateurController">
+                    <div ng-include="'/app/views/Administrateur/ajoutUtilisateur.html'">
+                    </div>
+                </div>
+                
+                <div class="" ng-if="selectedMenu=='Listes'" ng-controller="listUtilisateursController">
+                    
+                </div>
+                
+                <div class="" ng-if="selectedMenu=='Utilisateurs'">
+                    <div ng-include="'inscription.html'">
+                    </div>
+                </div>
+                
+                <div class="" ng-if="selectedMenu=='Logout'" ng-controller="">
+                    
+                </div>
+                
+        -->
+        
+        <script type="text/javascript" src="/js/angular-1.5.0/angular.min.js" ></script>
+        <script type="text/javascript" src="/js/angular-1.5.0/angular-route.min.js" ></script>
+        
+        <script type="text/javascript" src="/app/controllers/loginController.js" ></script>
+        <script type="text/javascript" src="/app/services/currentUser.js"></script>
+<!--        <script type="text/javascript" src="/app/services/dao.js"></script>
+        <script type="text/javascript" src="/app/services/properties.js"></script>
+        <script type="text/javascript" src="/app/services/utils.js"></script>-->
+        
+        
+    </body>
+</html>

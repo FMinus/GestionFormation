@@ -6,6 +6,7 @@
 package org.GestionFormation.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.DiscriminatorColumn;
@@ -44,7 +45,7 @@ public class Utilisateur implements Serializable
     @Email
     private String emailUtilisateur;
     
-    @JsonIgnore
+    
     private String passwordUtilisateur;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -114,12 +115,13 @@ public class Utilisateur implements Serializable
     {
         this.urlPhotoUtilisateur = urlPhotoUtilisateur;
     }
-
+    
+    @JsonIgnore
     public String getPasswordUtilisateur()
     {
         return passwordUtilisateur;
     }
-
+    @JsonSetter
     public void setPasswordUtilisateur(String passwordUtilisateur)
     {
         this.passwordUtilisateur = passwordUtilisateur;
