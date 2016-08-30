@@ -1,5 +1,5 @@
-angular.module("GestionFormation",[])
-.controller("loginController",['currentUser','$scope','$http','$location', function(currentUser, $scope, $http,$location)
+angular.module("GestionFormation",['ngStorage'])
+.controller("loginController",['currentUser','$scope','$http','$location','$rootScope', function(currentUser, $scope, $http,$location,$rootScope,$localStorage,$sessionStorage)
 {
     $scope.test = "mytest";
     $scope.user = 
@@ -11,7 +11,9 @@ angular.module("GestionFormation",[])
     $scope.utilisateur = null;
     $scope.error = null;
     
+    
     //var self = this;
+    $scope.$storage = $sessionStorage;
     
     $scope.authenticate  = function()
     {
@@ -28,11 +30,15 @@ angular.module("GestionFormation",[])
         {
             
             $scope.utilisateur = data;
-   
-            //window.location.href="http://localhost:8080/app/views/index.html";
+            $rootScope.utilisateur = data;
+           
+            window.location.href="http://localhost:8080/app/views/index.html";
             console.log("login success : "+ $scope.utilisateur);
             
-            //currentUser.saveCurrentUser(data);
+            currentUser.saveCurrentUser(data);
+            
+            //$scope.$storage.sessionuser = data;
+            
         })
         .error(function(data)
         {

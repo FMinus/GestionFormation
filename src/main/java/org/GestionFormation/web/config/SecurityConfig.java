@@ -5,6 +5,7 @@
 */
 package org.GestionFormation.web.config;
 
+import org.GestionFormation.web.config.appUser.AppUserDetailsService;
 import javax.ws.rs.HttpMethod;
 import org.GestionFormation.web.config.handlers.CustomSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
-     public static final String REMEMBER_ME_KEY = "rememberme_key";
-     
+   
+    
     @Autowired
     private AppUserDetailsService appUserDetailsService;
     
-    @Autowired
-    CustomSuccessHandler customSuccessHandler;
- 
+  
     
     @Override
     protected void configure(AuthenticationManagerBuilder registry) throws Exception
@@ -41,39 +40,44 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        // CSRF
-        http.csrf().disable();
+//        // CSRF
+//        http.csrf().disable();
+//        
+//        // l'authentification est faite par le header Authorization: Basic xxxx
+//        http.httpBasic();
+//        
+//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//        
+//        
+//        
+//        // le dossier [app] est accessible à tous
+//        http
+//            .authorizeRequests() //
+//                .antMatchers("/css/**" , "/js/**","/images/**","/app/**","/favicon.ico").permitAll()
+//                .antMatchers("/app/views/login").permitAll()
+//                .antMatchers("/app/views/index.html").authenticated()
+//                .anyRequest().authenticated()
+//       
+//            .and()
+//                .formLogin()
+//                    .loginPage("/app/views/login.html").permitAll()
+//                    .defaultSuccessUrl("/app/views/index.html")
+//            .and()
+//                .logout()
+//                    .invalidateHttpSession(true)
+//                    .logoutUrl("/logout")
+//                    .permitAll()
+//
+//        ;
+//        
+//        
         
-        // l'authentification est faite par le header Authorization: Basic xxxx
-        http.httpBasic();
-        
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        
-        
-        
-        // le dossier [app] est accessible à tous
         http
-            .authorizeRequests() //
-                .antMatchers("/css/**" , "/js/**","/images/**","/app/**","/favicon.ico").permitAll()
-                .antMatchers("/app/views/login").permitAll()
-                .anyRequest().authenticated()
-//                .antMatchers(HttpMethod.GET, "/app", "/app/**").permitAll()
-//                .antMatchers("/utilisateurs").hasRole("ADMINISTRATEUR")
-//                .antMatchers(HttpMethod.GET,"/utilisateurs/*").hasRole("ADMINISTRATEUR")
-//                .antMatchers(HttpMethod.POST,"/utilisateurs/*").hasRole("ADMINISTRATEUR")
+            .authorizeRequests()
+            .anyRequest().fullyAuthenticated()
             .and()
-                .formLogin()
-                    .loginPage("/app/views/login.html").permitAll()
-                    .usernameParameter("emailUtilisateur")
-                    .passwordParameter("passwordUtilisateur")
-                    .defaultSuccessUrl("/app/views/index.html")
-            .and()
-                .logout()
-                    .invalidateHttpSession(true)
-                    .logoutUrl("/logout")
-                    .permitAll()
-            
-                ;
+            .httpBasic();
     }
+    
     
 }

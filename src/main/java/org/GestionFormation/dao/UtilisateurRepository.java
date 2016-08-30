@@ -30,19 +30,24 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>
     @Query("select e from Utilisateur e where role = Utilisateur")
     public List<Utilisateur> findUtilisateursOnly();
     
+     @Query("select e from Utilisateur e where e.emailUtilisateur = :email")
+    public List<Utilisateur> findByEmail(@Param("email")String email);
     
     @Query("select e from Utilisateur e where role = Utilisateur and (e.nomUtilisateur like :x or e.prenomUtilisateur like :x)")
     public Page<Utilisateur> findPageUtilisateursOnly(@Param("x") String mc,Pageable pageable);
     
-    @Query("select u from Utilisateur u where u.emailUtilisateur=?1 and u.passwordUtilisateur= ?2") 
+    @Query("select u from Utilisateur u where u.emailUtilisateur=?1 and u.passwordUtilisateur= ?2 and role = Utilisateur") 
     public Utilisateur login(String emailUtilisateur,String passwordUtilisateur);
     
     @Modifying
     @Query("UPDATE Utilisateur u SET u.urlPhotoUtilisateur = ?2 WHERE u.idUtilisateur = ?1")
     public void updateUrlPhotoUtilisateur(Long idUtilisateur, String urlPhotoUtilisateur);
     
+    @Query("select u from Utilisateur u where u.emailUtilisateur=?1")
     public Utilisateur findUserByEmailUtilisateur(String email);
     
+    public Utilisateur findFirstByOrderByEmailUtilisateurAsc(String email);
+
     @Modifying
     @Query("UPDATE Utilisateur u SET u.passwordUtilisateur = ?1 WHERE u.idUtilisateur = ?2")
     public void updatePassword(String newPassword, Long id);

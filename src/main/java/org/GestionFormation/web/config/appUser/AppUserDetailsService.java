@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.GestionFormation.web.config;
+package org.GestionFormation.web.config.appUser;
 
 import org.GestionFormation.dao.UtilisateurRepository;
 import org.GestionFormation.entities.Utilisateur;
@@ -28,12 +28,12 @@ public class AppUserDetailsService  implements UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
     {
-        Utilisateur user = utilisateurRepository.findUserByEmailUtilisateur(email);
-        
+        Utilisateur user = utilisateurRepository.findFirstByOrderByEmailUtilisateurAsc(email);
+        System.out.println("execution app user repository");
         if (user == null) 
             throw new UsernameNotFoundException(String.format("login [%s] inexistant", email));
 	
-        System.out.println("execution app user repository");
+        
 	// on rend les détails de l'utilsateur
 	return new AppUserDetails(user);
         

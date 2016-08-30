@@ -24,12 +24,14 @@ myApp.factory('currentUser', ['$location',function ()
         };
         
     }]);
-*/
+ */
 var app=angular.module("GestionFormation");
-    app.factory('currentUser', [
-        function () {
+app.factory('currentUser', [
+    function () 
+    {
+        var user = {};
 
-            function getCurrentUser() 
+        function getCurrentUser() 
         {
             return user;
         }
@@ -40,10 +42,10 @@ var app=angular.module("GestionFormation");
             console.log(creds);
         }
 
-            // --------------------- instance du service [security]
-            return {
-                getCurrentUser:getCurrentUser,
-                saveCurrentUser:saveCurrentUser
+        // --------------------- instance du service [security]
+        return {
+            getCurrentUser:getCurrentUser,
+            saveCurrentUser:saveCurrentUser
                
-            }
-        }]);
+        }
+    }]);

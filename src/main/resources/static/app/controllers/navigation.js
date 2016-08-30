@@ -69,11 +69,13 @@ angular.module('GestionFormation', [ 'ngRoute' ])
 
 */
 
-angular.module("GestionFormation",[])
-.controller("navigation",['currentUser','$scope','$http','$location', function(currentUser, $scope, $http,$location)
+angular.module("GestionFormation",['ngStorage'])
+.controller("navigation",['currentUser','$scope','$http','$location','$rootScope', function(currentUser, $scope, $http,$location,$rootScope,$sessionStorage)
 {
     $scope.test = "mytest";
-    $scope.user = currentUser.getCurrentUser();
+    $scope.user = currentUser.getCurrentUser;
+    $scope.user2 = $rootScope.utilisateur;
+    $scope.$storage.sessionuser = $sessionStorage.sessionuser;
            
     
     $scope.utilisateur = null;
@@ -81,9 +83,6 @@ angular.module("GestionFormation",[])
     
     //var self = this;
     
+  // console.log($sessionStorage.sessionuser);
     
-    
-    
-    
-}])
-    ;
+}]);

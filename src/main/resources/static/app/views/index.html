@@ -28,7 +28,10 @@ and open the template in the editor.
                     </ul>
                 </div>
                 <div ng-controller="navigation">
-                    {{test}}
+                    test script : {{test}} <br/>
+                    current user : {{user.emailUtilisateur}}<br/>
+                    current user : {{user2.emailUtilisateur}}<br/>
+<!--                    current user : {{$storage.sessionuser}}<br/>-->
                 </div>
             </div>
         </div>
@@ -73,6 +76,7 @@ and open the template in the editor.
         
         
         <script type="text/javascript" src="/js/angular-1.5.0/angular.min.js" ></script>
+        <script type="text/javascript" src="/js/angular-1.5.0/ngStorage.min.js" ></script>
         <script type="text/javascript" src="/app/controllers/navigation.js" ></script>
         <script type="text/javascript" src="/app/services/currentUser.js"></script>
     </body>
