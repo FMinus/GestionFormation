@@ -80,7 +80,6 @@ public class UtilisateurRestService
                         @RequestParam(name = "page",defaultValue = "0") int p,
                         @RequestParam(name = "motCle",defaultValue = "") String mc)
     {
-        //Page<Etudiant> pageEtudiants = etudiantRepository.findAll(new PageRequest(p,5));
         Page<Utilisateur> pageUtilisateurs = utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(p,5));
         
         
@@ -91,7 +90,6 @@ public class UtilisateurRestService
         {
             pages[i]=i;
         }
-        //object accessble a travers la session
         model.addAttribute("pageUtilisateurs",pageUtilisateurs);
         model.addAttribute("pages",pages);
         model.addAttribute("pageCourante",p);
@@ -103,14 +101,12 @@ public class UtilisateurRestService
     @RequestMapping(value = "pageUsers")
     public Page<Utilisateur> listUtilisateurs(@RequestParam(name = "page") int page,@RequestParam(name = "size") int size)
     {
-        //return utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(page,5));
         return utilisateurMetier.findAllUtilisateurs(new PageRequest(page,size));
     }
     
     @RequestMapping(value = "pageUsersOnly")
     public Page<Utilisateur> pageUtilisateursOnly(@RequestParam(name = "mc",defaultValue = "") String mc,@RequestParam(name = "page",defaultValue = "0") int page,@RequestParam(name = "size",defaultValue ="5") int size)
     {
-        //return utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(page,5));
         return utilisateurMetier.findPageUtilisateursOnly("%"+mc+"%",new PageRequest(page,size));
     }
     
@@ -119,67 +115,50 @@ public class UtilisateurRestService
     {
         System.out.println("login : "+utilisateur.getEmailUtilisateur()+ " " +utilisateur.getPasswordUtilisateur());
         
-        //if user is null an exception will be thrown
         Utilisateur user = utilisateurMetier.login(utilisateur.getEmailUtilisateur(), utilisateur.getPasswordUtilisateur());
         
-//        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(utilisateur.getEmailUtilisateur(), utilisateur.getPasswordUtilisateur());
-//        System.out.println("token "+authRequest);
-//
-//        // Authenticate the user
-//        Authentication authentication = authenticationManager.authenticate(authRequest);
-//        System.out.println("authentication "+authentication);
-//
-//        SecurityContext securityContext = SecurityContextHolder.getContext();
-//
-//        securityContext.setAuthentication(authentication);
-//
-//        // Create a new session and add the security context.
-//        HttpSession session = request.getSession(true);
-//        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
-//
-//        System.out.println("code");
-
-
-Result r = new Result();
-r.setStatus(true);
-r.setMessage("");
-r.setData(user);
-return r;
+        
+        
+        Result r = new Result();
+        r.setStatus(true);
+        r.setMessage("");
+        r.setData(user);
+        return r;
     }
     
     @RequestMapping(value="/currentUser",method = RequestMethod.GET)
     public String getCurrentUser(HttpServletRequest request, HttpServletResponse response)
     {
-        //System.out.println("login : "+utilisateur.getEmailUtilisateur()+ " " +utilisateur.getPasswordUtilisateur());
         
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
-        
-        
         Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         
         HttpSession session = request.getSession();
         
-        
         System.out.println("current user : "+auth.getPrincipal());
-//        System.out.println("current user : "+o);
-//        System.out.println("current user : "+auth.isAuthenticated());
-//        System.out.println("current user : "+session.getAttribute("currentUser"));
-return name;
+        
+        return name;
     }
     
     
     @RequestMapping(value = "/session", produces = MediaType.APPLICATION_JSON_VALUE)
-                                Map<String, String> helloUser(Principal principal)
-                                {
-                                    Map<String, String> result = new HashMap<>();
-                                    result.put("username", principal.getName());
-                                    return result;
-                                }
-                                
-                                @RequestMapping("/logout")
-                                @ResponseStatus(HttpStatus.NO_CONTENT)
-                                void logout(HttpSession session) {
-                                    session.invalidate();
-                                }
+    Map<String, String> helloUser(Principal principal)
+    {
+        Map<String, String> result = new HashMap<>();
+        result.put("username", principal.getName());
+        return result;
+    }
+                                                
+    @RequestMapping("/logout")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void logout(HttpSession session) {
+        session.invalidate();
+    }
+    
+    @RequestMapping("user")
+    public Principal user(Principal user)
+    {
+        return user;
+    }
 }
