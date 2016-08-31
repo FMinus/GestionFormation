@@ -3,7 +3,7 @@
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
-package org.GestionFormation.web.config.handlers;
+package org.GestionFormation.web.config.toDelete.handlers;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -23,7 +23,6 @@ public class RestUnauthorizedEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,AuthenticationException exception) throws IOException, ServletException
     {
-        //SecurityUtils.sendError(response, exception, HttpServletResponse.SC_UNAUTHORIZED,"Authentication failed");
-                
+           response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"Unauthorized: Authentication token was either missing or invalid.");     
     }
 }

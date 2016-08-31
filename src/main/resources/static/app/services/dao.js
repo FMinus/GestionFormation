@@ -5,7 +5,8 @@ angular.module("GestionFormation")
       // log
 
       // liste de données
-      function getData(urlAction,basicHeader,http_method,info) {
+      function getData(urlAction,basicHeader,http_method,info) 
+      {
 
         // opération asynchrone
         var task = $q.defer();

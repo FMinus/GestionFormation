@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 /**
  *
@@ -51,4 +52,8 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>
     @Modifying
     @Query("UPDATE Utilisateur u SET u.passwordUtilisateur = ?1 WHERE u.idUtilisateur = ?2")
     public void updatePassword(String newPassword, Long id);
+    
+     @PreAuthorize("hasRole('ROLE_ADMIN')")
+     @Override
+     Utilisateur save(Utilisateur u);
 }

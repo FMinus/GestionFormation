@@ -13,7 +13,7 @@ angular.module("GestionFormation",['ngStorage'])
     
     
     //var self = this;
-    $scope.$storage = $sessionStorage;
+    //$scope.$storage = $sessionStorage;
     
     $scope.authenticate  = function()
     {
@@ -35,7 +35,7 @@ angular.module("GestionFormation",['ngStorage'])
             window.location.href="http://localhost:8080/app/views/index.html";
             console.log("login success : "+ $scope.utilisateur);
             
-            currentUser.saveCurrentUser(data);
+            //currentUser.saveCurrentUser(data);
             
             //$scope.$storage.sessionuser = data;
             

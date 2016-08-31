@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.GestionFormation.web.config.handlers;
+package org.GestionFormation.web.config.toDelete.handlers;
 
 import java.io.IOException;
 import java.util.ArrayList;

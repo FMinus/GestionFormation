@@ -3,7 +3,7 @@
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
-package org.GestionFormation.web.config.handlers;
+package org.GestionFormation.web.config.toDelete.handlers;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -29,6 +29,8 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationFai
             throws ServletException, IOException 
     {
          Utilisateur user = userService.findUserByEmailUtilisateur(authentication.getName());
+         System.out.println("user authentification success ");
          //SecurityUtils.sendResponse(response, HttpServletResponse.SC_OK, user);
+         response.sendRedirect("/app/views/index.html");     
     }
 }

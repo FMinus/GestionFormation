@@ -69,13 +69,33 @@ angular.module('GestionFormation', [ 'ngRoute' ])
 
 */
 
-angular.module("GestionFormation",['ngStorage'])
+angular.module("GestionFormation",['ngStorage','ngRoute'])
+.config(function($routeProvider, $httpProvider)
+{
+    /*
+     $routeProvider.when('/', 
+     {
+        templateUrl : 'home.html',
+        controller : 'home',
+        controllerAs: 'controller'
+    })
+    .when('/login', 
+     {
+        templateUrl : 'login.html',
+        controller : 'navigation',
+        controllerAs: 'controller'
+    })
+    .otherwise('/');
+    */
+   
+    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+})
 .controller("navigation",['currentUser','$scope','$http','$location','$rootScope', function(currentUser, $scope, $http,$location,$rootScope,$sessionStorage)
 {
     $scope.test = "mytest";
     $scope.user = currentUser.getCurrentUser;
     $scope.user2 = $rootScope.utilisateur;
-    $scope.$storage.sessionuser = $sessionStorage.sessionuser;
+    //$scope.$storage.sessionuser = $sessionStorage.sessionuser;
            
     
     $scope.utilisateur = null;
@@ -86,3 +106,4 @@ angular.module("GestionFormation",['ngStorage'])
   // console.log($sessionStorage.sessionuser);
     
 }]);
+

@@ -9,14 +9,20 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.GestionFormation.entities.Utilisateur;
 import org.GestionFormation.metier.UtilisateurMetier;
+import org.GestionFormation.web.models.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +40,9 @@ public class UtilisateurRestService
 {
     @Autowired
     private UtilisateurMetier utilisateurMetier;
+    
+    @Autowired
+    private AuthenticationManager authenticationManager;
     
     @RequestMapping(value = "ajout" , method = RequestMethod.POST)
     public Utilisateur saveUtilisateur(@RequestBody Utilisateur u)
@@ -106,23 +115,71 @@ public class UtilisateurRestService
     }
     
     @RequestMapping(value="/login",method = RequestMethod.POST, consumes = "application/json; charset=UTF-8")
-    public Utilisateur login(@RequestBody Utilisateur utilisateur)
+    public Result login(@RequestBody Utilisateur utilisateur)
     {
         System.out.println("login : "+utilisateur.getEmailUtilisateur()+ " " +utilisateur.getPasswordUtilisateur());
-       return utilisateurMetier.login(utilisateur.getEmailUtilisateur(), utilisateur.getPasswordUtilisateur());
+        
+        //if user is null an exception will be thrown
+        Utilisateur user = utilisateurMetier.login(utilisateur.getEmailUtilisateur(), utilisateur.getPasswordUtilisateur());
+        
+//        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(utilisateur.getEmailUtilisateur(), utilisateur.getPasswordUtilisateur());
+//        System.out.println("token "+authRequest);
+//
+//        // Authenticate the user
+//        Authentication authentication = authenticationManager.authenticate(authRequest);
+//        System.out.println("authentication "+authentication);
+//
+//        SecurityContext securityContext = SecurityContextHolder.getContext();
+//
+//        securityContext.setAuthentication(authentication);
+//
+//        // Create a new session and add the security context.
+//        HttpSession session = request.getSession(true);
+//        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+//
+//        System.out.println("code");
+
+
+Result r = new Result();
+r.setStatus(true);
+r.setMessage("");
+r.setData(user);
+return r;
     }
     
-    @RequestMapping(value = "/session", produces = MediaType.APPLICATION_JSON_VALUE)
-	Map<String, String> helloUser(Principal principal) 
-        {
-		Map<String, String> result = new HashMap<>();
-		result.put("username", principal.getName());
-		return result;
-	}
+    @RequestMapping(value="/currentUser",method = RequestMethod.GET)
+    public String getCurrentUser(HttpServletRequest request, HttpServletResponse response)
+    {
+        //System.out.println("login : "+utilisateur.getEmailUtilisateur()+ " " +utilisateur.getPasswordUtilisateur());
         
-        @RequestMapping("/logout")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	void logout(HttpSession session) {
-		session.invalidate();
-	}
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        
+        
+        Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        
+        HttpSession session = request.getSession();
+        
+        
+        System.out.println("current user : "+auth.getPrincipal());
+//        System.out.println("current user : "+o);
+//        System.out.println("current user : "+auth.isAuthenticated());
+//        System.out.println("current user : "+session.getAttribute("currentUser"));
+return name;
+    }
+    
+    
+    @RequestMapping(value = "/session", produces = MediaType.APPLICATION_JSON_VALUE)
+                                Map<String, String> helloUser(Principal principal)
+                                {
+                                    Map<String, String> result = new HashMap<>();
+                                    result.put("username", principal.getName());
+                                    return result;
+                                }
+                                
+                                @RequestMapping("/logout")
+                                @ResponseStatus(HttpStatus.NO_CONTENT)
+                                void logout(HttpSession session) {
+                                    session.invalidate();
+                                }
 }

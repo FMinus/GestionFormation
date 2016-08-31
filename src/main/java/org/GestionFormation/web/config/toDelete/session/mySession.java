@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.GestionFormation.web.config.session;
+package org.GestionFormation.web.config.toDelete.session;
 
 import org.springframework.context.annotation.Bean;
 //import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
