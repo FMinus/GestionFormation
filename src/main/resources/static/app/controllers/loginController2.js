@@ -1,15 +1,15 @@
-angular.module('GestionFormation', [ 'ngRoute' ])
+angular.module('GestionFormation', ['ngRoute','ngCookies'])
 .config(function($routeProvider, $httpProvider) 
 {
 
     $routeProvider.when('/', 
     {
-      templateUrl : 'home.html',
+      templateUrl : '/app/views/index.html',
       controller : 'home',
       controllerAs: 'controller'
     })
-            .when('/login2', {
-      templateUrl : 'login2.html',
+    .when('/login2', {
+      templateUrl : '/app/views/login2.html',
       controller : 'navigation',
       controllerAs: 'controller'
     }).otherwise('/');
@@ -17,37 +17,31 @@ angular.module('GestionFormation', [ 'ngRoute' ])
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
   })
-.controller('home', function($http) 
-{
-    var self = this;
-    $http.get('/resource/').then(function(response) 
-    {
-      self.greeting = response.data;
-    });
-})
-.controller('navigation',function($rootScope, $http, $location) 
+.controller('navigation',['$rootScope', '$http', '$location','$scope','$cookies',function($rootScope, $http, $location,$scope,$cookies) 
 {
     var self = this;
     var user;
+    var test = "mytest";
+    $scope.credentials;
     
     var authenticate = function(credentials, callback) 
     {
-
+        console.log("authenticate");
         var headers = credentials ? {authorization : "Basic " + btoa(credentials.username + ":" + credentials.password) } : {};
            
-   
-
-        $http.get('user', {headers : headers}).then(function(response) 
+        $http.get('/utilisateurs/user', {headers : headers}).then(function(response) 
         {
           if (response.data.name) 
           {
             $rootScope.authenticated = true;
             $rootScope.user = response.data;
-
+            console.log("new cookie");
+            $cookies.put('currentUser',response.data);
           } 
           else 
           {
             $rootScope.authenticated = false;
+            console.log("not authenticated");
           }
           callback && callback();
         }, 
@@ -60,13 +54,16 @@ angular.module('GestionFormation', [ 'ngRoute' ])
 
   authenticate();
   self.credentials = {};
-  self.login = function() 
+  
+  $scope.login = function() 
   {
-      authenticate(self.credentials, function() 
+      console.log("login");
+      
+      authenticate($scope.credentials, function() 
       {
         if ($rootScope.authenticated) 
         {
-          $location.path("/");
+          $location.path("/app/views/index.html");
           self.error = false;
         } 
         else 
@@ -87,10 +84,6 @@ angular.module('GestionFormation', [ 'ngRoute' ])
     
     });
   };
-});;/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+}]);
 
 

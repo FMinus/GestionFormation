@@ -4,7 +4,7 @@
         <title>Login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <link href="css/angular-bootstrap.css" rel="stylesheet">
+         <link href="/css/angular-bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" href="/css/mystyle.css" />
         <link rel="stylesheet" href="/css/pure-min.css" />
     </head>
@@ -13,17 +13,17 @@
   
         <div class="col-md-6 col-xs-12 spacer">
             <div class="panel panel-info">
-                <div class="panel panel-heading">Login : {{test}}</div>
+                <div class="panel panel-heading">Login : {{controller.test}}</div>
                 <div class="panel panel-body">
-                    <form class="pure-form pure-form-aligned" role="form" ng-submit="controller.login()">
+                    <form class="pure-form pure-form-aligned" role="form" ng-submit="login()">
                         <fieldset>
                             <div class="pure-control-group">
                                 <label class="control-label" for="email">Email : </label>
-                                <input type="text" ng-model="controller.credentials.username" id="email" class="input-sm" placeholder="Votre Adresse Email"/>
+                                <input type="text" ng-model="credentials.username" id="email" class="input-sm" placeholder="Votre Adresse Email"/>
                             </div>
                             <div class="pure-control-group">
                                 <label class="control-label" for="password">Mot De Passe : </label>
-                                <input type="text" ng-model="controller.credentials.password" id="password" class="input-sm" placeholder="Votre Mot De Passe"/>
+                                <input type="text" ng-model="credentials.password" id="password" class="input-sm" placeholder="Votre Mot De Passe"/>
                             </div>
                             <div class="center-block">
                                 <span ng-if="error" class="error center-block ng-cloak">{{error}}</span>
@@ -74,7 +74,10 @@
                 
         -->
         
-        <script src="/js/angular-bootstrap.js" type="text/javascript"></script>
+<!--        <script src="/js/angular-bootstrap.js" type="text/javascript"></script>       -->
+        <script src="/js/angular-1.5.0/angular.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-route.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-cookies.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="/app/controllers/loginController2.js" ></script>
 <!--        <script type="text/javascript" src="/app/services/dao.js"></script>
         <script type="text/javascript" src="/app/services/properties.js"></script>

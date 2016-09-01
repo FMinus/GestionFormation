@@ -1,51 +1,19 @@
-/*
-
-var myApp=angular.module('GestionFormation');
-
-myApp.factory('currentUser', ['$location',function () 
+var app=angular.module("GestionFormation");
+app.service('currentUser', ['$cookies',
+    function ($cookies) 
     {
+        var currentUserReturn = {};
+        
         var user = {};
         
-        function getCurrentUser() 
+        currentUserReturn.getCurrentUser = function() 
         {
-            return user;
-        }
-        
-        function saveCurrentUser(creds)
-        {
-            user = creds;
-            console.log(creds);
-        }
-        
-        return 
-        {
-           getCurrentUser:getCurrentUser,
-           saveCurrentUser,saveCurrentUser
+            user = $cookies.get('currentUser');
+            console.log("current user " + user);
         };
         
-    }]);
- */
-var app=angular.module("GestionFormation");
-app.factory('currentUser', [
-    function () 
-    {
-        var user = {};
-
-        function getCurrentUser() 
-        {
-            return user;
-        }
-        
-        function saveCurrentUser(creds)
-        {
-            user = creds;
-            console.log(creds);
-        }
 
         // --------------------- instance du service [security]
-        return {
-            getCurrentUser:getCurrentUser,
-            saveCurrentUser:saveCurrentUser
-               
-        }
+        return currentUserReturn;
+        
     }]);

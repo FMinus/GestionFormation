@@ -51,22 +51,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         
         // CSRF
-        http.csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+       
                 //.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());;
         
         // l'authentification est faite par le header Authorization: Basic xxxx
         http.httpBasic();
         
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        //http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         
         
         
         // le dossier [app] est accessible à tous
-        http
-            .authorizeRequests() //
-                .antMatchers("/css/**" , "/js/**","/images/**","/app/**","/favicon.ico").permitAll()
-                .antMatchers("/app/views/login").permitAll()
+      http
+           .authorizeRequests() 
+                .antMatchers("/css/**" , "/js/**","/images/**","/app/**","/favicon.ico","/fonts/**").permitAll()
+                .antMatchers("/app/views/login2.html","/login","/utilisateurs/user").permitAll()
                 .antMatchers("/app/views/index.html").authenticated()
                 
        
@@ -82,10 +81,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 //                    .logoutUrl("/logout").permitAll()
 //                    .clearAuthentication(true)
                     
-//                
-//            .and()
-//                .authorizeRequests()
-//                .anyRequest().authenticated()
+            
+              .anyRequest().authenticated()
+              .and()
+                .csrf()
+                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 
         ;
         

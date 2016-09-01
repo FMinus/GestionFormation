@@ -1,30 +1,8 @@
-var app=angular.module("GestionFormation",[]);
-app.controller("utilisateur",function($scope,$http)
+var app=angular.module("GestionFormation");
+app.controller("utilisateur",["currentUser","$scope","$http",function(currentUser,$scope,$http)
 {
     $scope.test = "mytest";
-    $scope.user = {};
+    $scope.user = currentUser.getCurrentUser();
     
-    $scope.getUser  = function()
-    {
-        
-        $http
-        ({
-            method : 'get',
-            url : "/utilisateurs/currentUser",
-            headers : {'Content-Type' : 'application/json'}
-            
-        })
-        .success(function(data)
-        {
-            $scope.user = data;
-            console.log("login success : "+ $scope.user);
-            
-        })
-        .error(function(data)
-        {
-            console.log(data.message);
-        });
-    };
     
-    $scope.getUser();
-});
+}]);
