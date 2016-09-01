@@ -1,6 +1,6 @@
 var app=angular.module("GestionFormation");
-app.service('currentUser', ['$cookies','$base64',"$http",'$q',
-    function ($cookies,$base64,$http,$q) 
+app.service('currentUser', ['$cookies','$base64',"$http",
+    function ($cookies,$base64,$http) 
     {
         var currentUserReturn = {};
         
@@ -8,14 +8,14 @@ app.service('currentUser', ['$cookies','$base64',"$http",'$q',
         
         function getCurrentUserCode() 
         {
-            user = $cookies.get('user');
+            user = $cookies.get('currentUser');
             return user;
             //console.log("current user " + user);
         }
         
         function getCurrentUser()
         {
-            user = $cookies.get('user');
+            user = $cookies.get('currentUser');
             user = $base64.decode(user);
             var tab = user.split(":");
             var currentUser = {emailUtilisateur:tab[0],passwordUtilisateur:tab[1]};

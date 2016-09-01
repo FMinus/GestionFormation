@@ -47,6 +47,7 @@ public class UtilisateurRestService
     @RequestMapping(value = "ajout" , method = RequestMethod.POST)
     public Utilisateur saveUtilisateur(@RequestBody Utilisateur u)
     {
+        //todo add hash for password 
         return utilisateurMetier.saveUtilisateur(u);
     }
     

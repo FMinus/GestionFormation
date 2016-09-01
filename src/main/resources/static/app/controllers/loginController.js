@@ -2,9 +2,9 @@ angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
 .config(function($routeProvider, $httpProvider) 
 {
 
-    $routeProvider.when('/', 
+    $routeProvider.when('/app/views/', 
     {
-      templateUrl : '/app/views/index.html',
+      templateUrl : '/index.html',
       controller : 'home',
       controllerAs: 'controller'
     })
@@ -17,7 +17,7 @@ angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
   })
-.controller('navigation',['$rootScope', '$http', '$location','$scope','$cookies','$base64',function($rootScope, $http, $location,$scope,$cookies,$base64) 
+.controller('loginController',['$rootScope', '$http', '$location','$scope','$cookies','$base64','properties','utils',function($rootScope, $http, $location,$scope,$cookies,$base64,properties,utils) 
 {
     var self = this;
     var user;
@@ -37,6 +37,8 @@ angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
             $rootScope.user = response.data;
             console.log("new cookie");
             $cookies.put('currentUser',$scope.coder());
+            utils.redirectTo("/index.html");
+            
           } 
           else 
           {
@@ -63,12 +65,12 @@ angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
       {
         if ($rootScope.authenticated) 
         {
-          $location.path("/app/views/index.html");
+          //$location.path("/app/views/index.html");
           self.error = false;
         } 
         else 
         {
-          $location.path("/login");
+          //$location.path("/login");
           self.error = true;
         }
       });
@@ -80,6 +82,7 @@ angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
     {
         $rootScope.authenticated = false;
         $rootScope.user= null;
+        //$cookies.remove("user");
         $location.path("/");
     
     });

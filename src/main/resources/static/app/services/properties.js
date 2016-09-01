@@ -5,11 +5,10 @@
  */
 
 
-angular.module("lambda.bilan")
-        .factory('properties', function () 
+angular.module("GestionFormation")
+        .service('properties', 
+        function () 
         {
-            return 
-            {
-                urlServer : "http://localhost:8080"
-            };
+            return { urlServer:"http://localhost:8080"};
+       
         });
