@@ -68,6 +68,13 @@ public class UtilisateurRestService
         return utilisateurMetier.getUtilisateur(id);
     }
     
+    @RequestMapping(value = "getByCreds" , method = RequestMethod.POST)
+    public Utilisateur getUtilisateur(@RequestBody Utilisateur utilisateur)
+    {
+        Utilisateur user = utilisateurMetier.login(utilisateur.getEmailUtilisateur(), utilisateur.getPasswordUtilisateur());
+        return user;
+    }
+    
     //FIXME
     @RequestMapping(value = "find" , method = RequestMethod.GET)
     public List<Utilisateur> getUtilisateurByFullName(@RequestParam(name = "prenom") String prenom,@RequestParam(name="nom") String nom)

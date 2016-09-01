@@ -1,19 +1,60 @@
 var app=angular.module("GestionFormation");
-app.service('currentUser', ['$cookies',
-    function ($cookies) 
+app.service('currentUser', ['$cookies','$base64',"$http",'$q',
+    function ($cookies,$base64,$http,$q) 
     {
         var currentUserReturn = {};
         
         var user = {};
         
-        currentUserReturn.getCurrentUser = function() 
+        function getCurrentUserCode() 
         {
-            user = $cookies.get('currentUser');
-            console.log("current user " + user);
-        };
+            user = $cookies.get('user');
+            return user;
+            //console.log("current user " + user);
+        }
         
-
-        // --------------------- instance du service [security]
-        return currentUserReturn;
+        function getCurrentUser()
+        {
+            user = $cookies.get('user');
+            user = $base64.decode(user);
+            var tab = user.split(":");
+            var currentUser = {emailUtilisateur:tab[0],passwordUtilisateur:tab[1]};
+            
+            return currentUser;
+        }
+        
+        function getCurrentUserFromServer()
+        {
+            user = getCurrentUser();
+            var headers = user ? {authorization : "Basic " + btoa(user.emailUtilisateur + ":" + user.passwordUtilisateur) } : {};
+            
+            
+            return $http
+            ({
+                method: 'POST',
+                url: '/utilisateurs/getByCreds',
+                headers : headers,
+                data: user
+            })
+            .then
+            (
+                function(payload) 
+                {
+                    return payload.data;
+                }
+            );
+    
+            
+           
+        }
+      
+      
+      
+      
+        return {
+            getCurrentUser:getCurrentUser,
+            getCurrentUserCode:getCurrentUserCode,
+            getCurrentUserFromServer:getCurrentUserFromServer
+        };
         
     }]);

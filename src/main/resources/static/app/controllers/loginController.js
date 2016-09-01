@@ -1,62 +1,94 @@
-angular.module("GestionFormation",['ngStorage'])
-.controller("loginController",['currentUser','$scope','$http','$location','$rootScope', function(currentUser, $scope, $http,$location,$rootScope,$localStorage,$sessionStorage)
+angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
+.config(function($routeProvider, $httpProvider) 
 {
-    $scope.test = "mytest";
-    $scope.user = 
-            {
-                emailUtilisateur:"user1@mail.com",
-                passwordUtilisateur:"123"
-    };
-    
-    $scope.utilisateur = null;
-    $scope.error = null;
-    
-    
-    //var self = this;
-    //$scope.$storage = $sessionStorage;
-    
-    $scope.authenticate  = function()
+
+    $routeProvider.when('/', 
     {
-        $scope.error = null;
-        $http
-        ({
-            method : 'post',
-            url : "/utilisateurs/login",
-            data : $scope.user,
-            headers : {'Content-Type' : 'application/json'}
-            
-        })
-        .success(function(data)
-        {
-            
-            $scope.utilisateur = data;
-            $rootScope.utilisateur = data;
+      templateUrl : '/app/views/index.html',
+      controller : 'home',
+      controllerAs: 'controller'
+    })
+    .when('/login2', {
+      templateUrl : '/app/views/login2.html',
+      controller : 'navigation',
+      controllerAs: 'controller'
+    }).otherwise('/');
+
+    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+
+  })
+.controller('navigation',['$rootScope', '$http', '$location','$scope','$cookies','$base64',function($rootScope, $http, $location,$scope,$cookies,$base64) 
+{
+    var self = this;
+    var user;
+    var test = "mytest";
+    $scope.credentials;
+    
+    var authenticate = function(credentials, callback) 
+    {
+        console.log("authenticate");
+        var headers = credentials ? {authorization : "Basic " + btoa(credentials.username + ":" + credentials.password) } : {};
            
-            window.location.href="http://localhost:8080/app/views/index.html";
-            console.log("login success : "+ $scope.utilisateur);
-            
-            //currentUser.saveCurrentUser(data);
-            
-            //$scope.$storage.sessionuser = data;
-            
-        })
-        .error(function(data)
+        $http.get('/utilisateurs/user', {headers : headers}).then(function(response) 
         {
-            
-            console.log(data.message);
-            $scope.error = data.message;
-            //$rootScope.authenticated = false;
-            
+          if (response.data.name) 
+          {
+            $rootScope.authenticated = true;
+            $rootScope.user = response.data;
+            console.log("new cookie");
+            $cookies.put('currentUser',$scope.coder());
+          } 
+          else 
+          {
+            $rootScope.authenticated = false;
+            console.log("not authenticated");
+          }
+          callback && callback();
+        }, 
+        function() 
+        {
+          $rootScope.authenticated = false;
+          callback && callback();
         });
     };
-    
-    $scope.toIndex = function()
+
+  authenticate();
+  self.credentials = {};
+  
+  $scope.login = function() 
+  {
+      console.log("login");
+      
+      authenticate($scope.credentials, function() 
+      {
+        if ($rootScope.authenticated) 
+        {
+          $location.path("/app/views/index.html");
+          self.error = false;
+        } 
+        else 
+        {
+          $location.path("/login");
+          self.error = true;
+        }
+      });
+  };
+  
+  self.logout = function() 
+  {
+    $http.post('logout', {}).finally(function() 
     {
-        $location.host("http://localhost:8080/");
-        $location.url("/index.html");
-    };
+        $rootScope.authenticated = false;
+        $rootScope.user= null;
+        $location.path("/");
     
-    
-    
-}])
-    ;
+    });
+  };
+  
+  $scope.coder = function()
+  {
+      return $base64.encode($scope.credentials.username + ":" + $scope.credentials.password);
+  };
+}]);
+
+

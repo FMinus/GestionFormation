@@ -1,5 +1,5 @@
 angular
-    .module('GestionFormation', ['ngRoute','ngCookies'])
+    .module('GestionFormation', ['ngRoute','ngCookies','base64'])
     .config(function($routeProvider, $httpProvider) 
 {
 
