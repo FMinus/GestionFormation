@@ -8,6 +8,7 @@ package org.GestionFormation.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -17,6 +18,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -52,6 +55,10 @@ public class Utilisateur implements Serializable
     private Date joinDate;
     
     private String urlPhotoUtilisateur="";
+    
+    @ManyToMany
+    @JoinTable(name = "USERS_ROLES")
+    private Collection<RoleUtilisateur> roles;
     
     public Utilisateur()
     {
@@ -137,11 +144,24 @@ public class Utilisateur implements Serializable
         this.emailUtilisateur = emailUtilisateur;
     }
 
+    public Collection<RoleUtilisateur> getRoles()
+    {
+        return roles;
+    }
+
+    public void setRoles(Collection<RoleUtilisateur> roles)
+    {
+        this.roles = roles;
+    }
+
     @Override
     public String toString()
     {
-        return "Utilisateur{" + "idUtilisateur=" + idUtilisateur + ", nomUtilisateur=" + nomUtilisateur + ", prenomUtilisateur=" + prenomUtilisateur + ", joinDate=" + joinDate + ", urlPhotoUtilisateur=" + urlPhotoUtilisateur + ", passwordUtilisateur=" + passwordUtilisateur + ", emailUtilisateur=" + emailUtilisateur + '}';
+        return "Utilisateur{" + "idUtilisateur=" + idUtilisateur + ", nomUtilisateur=" + nomUtilisateur + ", prenomUtilisateur=" + prenomUtilisateur + ", emailUtilisateur=" + emailUtilisateur + ", passwordUtilisateur=" + passwordUtilisateur + ", joinDate=" + joinDate + ", urlPhotoUtilisateur=" + urlPhotoUtilisateur + ", roles=" + roles + '}';
     }
+    
+    
+    
 
     
     

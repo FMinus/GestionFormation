@@ -101,7 +101,11 @@ public class UtilisateurMetierImpl implements UtilisateurMetier
         Utilisateur user = utilisateurRepository.login(email, password);
         
         if(user==null)
+        {
+            System.out.println("failed login with : "+ email+ " : "+password);
             throw new RuntimeException("Utilisateur Innexistant");
+        }
+            
         
         return user;
     }

@@ -46,8 +46,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider
         {
             List<GrantedAuthority> grantedAuths = new ArrayList<>();
             
-            grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
-            grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            grantedAuths.add(new SimpleGrantedAuthority("ROLE_UTILISATEUR"));
+            //grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMINISTRATEUR"));
             
             Authentication auth = new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
             return auth;
@@ -68,6 +68,15 @@ public class CustomAuthenticationProvider implements AuthenticationProvider
     public void setUserDetailsService(UserDetailsService customUserDetailsService)
     {
         System.out.println("setUserDetailsService called");
+    }
+    
+    protected List<GrantedAuthority> loadUserAuthorities(String username) 
+    {
+        //TODO
+        List<GrantedAuthority> authorities = null;
+        Object[] params = { username };
+        //authorities = authoritiesByUsernameMapping.execute(params); // Query to get Authorities
+        return authorities;      
     }
     
 }

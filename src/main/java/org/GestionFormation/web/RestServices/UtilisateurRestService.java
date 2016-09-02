@@ -9,6 +9,8 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.security.RolesAllowed;
+import javax.persistence.SecondaryTable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -83,28 +87,6 @@ public class UtilisateurRestService
         return utilisateurMetier.findByFullName(nom, prenom);
     }
     
-    @RequestMapping(value = "/listUtilisateurs-backed", method = RequestMethod.GET)
-    public String Index(Model model,
-                        @RequestParam(name = "page",defaultValue = "0") int p,
-                        @RequestParam(name = "motCle",defaultValue = "") String mc)
-    {
-        Page<Utilisateur> pageUtilisateurs = utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(p,5));
-        
-        
-        int pageCount = pageUtilisateurs.getTotalPages();
-        int[] pages = new int[pageCount];
-        
-        for(int i=0 ; i<pageCount ; i++)
-        {
-            pages[i]=i;
-        }
-        model.addAttribute("pageUtilisateurs",pageUtilisateurs);
-        model.addAttribute("pages",pages);
-        model.addAttribute("pageCourante",p);
-        model.addAttribute("motCle",mc);
-        
-        return "listUtilisateurs";
-    }
     
     @RequestMapping(value = "pageUsers")
     public Page<Utilisateur> listUtilisateurs(@RequestParam(name = "page") int page,@RequestParam(name = "size") int size)
@@ -112,6 +94,9 @@ public class UtilisateurRestService
         return utilisateurMetier.findAllUtilisateurs(new PageRequest(page,size));
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMINISTRATEUR')")
+    @Secured({"ROLE_REGULAR_USER","ROLE_ADMINISTRATEUR"})
+    @RolesAllowed("ADMINISTRATEUR")
     @RequestMapping(value = "pageUsersOnly")
     public Page<Utilisateur> pageUtilisateursOnly(@RequestParam(name = "mc",defaultValue = "") String mc,@RequestParam(name = "page",defaultValue = "0") int page,@RequestParam(name = "size",defaultValue ="5") int size)
     {

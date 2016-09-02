@@ -21,7 +21,7 @@ angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
 {
     var self = this;
     var user;
-    var test = "mytest";
+    $scope.test = "mytest";
     $scope.credentials;
     
     var authenticate = function(credentials, callback) 
@@ -35,7 +35,8 @@ angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
           {
             $rootScope.authenticated = true;
             $rootScope.user = response.data;
-            console.log("new cookie");
+            
+            //console.log("new cookie");
             $cookies.put('currentUser',$scope.coder());
             utils.redirectTo("/index.html");
             
@@ -54,13 +55,13 @@ angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
         });
     };
 
-  authenticate();
+  //authenticate();
   self.credentials = {};
   
   $scope.login = function() 
   {
       console.log("login");
-      
+      $cookies.remove("currentUser");
       authenticate($scope.credentials, function() 
       {
         if ($rootScope.authenticated) 

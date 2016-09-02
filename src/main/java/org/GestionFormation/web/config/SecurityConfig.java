@@ -5,16 +5,17 @@
 */
 package org.GestionFormation.web.config;
 
+import javax.ws.rs.HttpMethod;
 import org.GestionFormation.web.config.authentication.CustomAuthenticationProvider;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 /**
@@ -22,7 +23,6 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
  * @author Ayoub
  */
 @Configuration
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 //    protected void configure(AuthenticationManagerBuilder registry) throws Exception
 //    {
 //        // l'authentification est faite par le bean [appUserDetailsService]
-//        //registry.userDetailsService(appUserDetailsService);
+//        registry.userDetailsService(appUserDetailsService);
 //        
 ////        registry.inMemoryAuthentication()
 ////            .withUser("user").password("user").roles("USER").and()
@@ -60,29 +60,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         //http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         
         
-        
         // le dossier [app] est accessible à tous
       http
            .authorizeRequests() 
-                .antMatchers("/css/**" , "/js/**","/images/**","/app/**","/favicon.ico","/fonts/**").permitAll()
+                .antMatchers("/css/**" , "/js/**","/images/**","/app/controllers/**","/app/services/**","/app/assets/**","/favicon.ico","/fonts/**").permitAll()
                 .antMatchers("/app/views/login.html","/login","/utilisateurs/user").permitAll()
-                .antMatchers("/app/views/index.html").authenticated()
                 
-       
-//            .and()
-//                .formLogin()
-//                    .loginPage("/app/views/login.html").permitAll()
-//                    .defaultSuccessUrl("/app/views/index.html")
-//            
-//                
-//            .and()
-//                .logout()
-//                    .invalidateHttpSession(true)
-//                    .logoutUrl("/logout").permitAll()
-//                    .clearAuthentication(true)
+            .anyRequest().authenticated()     
+            .and()
+                .formLogin()
+                    .loginPage("/app/views/login.html").permitAll()
                     
+                   
             
-              .anyRequest().authenticated()
+                
+            .and()
+                .logout()
+                    .invalidateHttpSession(true)
+                    .logoutUrl("/logout").permitAll()
+                    .clearAuthentication(true)
+                    
+             
+              
               .and()
                 .csrf()
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
@@ -90,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         ;
         
        
-        
+        //super.configure(http);
 //        http
 //            .authorizeRequests()
 //            .antMatchers(HttpMethod.POST, "/utilisateurs/**").hasRole("ADMIN")

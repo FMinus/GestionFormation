@@ -47,6 +47,28 @@ app.service('currentUser', ['$cookies','$base64',"$http",
             
            
         }
+        function getCurrentUserCookie()
+        {
+            var user = getCurrentUser();
+            var headers = user ? {authorization : "Basic " + btoa(user.emailUtilisateur + ":" + user.passwordUtilisateur) } : {};
+            return $http
+            ({
+                method: 'GET',
+                url: '/utilisateurs/user',
+                headers : headers
+               
+            })
+            .then
+            (
+                function(payload) 
+                {
+                    return payload.data;
+                }
+            );
+    
+            
+           
+        }
       
       
       
@@ -54,7 +76,8 @@ app.service('currentUser', ['$cookies','$base64',"$http",
         return {
             getCurrentUser:getCurrentUser,
             getCurrentUserCode:getCurrentUserCode,
-            getCurrentUserFromServer:getCurrentUserFromServer
+            getCurrentUserFromServer:getCurrentUserFromServer,
+            getCurrentUserCookie:getCurrentUserCookie
         };
         
     }]);
