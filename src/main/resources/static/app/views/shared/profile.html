@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="GestionFormation">
+    <head>
+        <title>Profile</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link href="/css/angular-bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/mystyle.css" />
+        <link rel="stylesheet" href="/css/pure-min.css" />
+    </head>
+    <body ng-controller="navigation">
+        
+        
+        <div ng-include="'/app/views/includes/header_page.html'" >
+        </div>
+        
+        
+        
+        
+        <div class="container">
+            <div class="row" >
+                <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+                    <table>
+                        <th>
+                            <A href="edit.html" style="padding-right: 10px;">Edit Profile</A>
+                        </th>
+                        <th>
+                            <A href="logout.html" >Logout</A>
+                        </th>
+                    </table>
+                    
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                    
+                    
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Votre Profile</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3 " align="center"> 
+                                    <img src="/files/assets/images/noavatar.png" alt="" class="img-rounded img-responsive"/>
+                                </div>
+                                
+                                
+                                <div class=" col-md-9 col-lg-9 "> 
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr>
+                                                <td>Nom Complet</td>
+                                                <td>
+                                                    {{fullcurrent.nomUtilisateur}}   {{fullcurrent.prenomUtilisateur}}
+                                                </td>
+                                            </tr>
+                                            <!--                                            <tr>
+                                                                                            <ui:fragment rendered="#{!nav.hasMods()}">
+                                                                                                <td>Filiére</td>
+                                                                                                <td><h:outputText value="#{cc.attrs.user.filiere}"/></td>
+                                                                                            </ui:fragment>
+                                                                                        </tr>-->
+                                            <tr>
+                                                <td>Date de Join</td>
+                                                <td> {{fullcurrent.joinDate}}</td>
+                                            </tr>
+                                            
+                                            
+                                                
+                                            <tr>
+                                                <td>Email</td>
+                                                <td>{{fullcurrent.emailUtilisateur}}</td>
+                                            </tr>
+                                            
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+                                    
+                                    <a href="#" class="btn btn-primary" style="padding-left: 20px;">Mes Notes</a>
+                                    
+                                    <a>Mes Formatons</a>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+<!--                            <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                            <span class="pull-right">
+                                <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                                <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                            </span>-->
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <script src="/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+        <script src="/css/bootstrap-3.3.6-dist/js/bootstrap.js" type="text/javascript"></script>
+        
+        
+        <script src="/js/angular-1.5.0/angular.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-route.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-cookies.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-base64.min.js" type="text/javascript"></script>
+        
+        
+        <script src="/app/services/moduleDependancies.js" type="text/javascript"></script>
+        <script src="/app/services/utils.js" type="text/javascript"></script>
+        <script src="/app/assets/properties.js" type="text/javascript"></script>
+        <script src="/app/services/currentUser.js" type="text/javascript"></script>
+        <script src="/app/services/security.js" type="text/javascript"></script>
+        
+        <script src="/app/services/navigation.js" type="text/javascript"></script>
+    </body>
+</html>

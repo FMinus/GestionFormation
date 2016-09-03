@@ -30,7 +30,7 @@ public class RoleUtilisateurMetierImpl implements RoleUtilisateurMetier
     }
 
     @Override
-    public List<RoleUtilisateur> getRoleUtilisateur(String nomRole)
+    public List<RoleUtilisateur> findRolesUtilisateur(String nomRole)
     {
         return roleUtilisateurRepository.findByRoleName(nomRole);
     }
@@ -46,6 +46,17 @@ public class RoleUtilisateurMetierImpl implements RoleUtilisateurMetier
     {
         RoleUtilisateur r = new RoleUtilisateur(nom, Desc);
         return roleUtilisateurRepository.save(r);
+    }
+
+    @Override
+    public RoleUtilisateur getRoleUtilisateur(String nom)
+    {
+        RoleUtilisateur role = roleUtilisateurRepository.findOne(nom);
+        
+        if(role==null)
+            throw new RuntimeException("Role Innexistant");
+        
+        return role;
     }
     
 }

@@ -35,8 +35,7 @@ app.controller("navigation",["currentUser","$scope","$http",'utils','properties'
             security.checkSecurity();
         };
         
-        $scope.getCurrent();
-        $scope.getFullCurrent();
+        
         
         $scope.logout= function()
         {
@@ -48,4 +47,9 @@ app.controller("navigation",["currentUser","$scope","$http",'utils','properties'
             });
     
         };
+        
+        /*        fetching user info from server        */
+        $scope.getCurrent();
+        $scope.getFullCurrent();
+        
     }]);

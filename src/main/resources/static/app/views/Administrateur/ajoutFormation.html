@@ -12,7 +12,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="/css/myStyle.css" />
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
     </head>
-    <body ng-app="GestionFormation" ng-controller="ajoutFormationController">
+    <body ng-app="GestionFormation" ng-controller="ajoutRoleToUtilisateurController">
         
         <div class="col-md-6 col-sm-6 col-xs-12 spacer">
             <div class="panel panel-info">
@@ -63,40 +63,14 @@ and open the template in the editor.
                     </div>
                     
                     
-                    <!--                    <div class="" ng-if="mode.value=='confirm'">
-                                            <div class="panel-heading">Confirmation : L'utilisateur a été inscrit avce succès</div>
-                                            <div class="form-group">
-                                                <label class="control-label">Id : </label>
-                                                <label class="control-label">{{utilisateur.idUtilisateur}}</label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Nom : </label>
-                                                <label class="control-label">{{utilisateur.nomUtilisateur}}</label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Prenom : </label>
-                                                <label class="control-label">{{utilisateur.prenomUtilisateur}}</label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Prenom : </label>
-                                                <label class="control-label">{{utilisateur.emailUtilisateur}}</label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Date de Naissance : </label>
-                                                <label class="control-label">{{utilisateur.joinDate|date:'yyyy-MM-dd'}}</label>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="" ng-if="exception.message">
-                                            <span class="error">{{exception.message}}</span>
-                                        </div>-->
+                   
                     
                 </div>
             </div>
         </div>
         
         <script type="text/javascript" src="/js/angular.min.js" ></script>
-        <script type="text/javascript" src="/app/controllers/administrateur/ajoutFormationController.js" ></script>
+        <script type="text/javascript" src="/app/controllers/administrateur/ajoutRoleToUtilisateurController.js" ></script>
         
     </body>
 </html>

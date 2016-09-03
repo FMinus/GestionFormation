@@ -154,4 +154,15 @@ public class UtilisateurRestService
     {
         return user;
     }
+    
+    @RequestMapping(value = "addRoleToUser",method = RequestMethod.POST)
+    public Utilisateur addRoleToUser(@RequestBody Long idUser,@RequestBody List<String> roles)
+    {
+        //TODO
+        System.out.println("adding to user"+idUser+" : the roles : "+roles);
+        for(String r : roles)
+            utilisateurMetier.addRoleToUser(idUser, r);
+        
+        return utilisateurMetier.getUtilisateur(idUser);
+    }
 }

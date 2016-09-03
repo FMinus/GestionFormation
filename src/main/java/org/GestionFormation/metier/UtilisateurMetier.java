@@ -6,6 +6,7 @@
 package org.GestionFormation.metier;
 
 import java.util.List;
+import org.GestionFormation.entities.RoleUtilisateur;
 import org.GestionFormation.entities.Utilisateur;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,5 +27,6 @@ public interface UtilisateurMetier
     public Page<Utilisateur> findUtilisateurs(String mc,Pageable pageable);
     public Page<Utilisateur> findAllUtilisateurs(Pageable pgbl);
     public Utilisateur login(String email,String password);
+    public Utilisateur addRoleToUser(Long idUser,String role);
     
 }

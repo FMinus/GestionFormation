@@ -5,8 +5,10 @@
 */
 package org.GestionFormation.metier;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.GestionFormation.dao.UtilisateurRepository;
+import org.GestionFormation.entities.RoleUtilisateur;
 import org.GestionFormation.entities.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,9 @@ public class UtilisateurMetierImpl implements UtilisateurMetier
 {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+    
+    @Autowired
+    private RoleUtilisateurMetier roleUtilisateurMetier;
     
     @Override
     public Utilisateur saveUtilisateur(Utilisateur u)
@@ -67,7 +72,7 @@ public class UtilisateurMetierImpl implements UtilisateurMetier
     @Override
     public List<Utilisateur> listUtilisateursOnly()
     {
-        return  utilisateurRepository.findUtilisateursOnly();
+        return  utilisateurRepository.listUtilisateursOnly();
     }
     
     
@@ -108,6 +113,25 @@ public class UtilisateurMetierImpl implements UtilisateurMetier
             
         
         return user;
+    }
+
+    @Override
+    public Utilisateur addRoleToUser(Long idUser,String role)
+    {
+        Utilisateur u = getUtilisateur(idUser);
+        RoleUtilisateur r = roleUtilisateurMetier.getRoleUtilisateur(role);
+        
+        List<RoleUtilisateur> roleUtilisateur = new ArrayList<>();
+        
+        if(u.getRoles()!= null)
+        {
+            roleUtilisateur = (List<RoleUtilisateur>) u.getRoles();
+        }
+        
+        roleUtilisateur.add(r);
+        u.setRoles(roleUtilisateur);
+        
+        return utilisateurRepository.save(u);
     }
     
 }

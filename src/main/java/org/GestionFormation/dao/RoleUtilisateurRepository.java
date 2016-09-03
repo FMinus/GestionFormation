@@ -17,6 +17,6 @@ import org.springframework.data.repository.query.Param;
  */
 public interface RoleUtilisateurRepository extends JpaRepository<RoleUtilisateur, String>
 {
-    @Query("select r from Utilisateur r where r.nomRole = :roleName")
+    @Query("select r from RoleUtilisateur r where r.nomRole = :roleName")
     public List<RoleUtilisateur> findByRoleName(@Param("roleName")String roleName);
 }

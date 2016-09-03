@@ -37,6 +37,9 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>
     @Query("select e from Utilisateur e where role = Utilisateur and (e.nomUtilisateur like :x or e.prenomUtilisateur like :x)")
     public Page<Utilisateur> findPageUtilisateursOnly(@Param("x") String mc,Pageable pageable);
     
+    @Query("select e from Utilisateur e where role = Utilisateur")
+    public List<Utilisateur> listUtilisateursOnly();
+    
     @Query("select u from Utilisateur u where u.emailUtilisateur=?1 and u.passwordUtilisateur= ?2 and role = Utilisateur") 
     public Utilisateur login(String emailUtilisateur,String passwordUtilisateur);
     

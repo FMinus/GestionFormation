@@ -15,8 +15,9 @@ import org.GestionFormation.entities.RoleUtilisateur;
 public interface RoleUtilisateurMetier
 {
     public List<RoleUtilisateur> listRoleUtilisateur();
-    public List<RoleUtilisateur> getRoleUtilisateur(String nomRole);
+    public List<RoleUtilisateur> findRolesUtilisateur(String nomRole);
     public RoleUtilisateur saveRoleUtilisateur(RoleUtilisateur r);
     public RoleUtilisateur saveNewRoleUtilisateur(String nom,String Desc);
+    public RoleUtilisateur getRoleUtilisateur(String nom);
     
 }
