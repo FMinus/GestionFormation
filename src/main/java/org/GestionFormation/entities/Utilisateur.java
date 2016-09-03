@@ -13,11 +13,13 @@ import java.util.Date;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -56,22 +58,25 @@ public class Utilisateur implements Serializable
     
     private String urlPhotoUtilisateur="";
     
-    @ManyToMany
-    @JoinTable(name = "USERS_ROLES")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_name"))
     private Collection<RoleUtilisateur> roles;
     
     public Utilisateur()
     {
     }
 
-    public Utilisateur(String nomUtilisateur, String prenomUtilisateur, Date joinDate, String passwordUtilisateur, String emailUtilisateur)
+    public Utilisateur(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passwordUtilisateur, Date joinDate, Collection<RoleUtilisateur> roles)
     {
         this.nomUtilisateur = nomUtilisateur;
         this.prenomUtilisateur = prenomUtilisateur;
-        this.joinDate = joinDate;
-        this.passwordUtilisateur = passwordUtilisateur;
         this.emailUtilisateur = emailUtilisateur;
+        this.passwordUtilisateur = passwordUtilisateur;
+        this.joinDate = joinDate;
+        this.roles = roles;
     }
+
+    
 
     public Long getIdUtilisateur()
     {
@@ -143,12 +148,14 @@ public class Utilisateur implements Serializable
     {
         this.emailUtilisateur = emailUtilisateur;
     }
-
+    
+    //@JsonIgnore
     public Collection<RoleUtilisateur> getRoles()
     {
         return roles;
     }
-
+    
+    @JsonSetter
     public void setRoles(Collection<RoleUtilisateur> roles)
     {
         this.roles = roles;

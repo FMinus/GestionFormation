@@ -133,5 +133,12 @@ public class UtilisateurMetierImpl implements UtilisateurMetier
         
         return utilisateurRepository.save(u);
     }
+
+    @Override
+    public List<RoleUtilisateur> getRoles(Long idUser)
+    {
+        Utilisateur user = getUtilisateur(idUser);
+        return (List<RoleUtilisateur>) user.getRoles();
+    }
     
 }

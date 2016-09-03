@@ -23,20 +23,22 @@ angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
     var user;
     $scope.test = "mytest";
     $scope.credentials;
+    $scope.error = null;
     
     var authenticate = function(credentials, callback) 
     {
-        console.log("authenticate");
+        //console.log("authenticate");
         var headers = credentials ? {authorization : "Basic " + btoa(credentials.username + ":" + credentials.password) } : {};
            
         $http.get('/utilisateurs/user', {headers : headers}).then(function(response) 
         {
+          console.log(response.message);
           if (response.data.name) 
           {
             $rootScope.authenticated = true;
             $rootScope.user = response.data;
             
-            //console.log("new cookie");
+            console.log("new cookie");
             $cookies.put('currentUser',$scope.coder());
             utils.redirectTo("/index.html");
             
@@ -44,13 +46,15 @@ angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
           else 
           {
             $rootScope.authenticated = false;
-            console.log("not authenticated");
+            console.log("error");                
           }
           callback && callback();
         }, 
-        function() 
+        function(response) 
         {
           $rootScope.authenticated = false;
+          //console.log("not authenticated wrong login"+response.data.message);
+          $scope.error = response.data.message;
           callback && callback();
         });
     };
@@ -60,7 +64,7 @@ angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
   
   $scope.login = function() 
   {
-      console.log("login");
+      //console.log("login");
       $cookies.remove("currentUser");
       authenticate($scope.credentials, function() 
       {
@@ -73,6 +77,7 @@ angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
         {
           //$location.path("/login");
           self.error = true;
+          console.log("not authenticated");
         }
       });
   };

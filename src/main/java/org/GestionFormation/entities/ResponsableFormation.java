@@ -32,11 +32,13 @@ public class ResponsableFormation extends Utilisateur implements Serializable
     {
     }
 
-    public ResponsableFormation(Collection<Formation> formations, String nomUtilisateur, String prenomUtilisateur, Date joinDate, String passwordUtilisateur, String emailUtilisateur)
+    public ResponsableFormation(Collection<Formation> formations, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passwordUtilisateur, Date joinDate, Collection<RoleUtilisateur> roles)
     {
-        super(nomUtilisateur, prenomUtilisateur, joinDate, passwordUtilisateur, emailUtilisateur);
+        super(nomUtilisateur, prenomUtilisateur, emailUtilisateur, passwordUtilisateur, joinDate, roles);
         this.formations = formations;
     }
+
+    
     
     
     

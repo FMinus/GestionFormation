@@ -6,9 +6,9 @@ myApp.controller("ajoutRoleToUtilisateurController", function($http, $scope)
     $scope.exception = {message:null};
     $scope.mode={value:"form"};
     
-    $scope.userRole = 
+    $scope.user = 
     {
-        iduser:null,
+        idUtilisateur:null,
         roles:null
     };
    
@@ -30,36 +30,39 @@ myApp.controller("ajoutRoleToUtilisateurController", function($http, $scope)
                 .success(function(data)
                 {
                     $scope.optionsRoles = data;
-                    
+                    console.log(data);
                 });
         
     };
     
     $scope.valider = function()
     {
-        //$scope.formation.collaborateurs = $scope.arrayIdUsers($scope.formation.collaborateurs);
+       $scope.user.roles = $scope.arrayRoles($scope.user.roles);
+        
+        $scope.user.idUtilisateur = parseInt($scope.user.idUtilisateur);
+        
         $http
         ({
             method : 'post',
             url : "/utilisateurs/addRoleToUser",
-            data : {idUser:$scope.userRole.iduser,roles:$scope.userRole.roles},
+            data : $scope.user,
             headers : {'Content-Type' : 'application/json'}
             
         });
        
         //console.log($scope.choixFormateurs);
-        console.log("adding roles "+$scope.userRole.roles);
+        //console.log("adding roles "+$scope.userRole.roles);
         //console.log($scope.formation.responsableFormation.idUtilisateur);
         
     };
     
-    $scope.arrayIdUsers = function(p)
+    $scope.arrayRoles = function(p)
     {
         var result = [];
         
         for (i = 0; i < p.length; i++) 
         { 
-            result[i] = {idUtilisateur:parseInt(p[i])};
+            result[i] = {nomRole:p[i]};
         }
         return result;
     };

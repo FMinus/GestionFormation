@@ -6,6 +6,7 @@
 package org.GestionFormation.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -24,10 +25,12 @@ public class Administrateur extends Utilisateur implements Serializable
     {
     }
 
-    public Administrateur(String nomUtilisateur, String prenomUtilisateur, Date joinDate, String passwordUtilisateur, String emailUtilisateur)
+    public Administrateur(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passwordUtilisateur, Date joinDate, Collection<RoleUtilisateur> roles)
     {
-        super(nomUtilisateur, prenomUtilisateur, joinDate, passwordUtilisateur, emailUtilisateur);
+        super(nomUtilisateur, prenomUtilisateur, emailUtilisateur, passwordUtilisateur, joinDate, roles);
     }
+
+    
 
     
 

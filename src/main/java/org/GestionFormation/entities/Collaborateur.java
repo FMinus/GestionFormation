@@ -37,11 +37,14 @@ public class Collaborateur extends Utilisateur implements Serializable
     {
     }
 
-    public Collaborateur(Collection<Formation> formations, String nomUtilisateur, String prenomUtilisateur, Date joinDate, String passwordUtilisateur, String emailUtilisateur)
+    public Collaborateur(Collection<Formation> formations, Collection<EvaluationFormation> evaluationFormations, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passwordUtilisateur, Date joinDate, Collection<RoleUtilisateur> roles)
     {
-        super(nomUtilisateur, prenomUtilisateur, joinDate, passwordUtilisateur, emailUtilisateur);
+        super(nomUtilisateur, prenomUtilisateur, emailUtilisateur, passwordUtilisateur, joinDate, roles);
         this.formations = formations;
+        this.evaluationFormations = evaluationFormations;
     }
+
+    
 
     public boolean isConfirmationInscription()
     {
@@ -51,6 +54,16 @@ public class Collaborateur extends Utilisateur implements Serializable
     public void setConfirmationInscription(boolean confirmationInscription)
     {
         this.confirmationInscription = confirmationInscription;
+    }
+
+    public Collection<EvaluationFormation> getEvaluationFormations()
+    {
+        return evaluationFormations;
+    }
+
+    public void setEvaluationFormations(Collection<EvaluationFormation> evaluationFormations)
+    {
+        this.evaluationFormations = evaluationFormations;
     }
     
     

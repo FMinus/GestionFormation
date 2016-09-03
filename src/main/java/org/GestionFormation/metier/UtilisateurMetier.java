@@ -28,5 +28,6 @@ public interface UtilisateurMetier
     public Page<Utilisateur> findAllUtilisateurs(Pageable pgbl);
     public Utilisateur login(String email,String password);
     public Utilisateur addRoleToUser(Long idUser,String role);
+    public List<RoleUtilisateur> getRoles(Long idUser);
     
 }

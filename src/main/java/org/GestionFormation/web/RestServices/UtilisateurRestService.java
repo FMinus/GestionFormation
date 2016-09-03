@@ -6,16 +6,18 @@
 package org.GestionFormation.web.RestServices;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.security.RolesAllowed;
-import javax.persistence.SecondaryTable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.GestionFormation.entities.Utilisateur;
+import org.GestionFormation.entities.RoleUtilisateur;
 import org.GestionFormation.metier.UtilisateurMetier;
+import org.GestionFormation.metier.RoleUtilisateurMetier;
 import org.GestionFormation.web.models.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +29,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,9 @@ public class UtilisateurRestService
 {
     @Autowired
     private UtilisateurMetier utilisateurMetier;
+    
+    @Autowired
+    private RoleUtilisateurMetier roleUtilisateurMetier;
     
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -155,14 +159,36 @@ public class UtilisateurRestService
         return user;
     }
     
+    @RequestMapping("roles")
+    public List<RoleUtilisateur> getRoles(@RequestParam(value ="id") Long idUser)
+    {
+        return utilisateurMetier.getRoles(idUser);
+    }
+    
     @RequestMapping(value = "addRoleToUser",method = RequestMethod.POST)
-    public Utilisateur addRoleToUser(@RequestBody Long idUser,@RequestBody List<String> roles)
+    public Utilisateur addRoleToUser(@RequestBody Utilisateur u)
     {
         //TODO
-        System.out.println("adding to user"+idUser+" : the roles : "+roles);
-        for(String r : roles)
-            utilisateurMetier.addRoleToUser(idUser, r);
+        //System.out.println("adding to user"+idUser+" : the roles : "+roles);
         
-        return utilisateurMetier.getUtilisateur(idUser);
+        List<RoleUtilisateur> listRoles = new ArrayList<>();
+        RoleUtilisateur role;
+        
+        if(u.getRoles()!= null)
+        {
+            for(RoleUtilisateur r : u.getRoles())
+            {
+                role = roleUtilisateurMetier.getRoleUtilisateur(r.getNomRole());
+                listRoles.add(r);
+            }
+        }
+        
+        System.out.println("roles to add"+listRoles);
+        
+        Utilisateur user = utilisateurMetier.getUtilisateur(u.getIdUtilisateur());
+        user.setRoles(listRoles);
+        
+        return utilisateurMetier.saveUtilisateur(user);
+        
     }
 }

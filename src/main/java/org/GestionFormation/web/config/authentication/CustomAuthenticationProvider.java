@@ -3,6 +3,7 @@ package org.GestionFormation.web.config.authentication;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.GestionFormation.entities.RoleUtilisateur;
 import org.GestionFormation.entities.Utilisateur;
 import org.GestionFormation.metier.UtilisateurMetier;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +43,25 @@ public class CustomAuthenticationProvider implements AuthenticationProvider
         
         Utilisateur utilisateur = utilisateurMetier.login(name, password);
         
+        System.out.println("test");
         if (utilisateur!=null) 
         {
             List<GrantedAuthority> grantedAuths = new ArrayList<>();
             
-            grantedAuths.add(new SimpleGrantedAuthority("ROLE_UTILISATEUR"));
+            if(utilisateur.getRoles() == null)
+            {
+                System.out.println("adding role : just user");
+                grantedAuths.add(new SimpleGrantedAuthority("ROLE_UTILISATEUR"));
+            }
+            else
+            {
+                for(RoleUtilisateur r : utilisateur.getRoles())
+                {
+                    System.out.println("adding role : "+r.getNomRole());
+                    grantedAuths.add(new SimpleGrantedAuthority("ROLE_"+r.getNomRole()));
+                }
+            }
+            
             //grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMINISTRATEUR"));
             
             Authentication auth = new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
@@ -54,6 +69,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider
         } 
         else 
         {
+            System.out.println("returning null");
             return null;
         }
     }

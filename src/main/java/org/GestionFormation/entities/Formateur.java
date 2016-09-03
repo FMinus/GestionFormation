@@ -28,11 +28,13 @@ public class Formateur extends Utilisateur implements Serializable
     {
     }
 
-    public Formateur(Collection<SessionFormation> sessionFormations, String nomUtilisateur, String prenomUtilisateur, Date joinDate, String passwordUtilisateur, String emailUtilisateur)
+    public Formateur(Collection<SessionFormation> sessionFormations, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passwordUtilisateur, Date joinDate, Collection<RoleUtilisateur> roles)
     {
-        super(nomUtilisateur, prenomUtilisateur, joinDate, passwordUtilisateur, emailUtilisateur);
+        super(nomUtilisateur, prenomUtilisateur, emailUtilisateur, passwordUtilisateur, joinDate, roles);
         this.sessionFormations = sessionFormations;
     }
+
+    
 
     public Collection<SessionFormation> getSessionFormations()
     {

@@ -24,7 +24,7 @@ and open the template in the editor.
                             
                             <div class="form-group">
                                 <label for="repeatSelectResponsable">Utilisateur :    </label>
-                                <select name="repeatSelectResponsable" id="repeatSelectResponsable" ng-model="userRole.iduser">
+                                <select name="repeatSelectResponsable" id="repeatSelectResponsable" ng-model="user.idUtilisateur">
                                     <option ng-repeat="option in optionsUtilisateurs" value="{{option.idUtilisateur}}">
                                         {{option.idUtilisateur}} : {{option.nomUtilisateur}} - {{option.prenomUtilisateur}}
                                     </option>
@@ -33,7 +33,7 @@ and open the template in the editor.
                             
                             <div class="form-group">
                                 <label for="repeatSelectColl"> Role  :</label>
-                                <select name="repeatSelectColl" id="repeatSelectColl" ng-model="userRole.roles" multiple>
+                                <select name="repeatSelectColl" id="repeatSelectColl" ng-model="user.roles" multiple>
                                     <option ng-repeat="r in optionsRoles" value="{{r.nomRole}}">
                                         {{r.nomRole}} - {{r.desscription}}
                                     </option>
