@@ -1,5 +1,5 @@
 
-var myApp = angular.module("GestionFormation", []);
+var myApp = angular.module("GestionFormation",[]);
 myApp.controller("ajouterUtilisateurController", function($http, $scope)
 {
     $scope.test="myTest";

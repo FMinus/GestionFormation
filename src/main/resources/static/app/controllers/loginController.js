@@ -1,4 +1,4 @@
-angular.module('GestionFormation', ['ngRoute','ngCookies','base64'])
+angular.module('GestionFormation')
 .config(function($routeProvider, $httpProvider) 
 {
 

@@ -1,5 +1,5 @@
 angular
-    .module('GestionFormation', ['ngRoute','ngCookies','base64'])
+    .module('GestionFormation', ['ngRoute','ngCookies','base64','ui.bootstrap','ngAnimate'])
     .config(function($routeProvider, $httpProvider) 
 {
 
