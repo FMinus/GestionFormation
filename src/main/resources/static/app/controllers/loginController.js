@@ -1,4 +1,4 @@
-angular.module('GestionFormation')
+angular.module('GestionFormation',['ngRoute','ngCookies','base64'])
 .config(function($routeProvider, $httpProvider) 
 {
 
@@ -20,7 +20,6 @@ angular.module('GestionFormation')
 .controller('loginController',['$rootScope', '$http', '$location','$scope','$cookies','$base64','properties','utils',function($rootScope, $http, $location,$scope,$cookies,$base64,properties,utils) 
 {
     var self = this;
-    var user;
     $scope.test = "mytest";
     $scope.credentials;
     $scope.error = null;
@@ -40,7 +39,7 @@ angular.module('GestionFormation')
             
             console.log("new cookie");
             $cookies.put('currentUser',$scope.coder());
-            utils.redirectTo("/index.html");
+            utils.redirectTo("/home.html");
             
           } 
           else 
