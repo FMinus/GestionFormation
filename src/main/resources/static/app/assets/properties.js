@@ -9,6 +9,7 @@ angular.module("GestionFormation")
         .service('properties', 
         function () 
         {
-            return { urlServer:"http://localhost:8080"};
+            return { //urlServer:"http://localhost:8080"};
+                     urlServer:"https://damp-wave-10421.herokuapp.com/"};
        
         });
