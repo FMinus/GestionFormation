@@ -31,6 +31,9 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>
     @Query("select e from Utilisateur e where role = Utilisateur")
     public List<Utilisateur> findUtilisateursOnly();
     
+    @Query("select e from Utilisateur e where role = 'Collaborateur'")
+    public List<Utilisateur> findCollaborateursOnly();
+    
      @Query("select e from Utilisateur e where e.emailUtilisateur = :email")
     public List<Utilisateur> findByEmail(@Param("email")String email);
     

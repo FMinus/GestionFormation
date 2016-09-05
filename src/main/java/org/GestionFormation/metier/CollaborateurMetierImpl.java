@@ -152,4 +152,10 @@ public class CollaborateurMetierImpl implements CollaborateurMetier
     {
         return collaborateurRepository.findAll(pgbl);
     }
+
+    @Override
+    public Page<Collaborateur> findCollaborateurOnly(String mc, Pageable pageable)
+    {
+        return collaborateurRepository.findCollaborateur(mc,pageable);
+    }
 }

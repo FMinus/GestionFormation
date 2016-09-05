@@ -10,7 +10,7 @@ myApp.controller("listCollaborateursController", function($http, $scope)
     $scope.listCollaborateurs = function()
     {
         
-        $http.get("/collaborateur/pageCollaborateurs?page="+$scope.pageCourante+"&size="+$scope.size)
+        $http.get("/collaborateurs/pageCollaborateursOnly?page="+$scope.pageCourante+"&size="+$scope.size)
                 .success(function(data)
                 {
                     $scope.pageUtilisateurs = data;

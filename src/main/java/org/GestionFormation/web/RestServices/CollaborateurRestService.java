@@ -59,4 +59,10 @@ public class CollaborateurRestService
         //return utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(page,5));
         return collaborateurMetier.findAllCollaborateur(new PageRequest(page,size));
     }
+    
+    @RequestMapping(value = "pageCollaborateursOnly")
+    public Page<Collaborateur> pageUtilisateursOnly(@RequestParam(name = "mc",defaultValue = "") String mc,@RequestParam(name = "page",defaultValue = "0") int page,@RequestParam(name = "size",defaultValue ="5") int size)
+    {
+        return collaborateurMetier.findCollaborateur("%"+mc+"%",new PageRequest(page,size));
+    }
 }

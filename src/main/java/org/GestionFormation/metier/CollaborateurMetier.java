@@ -24,5 +24,6 @@ public interface CollaborateurMetier
     public Collaborateur ajoutFormation(Long idFormation,Long idCollaborateur);
     public List<Formation> getFormationsOfCollab(Long idCollab);
     public Page<Collaborateur> findCollaborateur(String mc,Pageable pageable);
+    public Page<Collaborateur> findCollaborateurOnly(String mc,Pageable pageable);
     public Page<Collaborateur> findAllCollaborateur(Pageable pgbl);
 }
