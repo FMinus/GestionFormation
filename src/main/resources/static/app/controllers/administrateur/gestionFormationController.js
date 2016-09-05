@@ -1,5 +1,5 @@
 var myApp = angular.module("GestionFormation", []);
-myApp.controller("ajoutFormationController", function($http, $scope)
+myApp.controller("gestionFormationController", function($http, $scope)
 {
     $scope.test = "mytest";
     $scope.errors = null;

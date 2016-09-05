@@ -1,4 +1,4 @@
-var app = angular.module("lambda.bilan");
+var app = angular.module("GestionFormation");
 
     app.constant('HTTP_METHOD',{
         get:'method-get',

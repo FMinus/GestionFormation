@@ -2,7 +2,7 @@
  * Created by ST on 05/05/2014.
  */
 angular.module("GestionFormation")
-  .factory('utils', ['properties','$cookies', function (properties,$cookies) 
+  .factory('utils', ['properties','$cookies','$http', function (properties,$cookies,$http) 
   {
     function redirectTo(page)
     {
@@ -13,6 +13,8 @@ angular.module("GestionFormation")
     {
         $cookies.remove("currentUser");
     }
+    
+    
     
     return {
       redirectTo:redirectTo,

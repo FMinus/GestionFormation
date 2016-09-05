@@ -1,5 +1,5 @@
 var myApp = angular.module("GestionFormation", []);
-myApp.controller("ajoutRoleController", function($http, $scope)
+myApp.controller("gestionRoleController", function($http, $scope)
 {
     $scope.test = "mytest";
     $scope.errors = null;
