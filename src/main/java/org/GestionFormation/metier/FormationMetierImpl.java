@@ -13,6 +13,8 @@ import org.GestionFormation.entities.Formateur;
 import org.GestionFormation.entities.Formation;
 import org.GestionFormation.entities.SessionFormation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -88,6 +90,12 @@ public class FormationMetierImpl implements FormationMetier
         sessionFormation.setFormation(f);
         
         return f;
+    }
+
+    @Override
+    public Page<Formation> findFormations(String mc, Pageable pageable)
+    {
+        return formationRepository.findAllByName(mc,pageable);
     }
     
     

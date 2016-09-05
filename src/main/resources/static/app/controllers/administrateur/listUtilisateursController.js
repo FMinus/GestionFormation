@@ -6,7 +6,9 @@ myApp.controller("listUtilisateursController", function($http, $scope)
     $scope.pageCourante = 0;
     $scope.size = 3;
     $scope.pages = [];
-     
+    $scope.motCle = "";
+    
+    
     $scope.listUtilisateurs = function()
     {
         
@@ -32,7 +34,7 @@ myApp.controller("listUtilisateursController", function($http, $scope)
     
     
     //partie recherche 
-    $scope.motCle = "";
+    
     $scope.recherche = function()
     {
         $http.get("/utilisateurs/pageUsersOnly?page="+$scope.pageCourante+"&size="+$scope.size+"&mc="+$scope.motCle)

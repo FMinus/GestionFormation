@@ -6,11 +6,55 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>List Formations</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/myStyle.css" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
     </head>
-    <body>
-        <div>TODO write content</div>
+    
+    <body ng-app="GestionFormation" ng-controller="listFormationsController">
+        
+        {{test}}
+        <a href="/app/views/Administrateur/ajoutFormation.html">Ajout Formation</a>
+        
+        <div class="col-md-6 col-sm-6 spacer">
+            <form>
+                <div class="form-group">
+                    <label>Mot Clé : </label>
+                    <input type="text" ng-model="motCle" />
+                    <button class="btn btn-success" ng-click="recherche()">Recherche</button>
+                </div>
+            </form>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Date Join</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="e in pageFormations.content">
+                        <td>{{e.idFormation}}</td>
+                        <td>{{e.nomFormation}}</td>
+                        <td>{{e.Description}}</td>
+                        <td>{{e.dateFormation|date:'yyyy-MM-dd'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container spacer">
+                <ul class="nav nav-pills">
+                    <li class ="clickable" ng-repeat="p in pages track by $index" ng-class="{active:$index==pageCourante}">
+                        <a ng-click="goToPage($index)">{{$index}}</a>
+                    </li>
+                </ul>
+                
+            </div> 
+        </div>
+        
+         <script type="text/javascript" src="/js/angular-1.5.0/angular.min.js" ></script>
+        <script type="text/javascript" src="/app/controllers/collaborateur/listFormationsController.js" ></script>
     </body>
 </html>

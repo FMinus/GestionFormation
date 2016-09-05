@@ -23,8 +23,6 @@ myApp.controller("gestionFormationController", function($http, $scope)
     //données a fournir au formulaire de la BD
     //$scope.optionsUtilisateurs = [];
     
-    
-    
     //choix fait
     $scope.choixFormateurs = null;
     
@@ -43,7 +41,6 @@ myApp.controller("gestionFormationController", function($http, $scope)
                     $scope.optionsUtilisateurs = data;
                     
                 });
-        
     };
     
     $scope.valider = function()
@@ -59,17 +56,11 @@ myApp.controller("gestionFormationController", function($http, $scope)
             headers : {'Content-Type' : 'application/json'}
             
         });
-       
-        //console.log($scope.choixFormateurs);
-        console.log();
-        //console.log($scope.formation.responsableFormation.idUtilisateur);
-        
     };
     
     $scope.arrayIdUsers = function(p)
     {
         var result = [];
-        
         for (i = 0; i < p.length; i++) 
         { 
             result[i] = {idUtilisateur:parseInt(p[i])};
