@@ -11,9 +11,9 @@
     
      <body ng-app="GestionFormation" ng-controller="loginController">
   
-        <div class="col-md-6 col-md-offset-3 spacer ">
+        <div class="col-md-6 col-md-offset-3 spacer">
             <div class="panel panel-info">
-                <div class="panel panel-heading ng-cloak">Login : {{test}} <a href="home.html">index</a></div>
+                <div class="panel panel-heading ng-cloak">Login : {{test}} <a href="home.html" class="send-left">index</a></div>
                 <div class="panel panel-body">
                     <form class="pure-form pure-form-aligned" role="form" ng-submit="login()">
                         <fieldset>
@@ -23,12 +23,12 @@
                             </div>
                             <div class="pure-control-group">
                                 <label class="control-label" for="password">Mot De Passe : </label>
-                                <input type="text" ng-model="credentials.password" id="password" class="input-sm" placeholder="Votre Mot De Passe" required="true"/>
+                                <input type="password" ng-model="credentials.password" id="password" class="input-sm" placeholder="Votre Mot De Passe" required="true"/>
                             </div>
                             <div class="center-block">
                                 <span ng-if="error" class="error center-block ng-cloak">{{error}}</span>
                             </div>
-                            <div class="center-block">
+                            <div class="center-block pure-controls spacer">
                                 <button type="submit" class="btn btn-success ">Login</button>
                                 <a href="register.html" class="btn btn-primary">Register</a>
                             </div>

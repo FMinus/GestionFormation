@@ -6,9 +6,15 @@
     margin-top: 20px;
 }
 
+.spacer-all-sides
+{
+    margin: 20px;
+}
+
 .clickable
 {
     cursor: pointer;
+    
 }
 
 .error
@@ -94,4 +100,75 @@
 }
 .slide-animate.ng-leave.ng-leave-active {
   top:50px;
+}
+
+.send-left
+{
+    float: right;
+}
+
+.panel-spacer
+{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+
+/* customized bootstrap button */
+.btn-mystyle {
+  color: #fff;
+  background-color: #008080;
+  border-color: #008085;
+}
+.btn-mystyle:focus,
+.btn-mystyle.focus {
+  color: #fff;
+  background-color: #008085;
+  border-color: #008090;
+}
+.btn-mystyle:hover {
+  color: #fff;
+  background-color: #018085;
+  border-color: #008095;
+}
+.btn-mystyle:active,
+.btn-mystyle.active,
+.open > .dropdown-toggle.btn-mystyle {
+  color: #fff;
+  background-color: #449d44;
+  border-color: #398439;
+}
+.btn-mystyle:active:hover,
+.btn-mystyle.active:hover,
+.open > .dropdown-toggle.btn-mystyle:hover,
+.btn-mystyle:active:focus,
+.btn-mystyle.active:focus,
+.open > .dropdown-toggle.btn-mystyle:focus,
+.btn-mystyle:active.focus,
+.btn-mystyle.active.focus,
+.open > .dropdown-toggle.btn-mystyle.focus {
+  color: #fff;
+  background-color: #398439;
+  border-color: #255625;
+}
+.btn-mystyle:active,
+.btn-mystyle.active,
+.open > .dropdown-toggle.btn-mystyle {
+  background-image: none;
+}
+.btn-mystyle.disabled:hover,
+.btn-mystyle[disabled]:hover,
+fieldset[disabled] .btn-mystyle:hover,
+.btn-mystyle.disabled:focus,
+.btn-mystyle[disabled]:focus,
+fieldset[disabled] .btn-mystyle:focus,
+.btn-mystyle.disabled.focus,
+.btn-mystyle[disabled].focus,
+fieldset[disabled] .btn-mystyle.focus {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.btn-mystyle .badge {
+  color: #5cb85c;
+  background-color: #fff;
 }

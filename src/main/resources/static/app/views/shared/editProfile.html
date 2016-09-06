@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html ng-app="GestionFormation">
     <head>
-        <title>Profile</title>
+        <title>Edit Profile</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <link href="/css/angular-bootstrap.css" rel="stylesheet">
@@ -26,9 +26,6 @@ and open the template in the editor.
             <div class="row" >
                 <div class="col-md-3  toppad  pull-right col-md-offset-5 ">
                     <table>
-                        <th>
-                            <A href="editProfile.html" style="padding-right: 10px;">Edit Profile</A>
-                        </th>
                         <th>
                             <A href="logout.html" >Logout</A>
                         </th>
@@ -55,7 +52,7 @@ and open the template in the editor.
                                             <tr>
                                                 <td>Nom Complet</td>
                                                 <td>
-                                                    {{current.nomUtilisateur}}   {{current.prenomUtilisateur}}
+                                                    <input value="{{current.nomUtilisateur}}"/>   <input value="{{current.prenomUtilisateur}}" />
                                                 </td>
                                             </tr>
                                             <!--                                            <tr>
@@ -66,14 +63,14 @@ and open the template in the editor.
                                                                                         </tr>-->
                                             <tr>
                                                 <td>Date de Join</td>
-                                                <td> {{current.joinDate|date:'yyyy-MM-dd'}}</td>
+                                                <td><input type="date" value="{{current.joinDate|date:'yyyy-MM-dd'}}"/></td>
                                             </tr>
                                             
                                             
                                                 
                                             <tr>
                                                 <td>Email</td>
-                                                <td>{{current.emailUtilisateur}}</td>
+                                                <td><input value="{{current.emailUtilisateur}}"/></td>
                                             </tr>
                                             
                                             

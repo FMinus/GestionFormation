@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="GestionFormation">
+    <head>
+        <title>Gestion Session</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/css/angular-bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/mystyle.css" />
+        <link rel="stylesheet" href="/css/pure-min.css" />
+    </head>
+    <body>
+        
+        <div ng-include="'/app/views/includes/header_page.html'" ng-controller="navigation">
+        </div>
+        
+        <div class="" ng-controller="gestonSessionsFormation">
+            <div class="spacer panel-spacer">
+                <div class="panel panel-info">
+                    <div class="panel panel-heading ng-cloak">Gestion Sessions Formation : {{test}}<a href="/app/views/home.html" class="send-left">index</a></div>
+                    <div class="panel panel-body">
+                        
+                        <div class="form-group">
+                            <button ng-click="addSection()" class="btn btn-mystyle center-block spacer-all-sides">Ajout</button>
+                            <button ng-click="deleteSection()" class="btn btn-danger center-block spacer-all-sides">Supprimer</button>
+                            Sessions Crée :  {{arrayLength}}
+                            
+                        </div>
+                        
+                        <ul>
+                            <li ng-repeat="a in arrayNum track by $index" class="ng-cloak">
+                                <div class="spacer">
+                                    <div class="panel panel-success">
+                                        <div class="panel panel-heading">{{"Session Formation N°:"+a}}</div>
+                                        <form>
+                                            <div class="form-group panel-spacer">
+                                                <label>{{"Date Session N° "+a}}</label>
+                                                <input type="date" ng-model="arrayContent[$index].dateSession" class="form-control"/>
+                                            </div>
+                                            <div class="form-group panel-spacer">
+                                                <label>{{"Formateur Session N° "+a}}</label>
+                                                <select name="repeatSelectResponsable" id="repeatSelectResponsable" ng-model="arrayContent[$index].formateur.idUtilisateur" class="form-control">
+                                                    <option ng-repeat="option in listFormateurs" value="{{option.idUtilisateur}}">
+                                                        {{option.idUtilisateur}} - {{option.nomUtilisateur}} {{option.prenomUtilisateur}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group panel-spacer">
+                                                <label>{{"Fichiers Session N° "+a}}</label>
+                                                <input type="file" ng-model="arrayContent[$index].documents" class="form-control" accept=".jpeg,.png,.gif,.jpg" value="name"/>
+                                            </div>    
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    <div class="panel panel-spacer">
+                        <button ng-click="Valider()()" class="btn btn-success bottom">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <script src="/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+        <script src="/css/bootstrap-3.3.6-dist/js/bootstrap.js" type="text/javascript"></script>
+        
+        
+        <script src="/js/angular-1.5.0/angular.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-route.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-cookies.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-base64.min.js" type="text/javascript"></script>
+        
+        
+        <script src="/app/services/moduleDependancies.js" type="text/javascript"></script>
+        
+        <script src="/app/services/constants.js" type="text/javascript"></script>
+        <script src="/app/services/requester.js" type="text/javascript"></script>
+        
+        <script src="/app/services/utils.js" type="text/javascript"></script>
+        <script src="/app/assets/properties.js" type="text/javascript"></script>
+        <script src="/app/services/currentUser.js" type="text/javascript"></script>
+        <script src="/app/services/security.js" type="text/javascript"></script>
+        
+        <script src="/app/services/navigation.js" type="text/javascript"></script>
+        <script src="/app/controllers/responsableFormation/gestionSessionFormationController.js" type="text/javascript"></script>
+    </body>
+</html>

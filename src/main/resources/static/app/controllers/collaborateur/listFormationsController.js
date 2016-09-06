@@ -1,4 +1,4 @@
-var myApp = angular.module("GestionFormation", []);
+var myApp = angular.module("GestionFormation");
 myApp.controller("listFormationsController", function($http, $scope)
 {
     $scope.test="myTest";
@@ -12,13 +12,14 @@ myApp.controller("listFormationsController", function($http, $scope)
     $scope.listFormations = function()
     {
         
-        $http.get("/utilisateurs/pageUsers?page="+$scope.pageCourante+"&size="+$scope.size)
+        $http.get("/formations/list")
                 .success(function(data)
                 {
                     $scope.pageFormations = data;
                     $scope.pages = new Array(data.totalPages);
                 });
     };
+    
     
      $scope.goToPage = function(p)
     {
@@ -38,5 +39,6 @@ myApp.controller("listFormationsController", function($http, $scope)
         
     };
     
-    $scope.recherche();
+    //$scope.recherche();
+    $scope.listFormations();
 });
