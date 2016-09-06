@@ -4,56 +4,100 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html ng-app="GestionFormation">
     <head>
         <title>List Utilisateurs</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/myStyle.css" />
-        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link href="/css/angular-bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/mystyle.css" />
+        <link rel="stylesheet" href="/css/pure-min.css" />
     </head>
     
-    <body ng-app="GestionFormation" ng-controller="listUtilisateursController">
+    <body  >
         
-        {{test}}
-        <a href="/app/views/Administrateur/ajoutUtilisateur.html">Ajout Utilisateur</a>
-        <div class="col-md-6 col-sm-6 spacer">
-            <form>
-                <div class="form-group">
-                    <label>Mot Clé : </label>
-                    <input type="text" ng-model="motCle" />
-                    <button class="btn btn-success" ng-click="recherche()">Recherche</button>
-                </div>
-            </form>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>Prenom</th>
-                        <th>Date Join</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="e in pageUtilisateurs.content">
-                        <td>{{e.idUtilisateur}}</td>
-                        <td>{{e.nomUtilisateur}}</td>
-                        <td>{{e.prenomUtilisateur}}</td>
-                        <td>{{e.joinDate|date:'yyyy-MM-dd'}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="container spacer">
-                <ul class="nav nav-pills">
-                    <li class ="clickable" ng-repeat="p in pages track by $index" ng-class="{active:$index==pageCourante}">
-                        <a ng-click="goToPage($index)">{{$index}}</a>
-                    </li>
-                </ul>
-                
-            </div> 
+        
+        <div ng-include="'/app/views/includes/header_page.html'" ng-controller="navigation">
         </div>
         
-         <script type="text/javascript" src="/js/angular-1.5.0/angular.min.js" ></script>
-        <script type="text/javascript" src="/app/controllers/administrateur/listUtilisateursController.js" ></script>
+        <div class="container" ng-controller="listUtilisateursController">
+            
+            
+            <div class="" ng-controller="gestonSessionsFormation">
+                <div class="spacer panel-spacer">
+                    <div class="panel panel-info">
+                        <div class="panel panel-heading ng-cloak">
+                            List Utilisateurs : {{test}}
+                            <a href="/app/views/home.html" class="send-left">index</a>
+                            <a href="/app/views/Administrateur/ajoutUtilisateur.html" class="send-left spacer-sides">Ajout Utilisateur</a>
+                        </div>
+                        <div class="panel panel-body">
+                            
+                            
+                            <form class="pure-form pure-form-aligned">
+                                <div class="pure-control-group">
+                                    <label>Mot Clé : </label>
+                                    <input type="text" ng-model="motCle"/>
+                                    <button class="btn btn-success" ng-click="recherche()"><span class="glyphicon glyphicon-search"></span></button>
+                                </div>
+                            </form>
+                            
+                            
+                            <table class="table table-striped spacer">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>Date Join</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="e in pageUtilisateurs.content">
+                                        <td>{{e.idUtilisateur}}</td>
+                                        <td>{{e.nomUtilisateur}}</td>
+                                        <td>{{e.prenomUtilisateur}}</td>
+                                        <td>{{e.joinDate|date:'yyyy-MM-dd'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="container spacer">
+                                <ul class="nav nav-pills">
+                                    <li class ="clickable" ng-repeat="p in pages track by $index" ng-class="{active:$index==pageCourante}">
+                                        <a ng-click="goToPage($index)">{{$index}}</a>
+                                    </li>
+                                </ul>
+                                
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <script type="text/javascript" src="/js/angular-1.5.0/angular.min.js" ></script>
+        <script src="/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+        <script src="/css/bootstrap-3.3.6-dist/js/bootstrap.js" type="text/javascript"></script>
+        
+        
+        <script src="/js/angular-1.5.0/angular.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-route.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-cookies.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-base64.min.js" type="text/javascript"></script>
+        
+        
+        <script src="/app/services/moduleDependancies.js" type="text/javascript"></script>
+        
+        <script src="/app/services/constants.js" type="text/javascript"></script>
+        <script src="/app/services/requester.js" type="text/javascript"></script>
+        
+        <script src="/app/services/utils.js" type="text/javascript"></script>
+        <script src="/app/assets/properties.js" type="text/javascript"></script>
+        <script src="/app/services/currentUser.js" type="text/javascript"></script>
+        <script src="/app/services/security.js" type="text/javascript"></script>
+        
+        <script src="/app/services/navigation.js" type="text/javascript"></script>
+        <script src="/app/controllers/responsableFormation/gestionSessionFormationController.js" type="text/javascript"></script>
+        <script src="/app/controllers/administrateur/listUtilisateursController.js"  type="text/javascript"></script>
     </body>
 </html>

@@ -10,7 +10,17 @@
 {
     margin: 20px;
 }
+.spacer-sides
+{
+    margin-left: 20px;
+    margin-right: 20px;
+}
 
+.spacer-sides-10
+{
+    margin-left: 10%;
+    margin-right: 10%;
+}
 .clickable
 {
     cursor: pointer;
@@ -112,7 +122,11 @@
     margin-left: 5%;
     margin-right: 5%;
 }
-
+.menu-link
+{
+    font-family: cursive;
+    
+}
 
 /* customized bootstrap button */
 .btn-mystyle {

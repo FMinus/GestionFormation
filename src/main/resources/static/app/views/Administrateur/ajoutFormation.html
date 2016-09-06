@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html ng-app="GestionFormation">
     <head>
         <title>Ajout Formation</title>
         <meta charset="UTF-8">
@@ -12,65 +12,91 @@ and open the template in the editor.
         <link rel="stylesheet" href="/css/myStyle.css" />
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
     </head>
-    <body ng-app="GestionFormation" ng-controller="gestionFormationController">
+    <body  >
         
-        <div class="col-md-6 col-sm-6 col-xs-12 spacer">
-            <div class="panel panel-info">
-                <div class="panel-heading">Ajout Formation : {{test}}</div>
-                <div class="panel-body">
-                    <div class="" ng-if="mode.value=='form'">
-                        <form>
-                            <div class="">
-                                <label>nom formation : </label>
-                                <input type="text" ng-model="formation.nomFormation" />
-                            </div>
+        <div ng-include="'/app/views/includes/header_page.html'" ng-controller="navigation">
+        </div>
+        
+        <div class="container" ng-controller="gestionFormationController">
+            
+            <div class="spacer panel-spacer">
+                <div class="panel panel-info">
+                    <div class="panel panel-heading ng-cloak">Ajout Formation : {{test}}<a href="/app/views/home.html" class="send-left">index</a></div>
+                    <div class="panel panel-body">
+                        <div class="" ng-if="mode.value=='form'">
+                            <form class="pure-form pure-form-aligned">
+                                <div class="pure-control-group spacer-sides-10">
+                                    <label>nom formation : </label>
+                                    <input type="text" ng-model="formation.nomFormation" class="form-control input-sm m-bot15 "/>
+                                </div>
+                                
+                                <div class="pure-control-group spacer-sides-10">
+                                    <label>Description : </label>
+                                    <input type="text" ng-model="formation.Description" class="form-control input-sm m-bot15"/>
+                                </div>
+                                
+                                <div class="pure-control-group spacer-sides-10">
+                                    <label>Date formation : </label>
+                                    <input type="date" ng-model="formation.dateFormation" class="form-control input-sm m-bot15"/>
+                                </div>
+                                
+                                <div class="pure-control-group spacer-sides-10">
+                                    <label for="repeatSelectResponsable"> responsable :  </label>
+                                    <select name="repeatSelectResponsable" id="repeatSelectResponsable" ng-model="formation.responsableFormation.idUtilisateur" class="form-control input-sm m-bot15">
+                                        <option ng-repeat="option in optionsUtilisateurs" value="{{option.idUtilisateur}}">
+                                            {{option.idUtilisateur}} - {{option.nomUtilisateur}} {{option.prenomUtilisateur}}
+                                        </option>
+                                    </select>
+                                </div>
+                                
+                                <div class="pure-control-group spacer-sides-10">
+                                    <label for="repeatSelectColl"> Collaborateurs :  </label>
+                                    <select name="repeatSelectColl" id="repeatSelectColl" ng-model="formation.collaborateurs" multiple class="form-control input-sm m-bot15">
+                                        <option ng-repeat="option in optionsUtilisateurs" value="{{option.idUtilisateur}}">
+                                            {{option.idUtilisateur}} - {{option.nomUtilisateur}} {{option.prenomUtilisateur}}
+                                        </option>
+                                    </select>
+                                </div>
+                                
+                                
+                                
+                                <button ng-click="valider()" class="btn btn-success center-block spacer">Ajouter</button>
+                            </form>
                             
-                            <div class="">
-                                <label>Description : </label>
-                                <input type="text" ng-model="formation.Description" />
-                            </div>
-                            
-                            <div class="">
-                                <label>Date formation : </label>
-                                <input type="date" ng-model="formation.dateFormation" />
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="repeatSelectResponsable"> responsable :  </label>
-                                <select name="repeatSelectResponsable" id="repeatSelectResponsable" ng-model="formation.responsableFormation.idUtilisateur">
-                                    <option ng-repeat="option in optionsUtilisateurs" value="{{option.idUtilisateur}}">
-                                        {{option.idUtilisateur}} - {{option.nomUtilisateur}} {{option.prenomUtilisateur}}
-                                    </option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="repeatSelectColl"> Collaborateurs :  </label>
-                                <select name="repeatSelectColl" id="repeatSelectColl" ng-model="formation.collaborateurs" multiple>
-                                    <option ng-repeat="option in optionsUtilisateurs" value="{{option.idUtilisateur}}">
-                                        {{option.idUtilisateur}} - {{option.nomUtilisateur}} {{option.prenomUtilisateur}}
-                                    </option>
-                                </select>
-                            </div>
                             
                             
-                            
-                            <button ng-click="valider()">Send</button>
-                        </form>
+                        </div>
+                        
                         
                         
                         
                     </div>
-                    
-                    
-                   
-                    
                 </div>
             </div>
+            
         </div>
         
-        <script type="text/javascript" src="/js/angular-1.5.0/angular.min.js" ></script>
-        <script type="text/javascript" src="/app/controllers/administrateur/gestionFormationController.js" ></script>
+        <script src="/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+        <script src="/css/bootstrap-3.3.6-dist/js/bootstrap.js" type="text/javascript"></script>
         
+        
+        <script src="/js/angular-1.5.0/angular.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-route.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-cookies.min.js" type="text/javascript"></script>
+        <script src="/js/angular-1.5.0/angular-base64.min.js" type="text/javascript"></script>
+        
+        
+        <script src="/app/services/moduleDependancies.js" type="text/javascript"></script>
+        
+        <script src="/app/services/constants.js" type="text/javascript"></script>
+        <script src="/app/services/requester.js" type="text/javascript"></script>
+        
+        <script src="/app/services/utils.js" type="text/javascript"></script>
+        <script src="/app/assets/properties.js" type="text/javascript"></script>
+        <script src="/app/services/currentUser.js" type="text/javascript"></script>
+        <script src="/app/services/security.js" type="text/javascript"></script>
+        
+        <script src="/app/services/navigation.js" type="text/javascript"></script>
+        <script src="/app/controllers/administrateur/gestionFormationController.js" type="text/javascript"></script>
     </body>
 </html>

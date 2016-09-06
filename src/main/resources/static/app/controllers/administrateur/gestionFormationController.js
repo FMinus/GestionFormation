@@ -1,4 +1,4 @@
-var myApp = angular.module("GestionFormation", []);
+var myApp = angular.module("GestionFormation");
 myApp.controller("gestionFormationController", function($http, $scope)
 {
     $scope.test = "mytest";

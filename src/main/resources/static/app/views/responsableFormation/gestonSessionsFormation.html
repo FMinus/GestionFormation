@@ -25,10 +25,10 @@ and open the template in the editor.
                     <div class="panel panel-body">
                         
                         <div class="form-group">
-                            <button ng-click="addSection()" class="btn btn-mystyle center-block spacer-all-sides">Ajout</button>
-                            <button ng-click="deleteSection()" class="btn btn-danger center-block spacer-all-sides">Supprimer</button>
-                            Sessions Crée :  {{arrayLength}}
+                            <button ng-click="deleteSection()" class="btn btn-danger send-left" style="margin-left: 10px;">Supprimer</button>
+                            <button ng-click="addSection()" class="pure-button pure-button-primary send-left" >Ajout</button>
                             
+                            Sessions a Crée :  {{arrayLength}}
                         </div>
                         
                         <ul>
@@ -65,7 +65,7 @@ and open the template in the editor.
                         
                     </div>
                     <div class="panel panel-spacer">
-                        <button ng-click="Valider()()" class="btn btn-success bottom">Valider</button>
+                        <button ng-click="Valider()()" class="btn btn-success bottom center-block">Valider</button>
                     </div>
                 </div>
             </div>
