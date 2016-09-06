@@ -55,19 +55,21 @@ public class Collaborateur extends Utilisateur implements Serializable
     {
         this.confirmationInscription = confirmationInscription;
     }
-
+    
+    @JsonIgnore
     public Collection<EvaluationFormation> getEvaluationFormations()
     {
         return evaluationFormations;
     }
 
+    @JsonSetter
     public void setEvaluationFormations(Collection<EvaluationFormation> evaluationFormations)
     {
         this.evaluationFormations = evaluationFormations;
     }
     
     
-    //@JsonIgnore
+    @JsonIgnore
     public Collection<Formation> getFormations()
     {
         return formations;

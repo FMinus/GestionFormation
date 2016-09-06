@@ -144,7 +144,7 @@ public class Formation implements Serializable
         this.responsableFormation = responsableFormation;
     }
     
-    @JsonIgnore
+    //@JsonIgnore
     public Collection<Collaborateur> getCollaborateurs()
     {
         return collaborateurs;
@@ -155,12 +155,14 @@ public class Formation implements Serializable
     {
         this.collaborateurs = collaborateurs;
     }
-
+    
+    @JsonIgnore
     public Collection<EvaluationFormation> getEvaluationFormations()
     {
         return evaluationFormations;
     }
-
+    
+    @JsonSetter
     public void setEvaluationFormations(Collection<EvaluationFormation> evaluationFormations)
     {
         this.evaluationFormations = evaluationFormations;

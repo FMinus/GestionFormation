@@ -6,6 +6,7 @@
 package org.GestionFormation.web.RestServices;
 
 import java.util.List;
+import org.GestionFormation.entities.Document;
 import org.GestionFormation.entities.SessionFormation;
 import org.GestionFormation.metier.SessionFormationMetier;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +26,21 @@ public class SessionFormationRestService
     @Autowired
     private SessionFormationMetier sessionFormationMetier;
     
-    @RequestMapping(value = "/ajout" , method = RequestMethod.POST)
+    @RequestMapping(value = "ajout" , method = RequestMethod.POST)
     public SessionFormation saveSessionFormation(@RequestBody SessionFormation sf)
     {
         return sessionFormationMetier.saveSessionFormation(sf);
     }
     
-    @RequestMapping(value = "/list" , method = RequestMethod.GET)
+    @RequestMapping(value = "list" , method = RequestMethod.GET)
     public List<SessionFormation> listSessionFormations()
     {
         return sessionFormationMetier.listSessionFormations();
     }
     
+    @RequestMapping(value = "documents" , method = RequestMethod.GET)
+    public List<Document> listSessionFormationDocuments(Long idSession)
+    {
+        return (List<Document>) sessionFormationMetier.getSessionFormations(idSession).getDocuments();
+    }
 }

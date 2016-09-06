@@ -130,8 +130,14 @@ public class FormationRestService
     }
     
     @RequestMapping(value = "pageFormations")
-    public Page<Formation> pageUtilisateursOnly(@RequestParam(name = "mc",defaultValue = "") String mc,@RequestParam(name = "page",defaultValue = "0") int page,@RequestParam(name = "size",defaultValue ="5") int size)
+    public Page<Formation> pageFormations(@RequestParam(name = "mc",defaultValue = "") String mc,@RequestParam(name = "page",defaultValue = "0") int page,@RequestParam(name = "size",defaultValue ="5") int size)
     {
-        return formationMetier.findFormations("%"+mc+"%",new PageRequest(page,size));
+        Page<Formation> pageF = formationMetier.findFormations("%"+mc+"%",new PageRequest(page,size));
+        //System.out.println("get list"+formationMetier.listFormations());
+        
+        for(Formation f : pageF)
+            System.out.println("formation"+f);
+        
+        return pageF;
     }
 }

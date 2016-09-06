@@ -5,6 +5,8 @@
  */
 package org.GestionFormation.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,11 +29,11 @@ public class EvaluationFormation implements Serializable
     @GeneratedValue
     private Long idEvaliationFormation;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCollaborateur")
     private Collaborateur collaborateur;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idFormation")
     private Formation formation;
     
@@ -56,22 +58,26 @@ public class EvaluationFormation implements Serializable
     {
         return idEvaliationFormation;
     }
-
+    
+    @JsonSetter
     public void setIdEvaliationFormation(Long idEvaliationFormation)
     {
         this.idEvaliationFormation = idEvaliationFormation;
     }
-
+    
+    @JsonIgnore
     public Collaborateur getCollaborateur()
     {
         return collaborateur;
     }
-
+    
+    @JsonSetter
     public void setCollaborateur(Collaborateur collaborateur)
     {
         this.collaborateur = collaborateur;
     }
-
+    
+    @JsonIgnore
     public Formation getFormation()
     {
         return formation;

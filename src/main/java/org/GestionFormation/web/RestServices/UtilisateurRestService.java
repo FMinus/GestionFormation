@@ -98,9 +98,9 @@ public class UtilisateurRestService
         return utilisateurMetier.findAllUtilisateurs(new PageRequest(page,size));
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMINISTRATEUR')")
-    @Secured({"ROLE_REGULAR_USER","ROLE_ADMINISTRATEUR"})
-    @RolesAllowed("ADMINISTRATEUR")
+//    @PreAuthorize("hasRole('ROLE_ADMINISTRATEUR')")
+//    @Secured({"ROLE_REGULAR_USER","ROLE_ADMINISTRATEUR"})
+//    @RolesAllowed("ADMINISTRATEUR")
     @RequestMapping(value = "pageUsersOnly")
     public Page<Utilisateur> pageUtilisateursOnly(@RequestParam(name = "mc",defaultValue = "") String mc,@RequestParam(name = "page",defaultValue = "0") int page,@RequestParam(name = "size",defaultValue ="5") int size)
     {

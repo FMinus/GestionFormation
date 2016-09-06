@@ -5,6 +5,8 @@
  */
 package org.GestionFormation.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -35,12 +37,13 @@ public class Formateur extends Utilisateur implements Serializable
     }
 
     
-
+    @JsonIgnore
     public Collection<SessionFormation> getSessionFormations()
     {
         return sessionFormations;
     }
-
+    
+    @JsonSetter
     public void setSessionFormations(Collection<SessionFormation> sessionFormations)
     {
         this.sessionFormations = sessionFormations;
