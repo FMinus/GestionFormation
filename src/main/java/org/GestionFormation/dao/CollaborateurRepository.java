@@ -25,6 +25,6 @@ public interface CollaborateurRepository extends JpaRepository<Collaborateur,Lon
     @Query("select c from Collaborateur c where c.emailUtilisateur = :x")
     public Collaborateur findOneCollaborateur(@Param("x") String mc);
     
-    
+    public Collaborateur findFirstByEmailUtilisateur(String email);
     //public Collaborateur findFirstemailUtilisateur(String email);
 }

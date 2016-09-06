@@ -21,6 +21,7 @@ public interface CollaborateurMetier
     public Collaborateur ajoutCollaborateur(Long idUser,Long idFormation);
     public List<Collaborateur> listCollaborateur();
     public Collaborateur getCollaborateur(Long idCollaborateur);
+    public Collaborateur findOneCollaborateurByEmail(String email);
     public Collaborateur ajoutFormation(Long idFormation,Long idCollaborateur);
     public List<Formation> getFormationsOfCollab(Long idCollab);
     public Page<Collaborateur> findCollaborateur(String mc,Pageable pageable);

@@ -54,6 +54,8 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>
     public Utilisateur findUserByEmailUtilisateur(String email);
     
     public Utilisateur findFirstByOrderByEmailUtilisateurAsc(String email);
+    
+    public Utilisateur findFirstByEmailUtilisateur(String email);
 
     @Modifying
     @Query("UPDATE Utilisateur u SET u.passwordUtilisateur = ?1 WHERE u.idUtilisateur = ?2")

@@ -21,8 +21,11 @@ public interface FormationMetier
     public Formation saveFormation(Formation f);
     public List<Formation> listFormations();
     public Formation getFormations(Long id);
+    public Formation findOneFormationByNom(String nomFormation);
     public List<Collaborateur> getCollaborateurs(Long idFormation); 
     public List<SessionFormation> getSessionFormations(Long idFormation);
     public Formation ajoutSession(Long idFormation,Long idSessionFormation);
     public Page<Formation> findFormations(String mc,Pageable pageable);
+    public Formation findFormationByName(String mc);
+    public void deleteFormation(Formation f);
 }

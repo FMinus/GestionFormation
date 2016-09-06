@@ -97,6 +97,24 @@ public class FormationMetierImpl implements FormationMetier
     {
         return formationRepository.findAllByName(mc,pageable);
     }
+
+    @Override
+    public Formation findFormationByName(String mc)
+    {
+        return formationRepository.findByName(mc);
+    }
+
+    @Override
+    public void deleteFormation(Formation f)
+    {
+        formationRepository.delete(f);
+    }
+
+    @Override
+    public Formation findOneFormationByNom(String nomFormation)
+    {
+        return formationRepository.findFirstByNomFormation(nomFormation);
+    }
     
     
 }

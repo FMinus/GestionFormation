@@ -28,6 +28,7 @@ public interface FormationRepository extends JpaRepository<Formation,Long>
     @Query("select e from Formation e where e.nomFormation like :x")
     public Page<Formation> findAllByName(@Param("x") String mc,Pageable pageable);
     
+    public Formation findFirstByNomFormation(String nomFormation);
     //TODO formation of collab 
     
 }
