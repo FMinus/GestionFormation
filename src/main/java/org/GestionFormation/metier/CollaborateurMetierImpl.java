@@ -112,7 +112,8 @@ public class CollaborateurMetierImpl implements CollaborateurMetier
         if(formation == null)
             throw new RuntimeException("Formation Innexistant"); 
         
-        Collaborateur col = UserClassesConverter.userToCollaborateur(utilisateur);
+        //FIXME
+        //Collaborateur col = UserClassesConverter.userToCollaborateur(utilisateur);
         
         col.getFormations().add(formation);
         formation.getCollaborateurs().add(col);

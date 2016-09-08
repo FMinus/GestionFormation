@@ -31,15 +31,15 @@ public class Administrateur extends Utilisateur implements Serializable
     }
 
     
-
-    
-
     @Override
     public String toString()
     {
         super.toString();
         return "Administrateur{" + '}';
     }
+
+    
+    
     
     
     

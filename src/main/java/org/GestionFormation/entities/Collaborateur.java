@@ -10,20 +10,31 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.OneToOne;
+
 
 @Entity
-@DiscriminatorValue("COLLABORATEUR") 
-public class Collaborateur extends Utilisateur implements Serializable
+public class Collaborateur implements Serializable
 {
     private static final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long idCollaborateur;
+            
+    
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="Collaborateur_ID")
+    private Utilisateur collaborateur;
     
     @ManyToMany(mappedBy = "collaborateurs",fetch = FetchType.LAZY)
     private Collection<Formation> formations;
@@ -37,13 +48,23 @@ public class Collaborateur extends Utilisateur implements Serializable
     {
     }
 
-    public Collaborateur(Collection<Formation> formations, Collection<EvaluationFormation> evaluationFormations, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passwordUtilisateur, Date joinDate, Collection<RoleUtilisateur> roles)
+    public Collaborateur(Utilisateur collaborateur, Collection<Formation> formations, Collection<EvaluationFormation> evaluationFormations)
     {
-        super(nomUtilisateur, prenomUtilisateur, emailUtilisateur, passwordUtilisateur, joinDate, roles);
+        this.collaborateur = collaborateur;
         this.formations = formations;
         this.evaluationFormations = evaluationFormations;
     }
 
+    public Utilisateur getCollaborateur()
+    {
+        return collaborateur;
+    }
+
+    public void setCollaborateur(Utilisateur collaborateur)
+    {
+        this.collaborateur = collaborateur;
+    }
+    
     
 
     public boolean isConfirmationInscription()
@@ -84,10 +105,7 @@ public class Collaborateur extends Utilisateur implements Serializable
     @Override
     public String toString()
     {
-        return "Collaborateur{" + "formations=" + formations + ", confirmationInscription=" + confirmationInscription + '}';
+        return "Collaborateur{" + "collaborateur=" + collaborateur + ", formations=" + formations + ", evaluationFormations=" + evaluationFormations + ", confirmationInscription=" + confirmationInscription + '}';
     }
-
-    
-    
     
 }

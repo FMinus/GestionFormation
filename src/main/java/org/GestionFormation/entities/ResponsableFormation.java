@@ -9,21 +9,28 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+
 
 /**
  *
  * @author Ayoub
  */
 @Entity
-@DiscriminatorValue("RESPONSABLEFORMATION")
-public class ResponsableFormation extends Utilisateur implements Serializable
+public class ResponsableFormation implements Serializable
 {
     private static final long serialVersionUID = 1L;
+    
+    @Id
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="ResponsableFormation_ID")
+    private Utilisateur ResponsableFormation;
     
     @OneToMany(mappedBy = "responsableFormation",fetch = FetchType.LAZY)
     private Collection<Formation> formations;
@@ -32,15 +39,22 @@ public class ResponsableFormation extends Utilisateur implements Serializable
     {
     }
 
-    public ResponsableFormation(Collection<Formation> formations, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passwordUtilisateur, Date joinDate, Collection<RoleUtilisateur> roles)
+    public ResponsableFormation(Utilisateur ResponsableFormation, Collection<Formation> formations)
     {
-        super(nomUtilisateur, prenomUtilisateur, emailUtilisateur, passwordUtilisateur, joinDate, roles);
+        this.ResponsableFormation = ResponsableFormation;
         this.formations = formations;
     }
 
-    
-    
-    
+    public Utilisateur getResponsableFormation()
+    {
+        return ResponsableFormation;
+    }
+
+    public void setResponsableFormation(Utilisateur ResponsableFormation)
+    {
+        this.ResponsableFormation = ResponsableFormation;
+    }
+
     
     @JsonIgnore
     public Collection<Formation> getFormations()
@@ -57,9 +71,10 @@ public class ResponsableFormation extends Utilisateur implements Serializable
     @Override
     public String toString()
     {
-        super.toString();
-        return "ResponsableFormation{" + "formations=" + formations + '}';
+        return "ResponsableFormation{" + "ResponsableFormation=" + ResponsableFormation + ", formations=" + formations + '}';
     }
+
+    
     
     
 }

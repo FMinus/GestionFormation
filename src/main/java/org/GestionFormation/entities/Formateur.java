@@ -13,14 +13,21 @@ import java.util.Date;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 @Entity
-@DiscriminatorValue("FORMATEUR")
-public class Formateur extends Utilisateur implements Serializable
+public class Formateur implements Serializable
 {
     private static final long serialVersionUID = 1L;
+    
+    @Id
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="Formateur_ID")
+    private Utilisateur formateur;
     
     @OneToMany(mappedBy = "formateur",fetch = FetchType.LAZY)
     private Collection<SessionFormation> sessionFormations;
@@ -30,12 +37,24 @@ public class Formateur extends Utilisateur implements Serializable
     {
     }
 
-    public Formateur(Collection<SessionFormation> sessionFormations, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passwordUtilisateur, Date joinDate, Collection<RoleUtilisateur> roles)
+    public Formateur(Utilisateur formateur, Collection<SessionFormation> sessionFormations)
     {
-        super(nomUtilisateur, prenomUtilisateur, emailUtilisateur, passwordUtilisateur, joinDate, roles);
+        this.formateur = formateur;
         this.sessionFormations = sessionFormations;
     }
 
+    public Utilisateur getFormateur()
+    {
+        return formateur;
+    }
+
+    public void setFormateur(Utilisateur formateur)
+    {
+        this.formateur = formateur;
+    }
+
+    
+    
     
     @JsonIgnore
     public Collection<SessionFormation> getSessionFormations()
@@ -52,9 +71,10 @@ public class Formateur extends Utilisateur implements Serializable
     @Override
     public String toString()
     {
-        super.toString();
-        return "Formateur{" + "sessionFormations=" + sessionFormations + '}';
+        return "Formateur{" + "formateur=" + formateur + ", sessionFormations=" + sessionFormations + '}';
     }
+
+   
     
     
 
