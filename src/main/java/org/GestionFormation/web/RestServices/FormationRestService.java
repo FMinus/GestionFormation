@@ -55,19 +55,19 @@ public class FormationRestService
     @RequestMapping(value = "get" , method = RequestMethod.GET)
     public Formation getFormations(@RequestParam(name = "idFormation") Long id)
     {
-        return formationMetier.getFormations(id);
+        return formationMetier.getFormation(id);
     }
     
      @RequestMapping(value = "getCollabs" , method = RequestMethod.GET)
     public List<Collaborateur> getCollaborateurs(@RequestParam(name = "idFormation") Long idFormation)
     {
-        return formationMetier.getCollaborateurs(idFormation);
+        return (List<Collaborateur>) formationMetier.getFormation(idFormation).getCollaborateurs(); 
     }
     
      @RequestMapping(value = "getSessions" , method = RequestMethod.GET)
     public List<SessionFormation> getSessionFormations(@RequestParam(name = "idFormation") Long idFormation)
     {
-        return formationMetier.getSessionFormations(idFormation);
+        return (List<SessionFormation>) formationMetier.getFormation(idFormation).getSessionFormations();
     }
     
     
@@ -84,47 +84,44 @@ public class FormationRestService
         return formationMetier.listFormations();
     }
     
-    @RequestMapping(value = "collabs" , method = RequestMethod.GET)
-    public List<Collaborateur> listCollaborateurs(@RequestParam(name = "idFormation") Long idForm)
-    {
-        return formationMetier.getCollaborateurs(idForm);
-    }
     
-     @RequestMapping(value = "ajoutSession" , method = RequestMethod.GET)
+    @RequestMapping(value = "ajoutSession" , method = RequestMethod.GET)
     public Formation ajoutSession(@RequestParam(name = "idFormation") Long idForm,@RequestParam("idSession") Long idSession )
     {
-        return formationMetier.ajoutSession(idForm, idSession);
+        //return formationMetier.ajoutSession(idForm, idSession);
+        //TODO
+        return null;
     }
     
     @RequestMapping(value = "creer" , method = RequestMethod.POST)
     public void creerFormations(@RequestBody Formation f)
     {
-        List<Collaborateur> listCol = new ArrayList<>();
-        Utilisateur u;
-        
-        for(Collaborateur col : f.getCollaborateurs())
-        {
-            u = utilisateurMetier.getUtilisateur(col.getIdUtilisateur());
-            listCol.add(UserClassesConverter.userToCollaborateur(u));
-        }
-        
-        List<Formateur> listFormateurs = new ArrayList<>();
-        
-        ResponsableFormation resp = UserClassesConverter.userToResponsableFormation(utilisateurMetier.getUtilisateur(f.getResponsableFormation().getIdUtilisateur()));
-        
-        f.setCollaborateurs(listCol);
-        f.setResponsableFormation(resp);
-        
-        responsableFormationMetier.saveResponsableFormation(resp);
-        for(Collaborateur col : listCol)
-        {
-             collaborateurMetier.saveCollaborateur(col);
-        }
-        
-        for(Formateur form : listFormateurs)
-        {
-           formateurMetier.saveFormateur(form);
-        }
+//        List<Collaborateur> listCol = new ArrayList<>();
+//        Utilisateur u;
+//        
+//        for(Collaborateur col : f.getCollaborateurs())
+//        {
+//            u = utilisateurMetier.getUtilisateur(col.getIdUtilisateur());
+//            listCol.add(UserClassesConverter.userToCollaborateur(u));
+//        }
+//        
+//        List<Formateur> listFormateurs = new ArrayList<>();
+//        
+//        ResponsableFormation resp = UserClassesConverter.userToResponsableFormation(utilisateurMetier.getUtilisateur(f.getResponsableFormation().getIdUtilisateur()));
+//        
+//        f.setCollaborateurs(listCol);
+//        f.setResponsableFormation(resp);
+//        
+//        responsableFormationMetier.saveResponsableFormation(resp);
+//        for(Collaborateur col : listCol)
+//        {
+//             collaborateurMetier.saveCollaborateur(col);
+//        }
+//        
+//        for(Formateur form : listFormateurs)
+//        {
+//           formateurMetier.saveFormateur(form);
+//        }
 
         Formation formation = formationMetier.saveFormation(f);
     }

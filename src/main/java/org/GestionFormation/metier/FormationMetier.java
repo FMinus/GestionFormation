@@ -5,8 +5,8 @@
  */
 package org.GestionFormation.metier;
 
+import java.util.Date;
 import java.util.List;
-import org.GestionFormation.entities.Collaborateur;
 import org.GestionFormation.entities.Formation;
 import org.GestionFormation.entities.SessionFormation;
 import org.springframework.data.domain.Page;
@@ -20,12 +20,10 @@ public interface FormationMetier
 {
     public Formation saveFormation(Formation f);
     public List<Formation> listFormations();
-    public Formation getFormations(Long id);
-    public Formation findOneFormationByNom(String nomFormation);
-    public List<Collaborateur> getCollaborateurs(Long idFormation); 
-    public List<SessionFormation> getSessionFormations(Long idFormation);
-    public Formation ajoutSession(Long idFormation,Long idSessionFormation);
+    public Formation getFormation(Long id);
+    public Formation ajoutSession(Long idFormation,SessionFormation sessionFormation);
     public Page<Formation> findFormations(String mc,Pageable pageable);
-    public Formation findFormationByName(String mc);
+    public Formation findFormationByName(String nomFormation);
+    public Page<Formation> findFormationDateBetween(Date min,Date max,Pageable pageable);
     public void deleteFormation(Formation f);
 }

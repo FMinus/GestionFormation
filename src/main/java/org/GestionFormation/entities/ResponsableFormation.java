@@ -11,6 +11,8 @@ import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -28,6 +30,9 @@ public class ResponsableFormation implements Serializable
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long idResp;
+    
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="ResponsableFormation_ID")
     private Utilisateur ResponsableFormation;
@@ -45,6 +50,17 @@ public class ResponsableFormation implements Serializable
         this.formations = formations;
     }
 
+    public Long getIdResp()
+    {
+        return idResp;
+    }
+
+    public void setIdResp(Long idResp)
+    {
+        this.idResp = idResp;
+    }
+    
+    
     public Utilisateur getResponsableFormation()
     {
         return ResponsableFormation;
@@ -71,8 +87,10 @@ public class ResponsableFormation implements Serializable
     @Override
     public String toString()
     {
-        return "ResponsableFormation{" + "ResponsableFormation=" + ResponsableFormation + ", formations=" + formations + '}';
+        return "ResponsableFormation{" + "idResponsableFormation=" + idResp + ", ResponsableFormation=" + ResponsableFormation + ", formations=" + formations + '}';
     }
+
+    
 
     
     

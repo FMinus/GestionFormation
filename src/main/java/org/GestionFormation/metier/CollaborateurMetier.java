@@ -18,14 +18,10 @@ import org.springframework.data.domain.Pageable;
 public interface CollaborateurMetier 
 {
     public Collaborateur saveCollaborateur(Collaborateur collaborateur);
-    public Collaborateur ajoutCollaborateur(Long idUser,Long idFormation);
     public List<Collaborateur> listCollaborateur();
     public Collaborateur getCollaborateur(Long idCollaborateur);
-    public Collaborateur getCollaborateurByEmail(String email);
-    public Collaborateur findOneCollaborateurByEmail(String email);
+    public Collaborateur findCollaborateurByEmail(String email);
     public Collaborateur ajoutFormation(Long idFormation,Long idCollaborateur);
-    public List<Formation> getFormationsOfCollab(Long idCollab);
     public Page<Collaborateur> findCollaborateur(String mc,Pageable pageable);
-    public Page<Collaborateur> findCollaborateurOnly(String mc,Pageable pageable);
     public Page<Collaborateur> findAllCollaborateur(Pageable pgbl);
 }

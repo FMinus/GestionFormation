@@ -52,8 +52,6 @@ public class UtilisateursRepositoryTest
      @Test
     public void deleteUsers()
     {
-        addUsers();
-        
         String email_u1 = "user1Test@mail.com";
         String email_u2 = "user2Test@mail.com";
         String email_u3 = "user3Test@mail.com";
@@ -62,13 +60,22 @@ public class UtilisateursRepositoryTest
         Utilisateur u2_ret = utilisateurMetier.findByEmail(email_u2);
         Utilisateur u3_ret = utilisateurMetier.findByEmail(email_u3);
         
-        utilisateurMetier.supprimerUtilisateur(u1_ret);
-        utilisateurMetier.supprimerUtilisateur(u2_ret);
-        utilisateurMetier.supprimerUtilisateur(u3_ret);
+        if(u1_ret == null || u2_ret == null || u3_ret == null)
+            addUsers();
         
         u1_ret = utilisateurMetier.findByEmail(email_u1);
         u2_ret = utilisateurMetier.findByEmail(email_u2);
         u3_ret = utilisateurMetier.findByEmail(email_u3);
+        
+        
+        
+        utilisateurMetier.supprimerUtilisateur(u1_ret);
+        utilisateurMetier.supprimerUtilisateur(u2_ret);
+        utilisateurMetier.supprimerUtilisateur(u3_ret);
+        
+        assert((u1_ret = utilisateurMetier.findByEmail(email_u1))!= null);
+        assert((u2_ret = utilisateurMetier.findByEmail(email_u2)) != null);
+        assert((u3_ret = utilisateurMetier.findByEmail(email_u3)) != null);
         
         
     }

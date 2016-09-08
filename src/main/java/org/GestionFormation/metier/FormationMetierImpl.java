@@ -6,6 +6,7 @@
 package org.GestionFormation.metier;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.GestionFormation.dao.FormationRepository;
 import org.GestionFormation.entities.Collaborateur;
@@ -45,7 +46,7 @@ public class FormationMetierImpl implements FormationMetier
     }
     
     @Override
-    public Formation getFormations(Long id)
+    public Formation getFormation(Long id)
     {
         Formation f = formationRepository.findOne(id);
         
@@ -56,43 +57,6 @@ public class FormationMetierImpl implements FormationMetier
     }
     
     @Override
-    public List<Collaborateur> getCollaborateurs(Long idFormation)
-    {
-        Formation f = getFormations(idFormation);
-        return (List<Collaborateur>) f.getCollaborateurs();
-    }
-    
-    @Override
-    public List<SessionFormation> getSessionFormations(Long idFormation)
-    {
-        Formation f = getFormations(idFormation);
-        return (List<SessionFormation>) f.getSessionFormations();
-    }
-    
-    
-
-    @Override
-    public Formation ajoutSession(Long idFormation,Long idsessionFormation)
-    {
-        Formation f = getFormations(idFormation);
-        SessionFormation sessionFormation = sessionFormationMetier.getSessionFormations(idsessionFormation);
-        
-        List<SessionFormation> listS = new ArrayList<>();
-        
-        if(f.getSessionFormations()!=null)
-        {
-            listS = (List<SessionFormation>) f.getSessionFormations();
-            
-        }
-        listS.add(sessionFormation);
-        f.setSessionFormations(listS);
-        
-        sessionFormation.setFormation(f);
-        
-        return f;
-    }
-
-    @Override
     public Page<Formation> findFormations(String mc, Pageable pageable)
     {
         return formationRepository.findAllByName(mc,pageable);
@@ -101,7 +65,7 @@ public class FormationMetierImpl implements FormationMetier
     @Override
     public Formation findFormationByName(String mc)
     {
-        return formationRepository.findByName(mc);
+        return formationRepository.findFirstByNomFormation(mc);
     }
 
     @Override
@@ -111,9 +75,29 @@ public class FormationMetierImpl implements FormationMetier
     }
 
     @Override
-    public Formation findOneFormationByNom(String nomFormation)
+    public Formation ajoutSession(Long idFormation, SessionFormation sessionFormation)
     {
-        return formationRepository.findFirstByNomFormation(nomFormation);
+        Formation formation = getFormation(idFormation);
+        
+        sessionFormation.setFormation(formation);
+        sessionFormationMetier.saveSessionFormation(sessionFormation);
+        
+        List<SessionFormation> listS = new ArrayList<>();
+        
+        if(formation.getSessionFormations()!=null)
+            listS = (List<SessionFormation>) formation.getSessionFormations();
+        
+        listS.add(sessionFormation);
+        
+        formation.setSessionFormations(listS);
+        
+        return formationRepository.save(formation);
+    }
+
+    @Override
+    public Page<Formation> findFormationDateBetween(Date min, Date max, Pageable pageable)
+    {
+        return formationRepository.findFormationDateBetween(min, max, pageable);
     }
     
     

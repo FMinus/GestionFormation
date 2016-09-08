@@ -37,28 +37,29 @@ public class CollaborateurRepositoryTest
     @Test
     public void testDao()
     {
-        String email = "user1@mail.com";
-        
-        //assert(utilisateurRepository==null); 
-        //List<Utilisateur> collaborateur = utilisateurRepository.findCollaborateursOnly();
-        Page<Collaborateur>  collaborateur = collaborateurRepository.findCollaborateur("user1",new PageRequest(0,3));
-        
-        //System.out.println("colab : "+collaborateur.);
-        
-        for(Collaborateur c : collaborateur)
-        {
-            System.out.println(">"+c);
-        }
+//        String email = "user1@mail.com";
+//        
+//        //assert(utilisateurRepository==null); 
+//        //List<Utilisateur> collaborateur = utilisateurRepository.findCollaborateursOnly();
+//        Page<Collaborateur>  collaborateur = collaborateurRepository.findCollaborateur("user1",new PageRequest(0,3));
+//        
+//        //System.out.println("colab : "+collaborateur.);
+//        
+//        for(Collaborateur c : collaborateur)
+//        {
+//            System.out.println(">"+c);
+//        }
         
     }
     
     @Test
     public void testCollab()
     {
-        String email = "user1@mail.com";
+        String email = "user1Test@mail.com";
         
-        Collaborateur c = collaborateurMetier.getCollaborateurByEmail(email);
+        Collaborateur c = collaborateurRepository.findByCollaborateurEmailUtilisateur(email);
         
         assert(c!=null);
+        System.out.println("collab"+c.getCollaborateur().getEmailUtilisateur());
     }
 }

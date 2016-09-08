@@ -29,10 +29,10 @@ public class Collaborateur implements Serializable
     
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    private Long idCollaborateur;
+    private Long idC;
             
     
-    @OneToOne(fetch=FetchType.LAZY)
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="Collaborateur_ID")
     private Utilisateur collaborateur;
     
@@ -63,6 +63,16 @@ public class Collaborateur implements Serializable
     public void setCollaborateur(Utilisateur collaborateur)
     {
         this.collaborateur = collaborateur;
+    }
+
+    public Long getIdCollaborateur()
+    {
+        return idC;
+    }
+
+    public void setIdCollaborateur(Long id)
+    {
+        this.idC = id;
     }
     
     

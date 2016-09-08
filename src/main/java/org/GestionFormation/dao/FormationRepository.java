@@ -5,6 +5,7 @@
  */
 package org.GestionFormation.dao;
 
+import java.util.Date;
 import org.GestionFormation.entities.Formation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,17 +19,16 @@ import org.springframework.data.repository.query.Param;
  */
 public interface FormationRepository extends JpaRepository<Formation,Long>
 {
-    @Query("select f from Formation f where f.nomFormation = ?")
-    public Formation findByName(String docName);
+   
+    public Formation findByNomFormation(String docName);
     
-    
-    @Query("select f from Formation f where f.nomFormation = ?")
-    public Page<Formation> findAllByName2(@Param("x") String mc,Pageable pageable);
     
     @Query("select e from Formation e where e.nomFormation like :x")
     public Page<Formation> findAllByName(@Param("x") String mc,Pageable pageable);
     
     public Formation findFirstByNomFormation(String nomFormation);
-    //TODO formation of collab 
     
+    //TODO formation of collab 
+    @Query("select f from Formation f where f.dateFormation between :min and :max")
+    public Page<Formation> findFormationDateBetween(@Param("min") Date min,@Param("max") Date max,Pageable pageable);
 }

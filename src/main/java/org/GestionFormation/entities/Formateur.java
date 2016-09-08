@@ -13,6 +13,8 @@ import java.util.Date;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -25,6 +27,9 @@ public class Formateur implements Serializable
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long idF;
+    
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="Formateur_ID")
     private Utilisateur formateur;
@@ -68,19 +73,21 @@ public class Formateur implements Serializable
         this.sessionFormations = sessionFormations;
     }
 
+    public Long getIdF()
+    {
+        return idF;
+    }
+
+    public void setIdF(Long idF)
+    {
+        this.idF = idF;
+    }
+
     @Override
     public String toString()
     {
-        return "Formateur{" + "formateur=" + formateur + ", sessionFormations=" + sessionFormations + '}';
+        return "Formateur{" + "idFormateur=" + idF + ", formateur=" + formateur + ", sessionFormations=" + sessionFormations + '}';
     }
 
-   
-    
-    
-
-   
-
-   
-   
     
 }

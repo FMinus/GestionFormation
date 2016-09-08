@@ -7,6 +7,7 @@ package org.GestionFormation.metier;
 
 import java.util.List;
 import org.GestionFormation.entities.ResponsableFormation;
+import org.GestionFormation.entities.Utilisateur;
 
 /**
  *
@@ -16,7 +17,11 @@ import org.GestionFormation.entities.ResponsableFormation;
 public interface ResponsableFormationMetier
 {
     public ResponsableFormation saveResponsableFormation(ResponsableFormation r);
+    public ResponsableFormation getResponsableFormation(Long idResponsable);
     public List<ResponsableFormation> listResponsableFormation();
-    
+    public ResponsableFormation findByEmail(String email);
+    public ResponsableFormation ajoutFormation(Long idFormation,Long idResp);
+    public void supprimerResponsableFormation(ResponsableFormation responsableFormation);
+    public ResponsableFormation updateResponsableFormation(ResponsableFormation responsableFormation,Utilisateur newResponsable);
     
 }

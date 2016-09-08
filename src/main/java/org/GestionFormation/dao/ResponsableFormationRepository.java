@@ -5,10 +5,10 @@
  */
 package org.GestionFormation.dao;
 
-import java.util.List;
 import org.GestionFormation.entities.ResponsableFormation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -16,6 +16,8 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface ResponsableFormationRepository extends JpaRepository<ResponsableFormation,Long>
 {
-    @Query("select r from ResponsableFormation r where r.nomUtilisateur=?")
-    public List<ResponsableFormation> findByName(String name);
+    public ResponsableFormation findByResponsableFormationEmailUtilisateur(String emailUtilisateur);
+    public Page<ResponsableFormation> findByResponsableFormationEmailUtilisateur(String mc,Pageable pageable);
+    public ResponsableFormation findByFormationsNomFormation(String nomFormation);
+
 }

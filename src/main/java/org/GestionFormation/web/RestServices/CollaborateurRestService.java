@@ -50,19 +50,19 @@ public class CollaborateurRestService
     @RequestMapping(value = "formations" , method = RequestMethod.GET)
     public List<Formation> listFormationsCollaborateur(@RequestParam(name = "idCollab") Long idcol)
     {
-        return collaborateurMetier.getFormationsOfCollab(idcol);
+        return (List<Formation>) collaborateurMetier.getCollaborateur(idcol).getFormations();
     }
     
     @RequestMapping(value = "pageCollaborateurs")
     public Page<Collaborateur> listCollaborateur(@RequestParam(name = "page") int page,@RequestParam(name = "size") int size)
     {
-        //return utilisateurMetier.findUtilisateurs("%"+mc+"%",new PageRequest(page,5));
         return collaborateurMetier.findAllCollaborateur(new PageRequest(page,size));
     }
     
-    @RequestMapping(value = "pageCollaborateursOnly")
-    public Page<Collaborateur> pageUtilisateursOnly(@RequestParam(name = "mc",defaultValue = "") String mc,@RequestParam(name = "page",defaultValue = "0") int page,@RequestParam(name = "size",defaultValue ="5") int size)
+    @RequestMapping(value = "pageCollaborateurByEmail")
+    public Page<Collaborateur> pageCollaborateurByEmail(@RequestParam(name = "page") int page,@RequestParam(name = "size") int size,@RequestParam(name = "email") String email)
     {
-        return collaborateurMetier.findCollaborateur("%"+mc+"%",new PageRequest(page,size));
+        return collaborateurMetier.findCollaborateur("%"+email+"%",new PageRequest(page,size));
     }
+    
 }

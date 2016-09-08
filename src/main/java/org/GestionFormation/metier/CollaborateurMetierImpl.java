@@ -50,18 +50,24 @@ public class CollaborateurMetierImpl implements CollaborateurMetier
     {
         Collaborateur col = collaborateurRepository.findOne(idCollaborateur);
         
-        if(col == null)
-            throw new RuntimeException("Collaborateur Innexistant"); 
+//        if(col == null)
+//            throw new RuntimeException("Collaborateur Innexistant"); 
         
         return col;
     }
 
     @Override
-    public Collaborateur ajoutFormation(Long idFormation,Long idCollaborateur)
+    public Collaborateur ajoutFormation(Long idFormation,Long idUtilisateur)
     {
-        Formation formation = formationMetier.getFormations(idFormation);
-        Collaborateur col = getCollaborateur(idCollaborateur);
+        Formation formation = formationMetier.getFormation(idFormation);
+        Utilisateur user = utilisateurMetier.getUtilisateur(idUtilisateur);
         
+        Collaborateur col = findCollaborateurByEmail(user.getEmailUtilisateur());
+        
+        if(col == null)
+            col = new Collaborateur(user, null, null);
+        
+        //unnecessary : exception will be thrown in formationRepository
         if(formation == null)
             throw new RuntimeException("Formation Innexistant"); 
         
@@ -89,63 +95,13 @@ public class CollaborateurMetierImpl implements CollaborateurMetier
         return col;
     }
 
-    @Override
-    public List<Formation> getFormationsOfCollab(Long idCollab)
-    {
-        Collaborateur col = getCollaborateur(idCollab);
-        
-        if(col.getFormations() == null)
-            throw new RuntimeException("collaborateur n'as pas de formations");
-        
-        return (List<Formation>) col.getFormations();
-    }
+    
 
-    @Override
-    public Collaborateur ajoutCollaborateur(Long idUser, Long idFormation)
-    {
-        Utilisateur utilisateur = utilisateurMetier.getUtilisateur(idUser);
-        Formation formation = formationMetier.getFormations(idFormation);
-        
-        if(utilisateur == null)
-            throw new RuntimeException("Utilisateur Inexistant");
-        
-        if(formation == null)
-            throw new RuntimeException("Formation Innexistant"); 
-        
-        //FIXME
-        //Collaborateur col = UserClassesConverter.userToCollaborateur(utilisateur);
-        
-        col.getFormations().add(formation);
-        formation.getCollaborateurs().add(col);
-        
-        formationMetier.saveFormation(formation);
-        
-        return saveCollaborateur(col);
-                
-    }
-    /*
-    public Collaborateur userToCollaborateur(Utilisateur u)
-    {
-        Collaborateur col = new Collaborateur();
-        
-        col.setNomUtilisateur(u.getNomUtilisateur());
-        col.setPrenomUtilisateur(u.getPrenomUtilisateur());
-        col.setEmailUtilisateur(u.getEmailUtilisateur());
-        col.setJoinDate(u.getJoinDate());
-        col.setPasswordUtilisateur(u.getPasswordUtilisateur());
-        col.setUrlPhotoUtilisateur(u.getUrlPhotoUtilisateur());
-        
-        List<Formation> listF = new ArrayList<>();
-        col.setFormations(listF);
-        
-        return col;
-        
-    }
-    */
+    
     @Override
     public Page<Collaborateur> findCollaborateur(String mc, Pageable pageable)
     {
-        return collaborateurRepository.findCollaborateur(mc, pageable);
+        return collaborateurRepository.findByCollaborateurEmailUtilisateur(mc, pageable);
     }
 
     @Override
@@ -154,21 +110,13 @@ public class CollaborateurMetierImpl implements CollaborateurMetier
         return collaborateurRepository.findAll(pgbl);
     }
 
-    @Override
-    public Page<Collaborateur> findCollaborateurOnly(String mc, Pageable pageable)
-    {
-        return collaborateurRepository.findCollaborateur(mc,pageable);
-    }
+    
 
     @Override
-    public Collaborateur findOneCollaborateurByEmail(String email)
+    public Collaborateur findCollaborateurByEmail(String email)
     {
-        return collaborateurRepository.findFirstByEmailUtilisateur(email);
+        return collaborateurRepository.findByCollaborateurEmailUtilisateur(email);
     }
 
-    @Override
-    public Collaborateur getCollaborateurByEmail(String email)
-    {
-        return collaborateurRepository.findFirstByEmailUtilisateur(email);
-    }
+    
 }
