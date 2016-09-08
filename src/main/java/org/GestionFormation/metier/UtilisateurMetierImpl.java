@@ -51,6 +51,8 @@ public class UtilisateurMetierImpl implements UtilisateurMetier
         return user;
     }
     
+    
+    
     @Override
     public List<Utilisateur> findByFullName(String nom, String prenom)
     {
@@ -139,6 +141,19 @@ public class UtilisateurMetierImpl implements UtilisateurMetier
     {
         Utilisateur user = getUtilisateur(idUser);
         return (List<RoleUtilisateur>) user.getRoles();
+    }
+
+    @Override
+    public void supprimerUtilisateur(Utilisateur user)
+    {
+        Utilisateur u = getUtilisateur(user.getIdUtilisateur());
+        utilisateurRepository.delete(u.getIdUtilisateur());
+    }
+
+    @Override
+    public Utilisateur findByEmail(String email)
+    {
+        return utilisateurRepository.findFirstByEmailUtilisateur(email);
     }
     
 }

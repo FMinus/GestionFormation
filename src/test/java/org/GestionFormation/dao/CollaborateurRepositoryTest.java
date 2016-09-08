@@ -8,6 +8,7 @@ package org.GestionFormation.dao;
 import java.util.List;
 import org.GestionFormation.entities.Collaborateur;
 import org.GestionFormation.entities.Utilisateur;
+import org.GestionFormation.metier.CollaborateurMetier;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class CollaborateurRepositoryTest
     @Autowired
     private CollaborateurRepository collaborateurRepository;
     
+    @Autowired
+    private CollaborateurMetier collaborateurMetier;
     
     @Test
     public void testDao()
@@ -47,5 +50,15 @@ public class CollaborateurRepositoryTest
             System.out.println(">"+c);
         }
         
+    }
+    
+    @Test
+    public void testCollab()
+    {
+        String email = "user1@mail.com";
+        
+        Collaborateur c = collaborateurMetier.getCollaborateurByEmail(email);
+        
+        assert(c!=null);
     }
 }

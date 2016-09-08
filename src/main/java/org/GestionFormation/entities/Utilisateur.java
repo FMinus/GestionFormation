@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -165,6 +166,42 @@ public class Utilisateur implements Serializable
     public String toString()
     {
         return "Utilisateur{" + "idUtilisateur=" + idUtilisateur + ", nomUtilisateur=" + nomUtilisateur + ", prenomUtilisateur=" + prenomUtilisateur + ", emailUtilisateur=" + emailUtilisateur + ", passwordUtilisateur=" + passwordUtilisateur + ", joinDate=" + joinDate + ", urlPhotoUtilisateur=" + urlPhotoUtilisateur + ", roles=" + roles + '}';
+    }
+
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        if (obj == null)
+        {
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        final Utilisateur other = (Utilisateur) obj;
+        if ( ! Objects.equals(this.nomUtilisateur, other.nomUtilisateur))
+        {
+            return false;
+        }
+        if ( ! Objects.equals(this.prenomUtilisateur, other.prenomUtilisateur))
+        {
+            return false;
+        }
+        if ( ! Objects.equals(this.emailUtilisateur, other.emailUtilisateur))
+        {
+            return false;
+        }
+        if ( ! Objects.equals(this.joinDate, other.joinDate))
+        {
+            return false;
+        }
+        return true;
     }
     
     

@@ -164,4 +164,10 @@ public class CollaborateurMetierImpl implements CollaborateurMetier
     {
         return collaborateurRepository.findFirstByEmailUtilisateur(email);
     }
+
+    @Override
+    public Collaborateur getCollaborateurByEmail(String email)
+    {
+        return collaborateurRepository.findFirstByEmailUtilisateur(email);
+    }
 }

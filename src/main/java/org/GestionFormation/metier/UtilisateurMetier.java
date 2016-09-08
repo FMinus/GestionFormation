@@ -24,10 +24,12 @@ public interface UtilisateurMetier
     public Page<Utilisateur> findPageUtilisateursOnly(String mc,Pageable pageable);
     public Utilisateur getUtilisateur(Long idUtilisateur);
     public List<Utilisateur> findByFullName(String nom,String prenom);
+    public Utilisateur findByEmail(String email);
     public Page<Utilisateur> findUtilisateurs(String mc,Pageable pageable);
     public Page<Utilisateur> findAllUtilisateurs(Pageable pgbl);
     public Utilisateur login(String email,String password);
     public Utilisateur addRoleToUser(Long idUser,String role);
     public List<RoleUtilisateur> getRoles(Long idUser);
+    public void supprimerUtilisateur(Utilisateur user);
     
 }
