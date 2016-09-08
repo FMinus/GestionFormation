@@ -37,7 +37,18 @@
   display: none !important;
 }
 
-
+.upload-left
+{
+    float: left;
+    size: 60%;
+    margin-right: 10px;
+}
+.upload-right
+{
+    float: left;
+    size: 20%;
+    
+}
 
 .green-panel-heading
 {

@@ -36,7 +36,7 @@ and open the template in the editor.
                                 <div class="spacer">
                                     <div class="panel panel-success">
                                         <div class="panel panel-heading">{{"Session Formation N°:"+a}}</div>
-                                        <form>
+                                        
                                             <div class="form-group panel-spacer">
                                                 <label>{{"Date Session N° "+a}}</label>
                                                 <input type="date" ng-model="arrayContent[$index].dateSession" class="form-control"/>
@@ -49,11 +49,22 @@ and open the template in the editor.
                                                     </option>
                                                 </select>
                                             </div>
+                                            
                                             <div class="form-group panel-spacer">
                                                 <label>{{"Fichiers Session N° "+a}}</label>
-                                                <input type="file" ng-model="arrayContent[$index].documents" class="form-control" accept=".jpeg,.png,.gif,.jpg" value="name"/>
+                                                <!--                                                <input type="file" onchange="angular.element(this).scope().setFile(this)" class="form-control" multiple/>
+                                                                                                {{theFile.name}}<br/>
+                                                                                                {{fileDocs}}-->
+                                                <!--<input type="file" id="file" name="file" multiple onchange="angular.element(this).scope().getFileDetails(this)" class="form-control" />-->
+                                                <input type="file" id="file" name="file" multiple ng-change="angular.element(this).scope().getFileDetails(this)" class="form-control" />
+                                                       
+                                                <input type="button" ng-click="uploadFiles()" value="Upload" class="center-block btn btn-toolbar spacer"/>
+                                                {{files}}
+                                                <p>
+                                                    <progress id="pro" value="0" class="center-block spacer"></progress>
+                                                </p>
                                             </div>    
-                                        </form>
+                                       
                                     </div>
                                 </div>
                             </li>

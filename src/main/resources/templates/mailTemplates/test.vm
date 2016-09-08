@@ -1,0 +1,19 @@
+<html>
+	<body>
+		
+		<h1 align="center" >Bonjour ${model.models.get(0)} </h1>
+
+		<h3 align="center">FeedBack validé par l'evaluateur .</h3>
+
+		<br/>
+		<div>
+                    Le FeedBack du collaborateur  <strong><em>${model.models.get(1)}</em></strong> sur le Projet 
+                    <strong>
+                        <em>${model.models.get(2)}</em>
+                    </strong> est validé 
+                </div>
+		<br/><br/><br/><hr/>
+		
+	</body>
+	<a href="mailto:lambda.bilan@gmail.com" target="_blank">Contactez-nous</a>
+</html>

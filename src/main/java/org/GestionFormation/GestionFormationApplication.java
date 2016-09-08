@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,6 +20,9 @@ import org.GestionFormation.entities.Formation;
 import org.GestionFormation.entities.ResponsableFormation;
 import org.GestionFormation.entities.SessionFormation;
 import org.GestionFormation.entities.Utilisateur;
+import org.GestionFormation.web.mail.ConfirmerInscription;
+import org.GestionFormation.web.mail.SimpleConfirmerInscription;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,17 +30,19 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootApplication
 public class GestionFormationApplication
 {
+    
+    
     @Transactional
     public static void main(String[] args) throws ParseException
     {
         ApplicationContext ctx = SpringApplication.run(GestionFormationApplication.class, args);
         
-        CollaborateurRepository collaborateurRepository = ctx.getBean(CollaborateurRepository.class);
-        FormateurRepository formateurRepository = ctx.getBean(FormateurRepository.class);
-        FormationRepository formationRepository = ctx.getBean(FormationRepository.class);
-        ResponsableFormationRepository responsableFormationRepository = ctx.getBean(ResponsableFormationRepository.class);
-        SessionFormationRepository sessionFormationRepository = ctx.getBean(SessionFormationRepository.class);
-        DocumentRepository documentRepository = ctx.getBean(DocumentRepository.class);
+//        CollaborateurRepository collaborateurRepository = ctx.getBean(CollaborateurRepository.class);
+//        FormateurRepository formateurRepository = ctx.getBean(FormateurRepository.class);
+//        FormationRepository formationRepository = ctx.getBean(FormationRepository.class);
+//        ResponsableFormationRepository responsableFormationRepository = ctx.getBean(ResponsableFormationRepository.class);
+//        SessionFormationRepository sessionFormationRepository = ctx.getBean(SessionFormationRepository.class);
+//        DocumentRepository documentRepository = ctx.getBean(DocumentRepository.class);
         
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         
