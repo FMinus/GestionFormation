@@ -13,12 +13,14 @@ import org.GestionFormation.entities.ResponsableFormation;
 import org.GestionFormation.entities.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Ayoub
  */
 @Service
+@Transactional
 public class ResponsableFormationMetierImpl implements ResponsableFormationMetier
 {
     @Autowired

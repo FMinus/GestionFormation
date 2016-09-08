@@ -10,12 +10,14 @@ import org.GestionFormation.dao.FormateurRepository;
 import org.GestionFormation.entities.Formateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Ayoub
  */
 @Service
+@Transactional
 public class FormateurMetierImpl implements FormateurMetier
 {
     @Autowired

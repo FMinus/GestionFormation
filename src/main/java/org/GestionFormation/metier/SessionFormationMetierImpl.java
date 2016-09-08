@@ -10,12 +10,14 @@ import org.GestionFormation.dao.SessionFormationRepository;
 import org.GestionFormation.entities.SessionFormation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Ayoub
  */
 @Service
+@Transactional
 public class SessionFormationMetierImpl implements SessionFormationMetier
 {
     @Autowired

@@ -10,12 +10,14 @@ import org.GestionFormation.dao.AbsenceRepository;
 import org.GestionFormation.entities.Absence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Ayoub
  */
 @Service
+@Transactional
 public class AbsenceMetierImpl implements AbsenceMetier
 {
     @Autowired
