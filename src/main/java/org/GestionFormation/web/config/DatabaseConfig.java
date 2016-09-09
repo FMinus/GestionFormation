@@ -30,7 +30,7 @@ public class DatabaseConfig
 //        return DataSourceBuilder.create().build();
 //    }
     
-    @Bean
+  @Bean
   public DataSource dataSource() 
   {
     DriverManagerDataSource driver = new DriverManagerDataSource();
