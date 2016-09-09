@@ -6,20 +6,17 @@
 package org.GestionFormation.web.config;
 
 import javax.sql.DataSource;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 /**
  *
  * @author Ayoub
  */
-@Configuration
+@EnableJpaRepositories(basePackages = "org.GestionFormation.dao")
+@EntityScan(basePackages = "org.GestionFormation.entities")
 public class DatabaseConfig
 {
 //    @Bean
@@ -30,15 +27,15 @@ public class DatabaseConfig
 //        return DataSourceBuilder.create().build();
 //    }
     
-  @Bean
-  public DataSource dataSource() 
-  {
-    DriverManagerDataSource driver = new DriverManagerDataSource();
-    driver.setDriverClassName("org.postgresql.Driver");
-    driver.setUrl("jdbc:postgresql://ec2-54-75-230-128.eu-west-1.compute.amazonaws.com:5432/d4apk3381p3q81");
-    driver.setUsername("vzzcihfqfomxzk");
-    driver.setPassword("mWB7SO-pEOFjTBX_8CpNALy1us");
-    return driver;
-  }
+//  @Bean
+//  public DataSource dataSource() 
+//  {
+//    DriverManagerDataSource driver = new DriverManagerDataSource();
+//    driver.setDriverClassName("org.postgresql.Driver");
+//    driver.setUrl("jdbc:postgresql://ec2-54-75-230-128.eu-west-1.compute.amazonaws.com:5432/d4apk3381p3q81");
+//    driver.setUsername("vzzcihfqfomxzk");
+//    driver.setPassword("mWB7SO-pEOFjTBX_8CpNALy1us");
+//    return driver;
+//  }
 
 }

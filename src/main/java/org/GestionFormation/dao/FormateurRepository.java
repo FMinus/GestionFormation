@@ -7,11 +7,13 @@ package org.GestionFormation.dao;
 
 import org.GestionFormation.entities.Formateur;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Ayoub
  */
+@Repository
 public interface FormateurRepository extends JpaRepository<Formateur,Long>
 {
     

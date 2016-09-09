@@ -5,15 +5,16 @@
  */
 package org.GestionFormation.dao;
 
-import java.util.List;
 import org.GestionFormation.entities.Document;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Ayoub
  */
+@Repository
 public interface DocumentRepository extends JpaRepository<Document,Long>
 {
     

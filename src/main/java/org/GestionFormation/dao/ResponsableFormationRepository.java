@@ -9,11 +9,13 @@ import org.GestionFormation.entities.ResponsableFormation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Ayoub
  */
+@Repository
 public interface ResponsableFormationRepository extends JpaRepository<ResponsableFormation,Long>
 {
     public ResponsableFormation findByResponsableEmailUtilisateur(String emailUtilisateur);

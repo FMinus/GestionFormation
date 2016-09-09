@@ -15,11 +15,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Ayoub
  */
+@Repository
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>
 {
     @Query("select u from Utilisateur u where u.nomUtilisateur = :nom and u.prenomUtilisateur = :prenom")

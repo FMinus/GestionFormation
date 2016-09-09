@@ -7,17 +7,16 @@ package org.GestionFormation.dao;
 
 import java.util.List;
 import org.GestionFormation.entities.Collaborateur;
-import org.GestionFormation.entities.Utilisateur;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Ayoub
  */
+@Repository
 public interface CollaborateurRepository extends JpaRepository<Collaborateur,Long>
 {
 //    @Query("select c from Collaborateur c fetch join c.collaborateur.nomUtilisateur like :x or c.collaborateur.prenomUtilisateur like :x")

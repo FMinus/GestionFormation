@@ -5,14 +5,15 @@
  */
 package org.GestionFormation.dao;
 
-import java.io.Serializable;
 import org.GestionFormation.entities.EvaluationFormation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Ayoub
  */
+@Repository
 public interface EvaluationFormationRepository extends JpaRepository<EvaluationFormation, Long>
 {
     
