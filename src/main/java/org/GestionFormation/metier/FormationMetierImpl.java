@@ -150,6 +150,11 @@ public class FormationMetierImpl implements FormationMetier
             user = utilisateurMetier.getUtilisateur(col.getCollaborateur().getIdUtilisateur());
             collaborateur = collaborateurMetier.findCollaborateurByEmail(user.getEmailUtilisateur());
             
+            if(collaborateur == null)
+            {
+                collaborateur = new Collaborateur(user, null, null);
+            }
+            
             if(collaborateur.getFormations() == null)
             {
                 collaborateur.setFormations(new ArrayList<Formation>());
