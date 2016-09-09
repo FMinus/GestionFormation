@@ -30,7 +30,7 @@ public class UserAccountPopulateMetier implements UserAccountPopulate
     private String baseName = "user";
     private String baseEmailCred = "@mail.com";
     private String basePassword = "123";
-    private String[] roleNames = {"ADMIN","USER","TESTER","MOD",};
+    private String[] roleNames = {"ADMIN","USER","TESTER","MOD"};
     
     @Autowired
     private UtilisateurMetier utilisateurMetier;
