@@ -58,7 +58,7 @@ public class ResponsableFormationMetierImpl implements ResponsableFormationMetie
     @Override
     public ResponsableFormation findByEmail(String email)
     {
-        return responsableFormationRepository.findByResponsableFormationEmailUtilisateur(email);
+        return responsableFormationRepository.findByResponsableEmailUtilisateur(email);
     }
 
     @Override
@@ -94,9 +94,15 @@ public class ResponsableFormationMetierImpl implements ResponsableFormationMetie
         getResponsableFormation(responsableFormation.getIdResp());
         utilisateurMetier.getUtilisateur(newResponsable.getIdUtilisateur());
         
-        responsableFormation.setResponsableFormation(newResponsable);
+        responsableFormation.setResponsable(newResponsable);
         
         return responsableFormationRepository.save(responsableFormation);
+    }
+
+    @Override
+    public ResponsableFormation findByIdUtilisateur(Long idUtilisateur)
+    {
+        return responsableFormationRepository.findByResponsableIdUtilisateur(idUtilisateur);
     }
 
     

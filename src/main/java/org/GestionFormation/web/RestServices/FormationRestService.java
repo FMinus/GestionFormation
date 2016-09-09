@@ -96,34 +96,9 @@ public class FormationRestService
     @RequestMapping(value = "creer" , method = RequestMethod.POST)
     public void creerFormations(@RequestBody Formation f)
     {
-//        List<Collaborateur> listCol = new ArrayList<>();
-//        Utilisateur u;
-//        
-//        for(Collaborateur col : f.getCollaborateurs())
-//        {
-//            u = utilisateurMetier.getUtilisateur(col.getIdUtilisateur());
-//            listCol.add(UserClassesConverter.userToCollaborateur(u));
-//        }
-//        
-//        List<Formateur> listFormateurs = new ArrayList<>();
-//        
-//        ResponsableFormation resp = UserClassesConverter.userToResponsableFormation(utilisateurMetier.getUtilisateur(f.getResponsableFormation().getIdUtilisateur()));
-//        
-//        f.setCollaborateurs(listCol);
-//        f.setResponsableFormation(resp);
-//        
-//        responsableFormationMetier.saveResponsableFormation(resp);
-//        for(Collaborateur col : listCol)
-//        {
-//             collaborateurMetier.saveCollaborateur(col);
-//        }
-//        
-//        for(Formateur form : listFormateurs)
-//        {
-//           formateurMetier.saveFormateur(form);
-//        }
 
-        Formation formation = formationMetier.saveFormation(f);
+
+        Formation formation = formationMetier.createFormation(f);
     }
     
     @RequestMapping(value = "pageFormations")

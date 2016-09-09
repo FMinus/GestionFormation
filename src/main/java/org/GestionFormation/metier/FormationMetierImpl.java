@@ -12,7 +12,9 @@ import org.GestionFormation.dao.FormationRepository;
 import org.GestionFormation.entities.Collaborateur;
 import org.GestionFormation.entities.Formateur;
 import org.GestionFormation.entities.Formation;
+import org.GestionFormation.entities.ResponsableFormation;
 import org.GestionFormation.entities.SessionFormation;
+import org.GestionFormation.entities.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +34,15 @@ public class FormationMetierImpl implements FormationMetier
     
     @Autowired
     private SessionFormationMetier sessionFormationMetier;
+    
+    @Autowired 
+    private ResponsableFormationMetier responsableFormationMetier;
+    
+    @Autowired
+    private UtilisateurMetier utilisateurMetier;
+    
+    @Autowired
+    private CollaborateurMetier collaborateurMetier;
     
     @Override
     public Formation saveFormation(Formation f)
@@ -98,6 +109,59 @@ public class FormationMetierImpl implements FormationMetier
     public Page<Formation> findFormationDateBetween(Date min, Date max, Pageable pageable)
     {
         return formationRepository.findFormationDateBetween(min, max, pageable);
+    }
+
+    @Override
+    public Formation createFormation(Formation f)
+    {
+        List<Collaborateur> listCol = new ArrayList<>();
+        Utilisateur user;
+        
+        System.out.println("nom formation "+f.getNomFormation());
+        System.out.println("desc "+f.getDescription());
+        System.out.println("resp "+f.getResponsableFormation().getResponsable().getIdUtilisateur());
+        for(Collaborateur col : f.getCollaborateurs())
+        {
+            System.out.println("colaborateur : "+col.getCollaborateur().getIdUtilisateur());
+        }
+        
+        
+        for(Collaborateur col : f.getCollaborateurs())
+        {
+            user = utilisateurMetier.getUtilisateur(col.getCollaborateur().getIdUtilisateur());
+            
+            if(col.getFormations() == null)
+            {
+                col.setFormations(new ArrayList<Formation>());
+            }
+            
+            col.getFormations().add(f);
+            collaborateurMetier.saveCollaborateur(col);
+            
+            listCol.add(col);
+        }
+        
+        ResponsableFormation resp = responsableFormationMetier.findByIdUtilisateur(f.getResponsableFormation().getResponsable().getIdUtilisateur());
+        
+        if(resp == null)
+            resp = new ResponsableFormation();
+        
+        List<Formation> listFresp = new ArrayList<>();
+        if(resp.getFormations()!=null)
+        {
+            listFresp = (List<Formation>) resp.getFormations();
+        }
+        listFresp.add(f);
+        resp.setResponsable(utilisateurMetier.getUtilisateur(f.getResponsableFormation().getResponsable().getIdUtilisateur()));
+        responsableFormationMetier.saveResponsableFormation(resp);
+        
+        
+        
+        f.setCollaborateurs(listCol);
+        f.setResponsableFormation(resp);
+        
+       return formationRepository.save(f);
+        
     }
     
     

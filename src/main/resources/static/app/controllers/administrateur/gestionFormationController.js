@@ -13,7 +13,7 @@ myApp.controller("gestionFormationController", function($http, $scope)
         dateFormation: "",
         responsableFormation: 
         {
-            idUtilisateur: null
+            responsable:{idUtilisateur: null}
         },
         collaborateurs : null,
        
@@ -45,7 +45,7 @@ myApp.controller("gestionFormationController", function($http, $scope)
     
     $scope.valider = function()
     {
-        $scope.formation.collaborateurs = $scope.arrayIdUsers($scope.formation.collaborateurs);
+       $scope.formation.collaborateurs = $scope.arrayIdUsers($scope.formation.collaborateurs);
        
         
         $http
@@ -56,6 +56,8 @@ myApp.controller("gestionFormationController", function($http, $scope)
             headers : {'Content-Type' : 'application/json'}
             
         });
+
+        console.log($scope.formation);
     };
     
     $scope.arrayIdUsers = function(p)
@@ -63,7 +65,7 @@ myApp.controller("gestionFormationController", function($http, $scope)
         var result = [];
         for (i = 0; i < p.length; i++) 
         { 
-            result[i] = {idUtilisateur:parseInt(p[i])};
+            result[i] = {collaborateur:{idUtilisateur:parseInt(p[i])}};
         }
         return result;
     };

@@ -14,8 +14,10 @@ import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.GestionFormation.entities.Collaborateur;
 import org.GestionFormation.entities.Utilisateur;
 import org.GestionFormation.entities.RoleUtilisateur;
+import org.GestionFormation.metier.CollaborateurMetier;
 import org.GestionFormation.metier.UtilisateurMetier;
 import org.GestionFormation.metier.RoleUtilisateurMetier;
 import org.GestionFormation.web.models.Result;
@@ -48,6 +50,9 @@ public class UtilisateurRestService
     
     @Autowired
     private RoleUtilisateurMetier roleUtilisateurMetier;
+    
+    @Autowired
+    private CollaborateurMetier collaborateurMetier;
     
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -163,6 +168,12 @@ public class UtilisateurRestService
     public List<RoleUtilisateur> getRoles(@RequestParam(value ="id") Long idUser)
     {
         return utilisateurMetier.getRoles(idUser);
+    }
+    
+    @RequestMapping("collaboration")
+    public Collaborateur getCollaborateur(@RequestParam(value ="email") String email)
+    {
+        return collaborateurMetier.findCollaborateurByEmail(email);
     }
     
     @RequestMapping(value = "addRoleToUser",method = RequestMethod.POST)

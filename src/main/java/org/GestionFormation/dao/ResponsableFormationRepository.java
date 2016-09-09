@@ -16,8 +16,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ResponsableFormationRepository extends JpaRepository<ResponsableFormation,Long>
 {
-    public ResponsableFormation findByResponsableFormationEmailUtilisateur(String emailUtilisateur);
-    public Page<ResponsableFormation> findByResponsableFormationEmailUtilisateur(String mc,Pageable pageable);
+    public ResponsableFormation findByResponsableEmailUtilisateur(String emailUtilisateur);
+    public ResponsableFormation findByResponsableIdUtilisateur(Long idUtilisateur);
+    public Page<ResponsableFormation> findByResponsableEmailUtilisateur(String mc,Pageable pageable);
     public ResponsableFormation findByFormationsNomFormation(String nomFormation);
 
 }

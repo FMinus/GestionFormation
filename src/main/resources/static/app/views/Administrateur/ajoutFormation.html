@@ -42,7 +42,7 @@ and open the template in the editor.
                                 
                                 <div class="pure-control-group spacer-sides-10">
                                     <label for="repeatSelectResponsable"> responsable :  </label>
-                                    <select name="repeatSelectResponsable" id="repeatSelectResponsable" ng-model="formation.responsableFormation.idUtilisateur" class="form-control input-sm m-bot15">
+                                    <select name="repeatSelectResponsable" id="repeatSelectResponsable" ng-model="formation.responsableFormation.responsable.idUtilisateur" class="form-control input-sm m-bot15">
                                         <option ng-repeat="option in optionsUtilisateurs" value="{{option.idUtilisateur}}">
                                             {{option.idUtilisateur}} - {{option.nomUtilisateur}} {{option.prenomUtilisateur}}
                                         </option>

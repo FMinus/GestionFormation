@@ -59,7 +59,8 @@ public class Collaborateur implements Serializable
     {
         return collaborateur;
     }
-
+    
+    @JsonSetter
     public void setCollaborateur(Utilisateur collaborateur)
     {
         this.collaborateur = collaborateur;

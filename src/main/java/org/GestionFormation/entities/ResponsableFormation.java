@@ -35,7 +35,7 @@ public class ResponsableFormation implements Serializable
     
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="ResponsableFormation_ID")
-    private Utilisateur ResponsableFormation;
+    private Utilisateur responsable;
     
     @OneToMany(mappedBy = "responsableFormation",fetch = FetchType.LAZY)
     private Collection<Formation> formations;
@@ -46,7 +46,7 @@ public class ResponsableFormation implements Serializable
 
     public ResponsableFormation(Utilisateur ResponsableFormation, Collection<Formation> formations)
     {
-        this.ResponsableFormation = ResponsableFormation;
+        this.responsable = ResponsableFormation;
         this.formations = formations;
     }
 
@@ -60,15 +60,16 @@ public class ResponsableFormation implements Serializable
         this.idResp = idResp;
     }
     
-    
-    public Utilisateur getResponsableFormation()
+    @JsonIgnore
+    public Utilisateur getResponsable()
     {
-        return ResponsableFormation;
+        return responsable;
     }
-
-    public void setResponsableFormation(Utilisateur ResponsableFormation)
+    
+    @JsonSetter
+    public void setResponsable(Utilisateur ResponsableFormation)
     {
-        this.ResponsableFormation = ResponsableFormation;
+        this.responsable = ResponsableFormation;
     }
 
     
@@ -87,7 +88,7 @@ public class ResponsableFormation implements Serializable
     @Override
     public String toString()
     {
-        return "ResponsableFormation{" + "idResponsableFormation=" + idResp + ", ResponsableFormation=" + ResponsableFormation + ", formations=" + formations + '}';
+        return "ResponsableFormation{" + "idResponsableFormation=" + idResp + ", ResponsableFormation=" + responsable + ", formations=" + formations + '}';
     }
 
     

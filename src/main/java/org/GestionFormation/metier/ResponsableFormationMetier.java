@@ -20,6 +20,7 @@ public interface ResponsableFormationMetier
     public ResponsableFormation getResponsableFormation(Long idResponsable);
     public List<ResponsableFormation> listResponsableFormation();
     public ResponsableFormation findByEmail(String email);
+    public ResponsableFormation findByIdUtilisateur(Long idUtilisateur);
     public ResponsableFormation ajoutFormation(Long idFormation,Long idResp);
     public void supprimerResponsableFormation(ResponsableFormation responsableFormation);
     public ResponsableFormation updateResponsableFormation(ResponsableFormation responsableFormation,Utilisateur newResponsable);

@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 public interface FormationMetier
 {
     public Formation saveFormation(Formation f);
+    public Formation createFormation(Formation f);
     public List<Formation> listFormations();
     public Formation getFormation(Long id);
     public Formation ajoutSession(Long idFormation,SessionFormation sessionFormation);
