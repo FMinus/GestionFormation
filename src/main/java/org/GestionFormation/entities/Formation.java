@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -58,10 +59,10 @@ public class Formation implements Serializable
     private Collection<Collaborateur> collaborateurs;
     
     
-    @OneToMany(mappedBy = "formation",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "formation",fetch = FetchType.LAZY,cascade=CascadeType.ALL, orphanRemoval=true)
     private Collection<SessionFormation> sessionFormations;
     
-    @OneToMany(mappedBy = "formation",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "formation",fetch = FetchType.LAZY,cascade=CascadeType.ALL, orphanRemoval=true)
     private Collection<EvaluationFormation> evaluationFormations;
      
     public Formation()
@@ -144,7 +145,7 @@ public class Formation implements Serializable
         this.responsableFormation = responsableFormation;
     }
     
-    //@JsonIgnore
+    @JsonIgnore
     public Collection<Collaborateur> getCollaborateurs()
     {
         return collaborateurs;

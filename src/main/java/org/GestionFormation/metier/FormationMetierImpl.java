@@ -80,9 +80,27 @@ public class FormationMetierImpl implements FormationMetier
     }
 
     @Override
-    public void deleteFormation(Formation f)
+    public void deleteFormation(Long  idFormation)
     {
-        formationRepository.delete(f);
+        Formation formation = getFormation(idFormation);
+        
+        List<Collaborateur> listCol = (List<Collaborateur>) formation.getCollaborateurs();
+        ResponsableFormation resp = formation.getResponsableFormation();
+        
+        if(resp != null)
+        {
+            resp.getFormations().remove(formation);
+        }
+        
+        if(listCol != null)
+        {
+            for(Collaborateur col : listCol)
+            {
+                col.getFormations().remove(formation);
+            }
+        }
+        
+        formationRepository.delete(formation);
     }
 
     @Override

@@ -26,5 +26,5 @@ public interface FormationMetier
     public Page<Formation> findFormations(String mc,Pageable pageable);
     public Formation findFormationByName(String nomFormation);
     public Page<Formation> findFormationDateBetween(Date min,Date max,Pageable pageable);
-    public void deleteFormation(Formation f);
+    public void deleteFormation(Long  idFormation);
 }

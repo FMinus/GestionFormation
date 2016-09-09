@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -42,10 +43,10 @@ public class SessionFormation implements Serializable
     @JoinColumn(name = "CODE_FORMATEUR")
     private Formateur formateur;
     
-    @OneToMany(mappedBy = "sessionFormation",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sessionFormation",fetch = FetchType.LAZY,cascade=CascadeType.ALL, orphanRemoval=true)
     private Collection<Document> documents;
     
-    @OneToMany(mappedBy = "sessionFormation",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sessionFormation",fetch = FetchType.LAZY,cascade=CascadeType.ALL, orphanRemoval=true)
     private Collection<Absence> absences;
     
     
