@@ -134,29 +134,31 @@ public class FormationMetierImpl implements FormationMetier
     {
         List<Collaborateur> listCol = new ArrayList<>();
         Utilisateur user;
+        Collaborateur collaborateur;
         
-        System.out.println("nom formation "+f.getNomFormation());
-        System.out.println("desc "+f.getDescription());
-        System.out.println("resp "+f.getResponsableFormation().getResponsable().getIdUtilisateur());
-        for(Collaborateur col : f.getCollaborateurs())
-        {
-            System.out.println("colaborateur : "+col.getCollaborateur().getIdUtilisateur());
-        }
+//        System.out.println("nom formation "+f.getNomFormation());
+//        System.out.println("desc "+f.getDescription());
+//        System.out.println("resp "+f.getResponsableFormation().getResponsable().getIdUtilisateur());
+//        for(Collaborateur col : f.getCollaborateurs())
+//        {
+//            System.out.println("colaborateur : "+col.getCollaborateur().getIdUtilisateur());
+//        }
         
         
         for(Collaborateur col : f.getCollaborateurs())
         {
             user = utilisateurMetier.getUtilisateur(col.getCollaborateur().getIdUtilisateur());
+            collaborateur = collaborateurMetier.findCollaborateurByEmail(user.getEmailUtilisateur());
             
-            if(col.getFormations() == null)
+            if(collaborateur.getFormations() == null)
             {
-                col.setFormations(new ArrayList<Formation>());
+                collaborateur.setFormations(new ArrayList<Formation>());
             }
             
-            col.getFormations().add(f);
-            collaborateurMetier.saveCollaborateur(col);
+            collaborateur.getFormations().add(f);
+            collaborateurMetier.saveCollaborateur(collaborateur);
             
-            listCol.add(col);
+            listCol.add(collaborateur);
         }
         
         ResponsableFormation resp = responsableFormationMetier.findByIdUtilisateur(f.getResponsableFormation().getResponsable().getIdUtilisateur());

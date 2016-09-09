@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,14 +19,13 @@ import org.GestionFormation.entities.RoleUtilisateur;
 import org.GestionFormation.metier.CollaborateurMetier;
 import org.GestionFormation.metier.UtilisateurMetier;
 import org.GestionFormation.metier.RoleUtilisateurMetier;
+import org.GestionFormation.web.DeploymentTest.UserAccountPopulateMetier;
 import org.GestionFormation.web.models.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -55,7 +53,7 @@ public class UtilisateurRestService
     private CollaborateurMetier collaborateurMetier;
     
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private UserAccountPopulateMetier userAccountPopulate;
     
     @RequestMapping(value = "ajout" , method = RequestMethod.POST)
     public Utilisateur saveUtilisateur(@RequestBody Utilisateur u)
@@ -164,6 +162,12 @@ public class UtilisateurRestService
         return user;
     }
     
+    @RequestMapping("testPopulate")
+    public void testPopulateUserAccounts()
+    {
+        userAccountPopulate.createUsers();
+    }
+    
     @RequestMapping("roles")
     public List<RoleUtilisateur> getRoles(@RequestParam(value ="id") Long idUser)
     {
@@ -202,4 +206,6 @@ public class UtilisateurRestService
         return utilisateurMetier.saveUtilisateur(user);
         
     }
+    
+    
 }

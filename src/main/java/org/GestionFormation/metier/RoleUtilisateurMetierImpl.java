@@ -58,5 +58,11 @@ public class RoleUtilisateurMetierImpl implements RoleUtilisateurMetier
         
         return role;
     }
+
+    @Override
+    public RoleUtilisateur findRoleUtilisateurByName(String nom)
+    {
+        return roleUtilisateurRepository.findFirstByOrderByRoleNameAsc(nom);
+    }
     
 }

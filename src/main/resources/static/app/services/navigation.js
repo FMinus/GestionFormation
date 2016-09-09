@@ -47,6 +47,17 @@ app.controller("navigation",["currentUser","$scope","$http",'utils','properties'
 
         };
         
+        $scope.populateDB = function()
+        {
+            
+            $http.get("/utilisateurs/testPopulate")
+                .success(function(data)
+                {
+                   console.log("DB Populated");
+                });
+
+        };
+        
         
         
         $scope.logout= function()

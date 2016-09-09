@@ -19,5 +19,6 @@ public interface RoleUtilisateurMetier
     public RoleUtilisateur saveRoleUtilisateur(RoleUtilisateur r);
     public RoleUtilisateur saveNewRoleUtilisateur(String nom,String Desc);
     public RoleUtilisateur getRoleUtilisateur(String nom);
+    public RoleUtilisateur findRoleUtilisateurByName(String nom);
     
 }
