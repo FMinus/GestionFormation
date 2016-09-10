@@ -117,7 +117,16 @@ public class CollaborateurMetierImpl implements CollaborateurMetier
     @Override
     public Collaborateur findCollaborateurByEmail(String email)
     {
+        
+        //Collaborateur col = collaborateurRepository.findByCollaborateurEmailUtilisateur(email);
+        //System.out.println("col "+col);
         return collaborateurRepository.findByCollaborateurEmailUtilisateur(email);
+    }
+
+    @Override
+    public List<Formation> findFormationsCollabByEmail(String email)
+    {
+        return (List<Formation>) findCollaborateurByEmail(email).getFormations();
     }
 
     

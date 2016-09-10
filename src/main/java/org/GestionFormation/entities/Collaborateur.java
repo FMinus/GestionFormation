@@ -101,7 +101,7 @@ public class Collaborateur implements Serializable
     }
     
     
-    @JsonIgnore
+    //@JsonIgnore
     public Collection<Formation> getFormations()
     {
         return formations;

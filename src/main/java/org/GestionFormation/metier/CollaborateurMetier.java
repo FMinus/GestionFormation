@@ -19,6 +19,7 @@ public interface CollaborateurMetier
 {
     public Collaborateur saveCollaborateur(Collaborateur collaborateur);
     public List<Collaborateur> listCollaborateur();
+    public List<Formation> findFormationsCollabByEmail(String email);
     public Collaborateur getCollaborateur(Long idCollaborateur);
     public Collaborateur findCollaborateurByEmail(String email);
     public Collaborateur ajoutFormation(Long idFormation,Long idCollaborateur);

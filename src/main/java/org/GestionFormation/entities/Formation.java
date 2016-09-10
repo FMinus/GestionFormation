@@ -50,7 +50,7 @@ public class Formation implements Serializable
     @JoinColumn(name = "CODE_RESP")
     private ResponsableFormation responsableFormation;
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "COLLABORATEUR_FORMATION",
             joinColumns = @JoinColumn(name="formation_id"),

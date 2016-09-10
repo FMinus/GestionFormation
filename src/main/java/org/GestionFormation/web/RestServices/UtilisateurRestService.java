@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.GestionFormation.entities.Collaborateur;
+import org.GestionFormation.entities.Formation;
 import org.GestionFormation.entities.Utilisateur;
 import org.GestionFormation.entities.RoleUtilisateur;
 import org.GestionFormation.metier.CollaborateurMetier;
@@ -26,7 +27,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -178,6 +178,12 @@ public class UtilisateurRestService
     public Collaborateur getCollaborateur(@RequestParam(value ="email") String email)
     {
         return collaborateurMetier.findCollaborateurByEmail(email);
+    }
+    
+    @RequestMapping("collaborationFormation")
+    public List<Formation> getCollaborateurFormations(@RequestParam(value ="email") String email)
+    {
+        return (List<Formation>) collaborateurMetier.findCollaborateurByEmail(email).getFormations();
     }
     
     @RequestMapping(value = "addRoleToUser",method = RequestMethod.POST)

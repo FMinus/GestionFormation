@@ -22,5 +22,5 @@ public interface RoleUtilisateurRepository extends JpaRepository<RoleUtilisateur
     @Query("select r from RoleUtilisateur r where r.nomRole = :roleName")
     public List<RoleUtilisateur> findByRoleName(@Param("roleName")String roleName);
     
-    public RoleUtilisateur findFirstByOrderByNomRoleAsc(String roleName);
+    public RoleUtilisateur findFirstByNomRole(String roleName);
 }

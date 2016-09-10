@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html ng-app="GestionFormation">
     <head>
-        <title>List Utilisateurs</title>
+        <title>List Collaborations</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/css/angular-bootstrap.css" rel="stylesheet">
@@ -20,16 +20,16 @@ and open the template in the editor.
         <div ng-include="'/app/views/includes/header_page.html'" ng-controller="navigation">
         </div>
         
-        <div class="container" ng-controller="listUtilisateursController">
+        <div class="container" ng-controller="listCollaborationController">
             
             
             <div class="" >
                 <div class="spacer panel-spacer">
                     <div class="panel panel-info">
                         <div class="panel panel-heading ng-cloak">
-                            List Utilisateurs : {{test}}
+                            List Collaborations : {{test}}
                             <a href="/app/views/home.html" class="send-left">index</a>
-                            <a href="/app/views/Administrateur/ajoutUtilisateur.html" class="send-left spacer-sides">Ajout Utilisateur</a>
+                            <a href="/app/views/home.html" class="send-left spacer-sides">home</a>
                         </div>
                         <div class="panel panel-body">
                             
@@ -47,19 +47,21 @@ and open the template in the editor.
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Nom</th>
-                                        <th>Prenom</th>
-                                        <th>Date Join</th>
-                                        <th>Email</th>
+                                        <th>Nom Utilisateur</th>
+                                        <th>Prenom Utilisateur</th>
+                                        <th>Email Utilisateur</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="e in pageUtilisateurs.content">
-                                        <td>{{e.idUtilisateur}}</td>
-                                        <td>{{e.nomUtilisateur}}</td>
-                                        <td>{{e.prenomUtilisateur}}</td>
-                                        <td>{{e.joinDate|date:'yyyy-MM-dd'}}</td>
-                                        <td>{{e.emailUtilisateur}}</td>
+                                    <tr ng-repeat="c in pageCollaboration">
+                                        <td>{{c.idUtilisateur}}</td>
+                                        <td>{{c.nomUtilisateur}}</td>
+                                        <td>{{c.prenomUtilisateur}}</td>
+                                        <td>{{c.emailUtilisateur}}</td>
+<!--                                        <td ng-repeat="f in listFormations(c.emailUtilisateur)">
+                                            {{f.nomFormation}} : 
+                                        </td>-->
+                                        
                                     </tr>
                                 </tbody>
                             </table>
@@ -98,6 +100,6 @@ and open the template in the editor.
         <script src="/app/services/security.js" type="text/javascript"></script>
         
         <script src="/app/services/navigation.js" type="text/javascript"></script>
-        <script src="/app/controllers/administrateur/listUtilisateursController.js"  type="text/javascript"></script>
+        <script src="/app/controllers/collaborateur/listCollaborationController.js" type="text/javascript"></script>
     </body>
 </html>

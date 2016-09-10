@@ -1,5 +1,5 @@
 var myApp = angular.module("GestionFormation");
-myApp.controller("gestionFormationController", function($http, $scope)
+myApp.controller("gestionFormationController",['$http','$scope',function($http, $scope)
 {
     $scope.test = "mytest";
     $scope.errors = null;
@@ -71,4 +71,4 @@ myApp.controller("gestionFormationController", function($http, $scope)
     };
     
     $scope.getUtilisateurs();
-});
+}]);

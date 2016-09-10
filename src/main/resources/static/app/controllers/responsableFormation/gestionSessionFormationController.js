@@ -1,18 +1,10 @@
 angular.module('GestionFormation')
-        .controller('gestonSessionsFormation',['$rootScope', '$http', '$location','$scope',function($rootScope, $http, $location,$scope)
+        .controller('gestonSessionsFormation',['$http','$scope','fileUpload',function($http,$scope,fileUpload)
     {
         $scope.test = "myTest";
         $scope.formation = 
                 {
-                    nomFormation : "",
-            Description: "",
-            dateFormation: "",
-            responsableFormation: 
-                    {
-                        idUtilisateur: null
-            },
-            collaborateurs : null,
-            
+                    idFormation:null, //fix
             sessionFormations : null
         };
         
@@ -102,108 +94,16 @@ angular.module('GestionFormation')
             return result;
         };
         
-        
-        $scope.setFiles = function(element) 
+        $scope.uploadFile = function(filename)
         {
-            $scope.$apply(function(scope) 
-            {
-                console.log('files:', element.files);
-                // Turn the FileList object into an Array
-                scope.files = [];
-                for (var i = 0; i < element.files.length; i++) 
-                {
-                    scope.files.push(element.files[i]);
-                }
-                
-            });
-        };
-        
-        $scope.mySetter = function(element,num)
-        {
-             $scope.$apply(function(scope) 
-            {
-                console.log('files:', element.files);
-                // Turn the FileList object into an Array
-                scope.files = [];
-                for (var i = 0; i < element.files.length; i++) 
-                {
-                    scope.files.push(element.files[i]);
-                }
-                
-            });
+            var file = $scope[filename];
+            console.log('file is ' + JSON.stringify(file));
+            console.dir(file);
+            var uploadUrl = "http://httpbin.org/post";
+            fileUpload.uploadFileToUrl(file, uploadUrl);
         };
         
         
         
         
-        
-        
-        
-        
-        
-        
-        // GET THE FILE INFORMATION.
-        $scope.getFileDetails = function (e) {
-            
-            $scope.files = [];
-            $scope.$apply(function () 
-            {
-                
-                // STORE THE FILE OBJECT IN AN ARRAY.
-                for (var i = 0; i < e.files.length; i++) 
-                {
-                    console.log("called");
-                    $scope.files.push(e.files[i]);
-                    //$scope.arrayContent[index].documents.push(e.files[i]);
-                }
-                
-            });
-        };
-        
-        // NOW UPLOAD THE FILES.
-        $scope.uploadFiles = function () 
-        {
-            
-            //FILL FormData WITH FILE DETAILS.
-            var data = new FormData();
-            
-            for (var i in $scope.files) 
-            {
-                data.append("uploadedFile", $scope.files[i]);
-                console.log($scope.files[i]);
-            }
-            
-            // ADD LISTENERS.
-            var objXhr = new XMLHttpRequest();
-            objXhr.addEventListener("progress", updateProgress, false);
-            objXhr.addEventListener("load", transferComplete, false);
-            
-            // SEND FILE DETAILS TO THE API.
-            //            objXhr.open("POST", "/api/fileupload/");
-            //            objXhr.send(data);
-        };
-        
-        // UPDATE PROGRESS BAR.
-        function updateProgress(e) 
-        {
-            if (e.lengthComputable) 
-            {
-                document.getElementById('pro').setAttribute('value', e.loaded);
-                document.getElementById('pro').setAttribute('max', e.total);
-            }
-        }
-        
-        // CONFIRMATION.
-        function transferComplete(e) 
-        {
-            //alert("Files uploaded successfully.");
-        }
-        
-        
-        
-}]).directive("fileread",function () {
-    return {
-            restric: 'A',
-            controller: function(){alert("test");}
-            }
-});
+    }]);
