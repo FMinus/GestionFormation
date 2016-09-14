@@ -5,20 +5,11 @@
  */
 package org.GestionFormation.web.RestServices;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.GestionFormation.entities.Collaborateur;
-import org.GestionFormation.entities.Formateur;
 import org.GestionFormation.entities.Formation;
-import org.GestionFormation.entities.ResponsableFormation;
 import org.GestionFormation.entities.SessionFormation;
-import org.GestionFormation.entities.Utilisateur;
-import org.GestionFormation.metier.CollaborateurMetier;
-import org.GestionFormation.metier.FormateurMetier;
 import org.GestionFormation.metier.FormationMetier;
-import org.GestionFormation.metier.ResponsableFormationMetier;
-import org.GestionFormation.metier.UserClassesConverter;
-import org.GestionFormation.metier.UtilisateurMetier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,17 +30,7 @@ public class FormationRestService
     @Autowired
     private FormationMetier formationMetier;
     
-    @Autowired 
-    private ResponsableFormationMetier responsableFormationMetier;
     
-    @Autowired
-    private CollaborateurMetier collaborateurMetier;
-    
-    @Autowired
-    private FormateurMetier formateurMetier;
-            
-    @Autowired
-    private UtilisateurMetier utilisateurMetier;        
 
    
     @RequestMapping(value = "get" , method = RequestMethod.GET)

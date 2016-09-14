@@ -37,18 +37,7 @@
   display: none !important;
 }
 
-.upload-left
-{
-    float: left;
-    size: 60%;
-    margin-right: 10px;
-}
-.upload-right
-{
-    float: left;
-    size: 20%;
-    
-}
+
 
 .green-panel-heading
 {
@@ -67,6 +56,23 @@
 .tabsdemoDynamicHeight md-content 
 {
   background-color: transparent !important; 
+}
+
+.file-upload-find
+{
+    max-width: 300px;
+    background-color: #f2f2f2;
+    right: initial;
+   
+	
+	
+	
+}
+
+.file-upload-upload
+{
+
+   
 }
 
 .tabsdemoDynamicHeight md-content md-tabs 

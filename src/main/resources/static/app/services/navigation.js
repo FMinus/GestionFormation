@@ -1,5 +1,5 @@
 var app=angular.module("GestionFormation");
-app.controller("navigation",["currentUser","$scope","$http",'utils','properties','security','requester','HTTP_METHOD',function(currentUser,$scope,$http,utils,properties,security,requester,HTTP_METHOD)
+app.controller("navigation",["currentUser","$scope","$http",'utils','properties','security','requester','HTTP_METHOD','$rootScope',function(currentUser,$scope,$http,utils,properties,security,requester,HTTP_METHOD,$rootScope)
     {
         $scope.test = "mytest";
         
@@ -9,6 +9,11 @@ app.controller("navigation",["currentUser","$scope","$http",'utils','properties'
         
         $scope.testReq = {};
         
+        $rootScope.currentUser= {};
+        $rootScope.$watch('currentUser',function()
+        {
+            console.log("root user "+$rootScope.currentUser.emailUtilisateur);
+        });
         
         
         
@@ -18,6 +23,8 @@ app.controller("navigation",["currentUser","$scope","$http",'utils','properties'
                     .then(function(data)
             {
                 $scope.current = data;
+                $rootScope.currentUser = data;
+                
             });
         };
         
@@ -27,6 +34,7 @@ app.controller("navigation",["currentUser","$scope","$http",'utils','properties'
                     .then(function(data)
             {
                 $scope.fullcurrent = data;
+                $rootScope.fullCurrentUser = data;
             });
         };
         

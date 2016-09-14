@@ -27,7 +27,7 @@ and open the template in the editor.
                 <div class="spacer panel-spacer">
                     <div class="panel panel-info">
                         <div class="panel panel-heading ng-cloak">
-                            List Collaborations : {{test}}
+                            List Collaborations de : {{user.emailUtilisateur}}
                             <a href="/app/views/home.html" class="send-left">index</a>
                             <a href="/app/views/home.html" class="send-left spacer-sides">home</a>
                         </div>
@@ -50,6 +50,7 @@ and open the template in the editor.
                                         <th>Nom Utilisateur</th>
                                         <th>Prenom Utilisateur</th>
                                         <th>Email Utilisateur</th>
+                                        <th>Formations</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,9 +59,9 @@ and open the template in the editor.
                                         <td>{{c.nomUtilisateur}}</td>
                                         <td>{{c.prenomUtilisateur}}</td>
                                         <td>{{c.emailUtilisateur}}</td>
-<!--                                        <td ng-repeat="f in listFormations(c.emailUtilisateur)">
-                                            {{f.nomFormation}} : 
-                                        </td>-->
+                                        <td>{{c.formations}}</td>
+                                              
+                                       
                                         
                                     </tr>
                                 </tbody>

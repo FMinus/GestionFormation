@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -19,23 +20,29 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Ayoub
  */
 @RestController
+@RequestMapping(value = "/responsableformations")
 public class ResponsableFormationRestService
 {
     @Autowired
     private ResponsableFormationMetier responsableFormationMetier;
     
-    @RequestMapping(value = "/responsableformations" , method = RequestMethod.POST)
+    @RequestMapping(value = "/ajout" , method = RequestMethod.POST)
     public ResponsableFormation saveResponsableFormation(@RequestBody ResponsableFormation r)
     {
         return responsableFormationMetier.saveResponsableFormation(r);
     }
     
-    @RequestMapping(value = "/responsableformations" , method = RequestMethod.GET)
+    @RequestMapping(value = "/list" , method = RequestMethod.GET)
     public List<ResponsableFormation> listResponsableFormation()
     {
         return responsableFormationMetier.listResponsableFormation();
     }
     
+    @RequestMapping(value = "/findByEmail" , method = RequestMethod.GET)
+    public ResponsableFormation findResponsableFormationByEmail(@RequestParam(name = "email") String email)
+    {
+        return responsableFormationMetier.findByEmail(email);
+    }
     
     
 }

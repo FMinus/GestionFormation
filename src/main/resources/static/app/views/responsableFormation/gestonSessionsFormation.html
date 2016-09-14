@@ -21,50 +21,66 @@ and open the template in the editor.
         <div class="" ng-controller="gestonSessionsFormation">
             <div class="spacer panel-spacer">
                 <div class="panel panel-info">
-                    <div class="panel panel-heading ng-cloak">Gestion Sessions Formation : {{test}}<a href="/app/views/home.html" class="send-left">index</a></div>
+                    <div class="panel panel-heading ng-cloak">Gestion Sessions Formation : {{user.emailUtilisateur}}<a href="/app/views/home.html" class="send-left">index</a></div>
                     <div class="panel panel-body">
                         
+                        
+                        
                         <div class="form-group">
-                            <button ng-click="deleteSection()" class="btn btn-danger send-left" style="margin-left: 10px;">Supprimer</button>
-                            <button ng-click="addSection()" class="pure-button pure-button-primary send-left" >Ajout</button>
+                            <button ng-click="deleteSection()" class="btn btn-danger send-left" style="margin-left: 10px;">
+                                <span class="glyphicon glyphicon-minus-sign"></span>
+                                Supprimer
+                            </button>
                             
-                            Sessions a Crée :  {{arrayLength}}
+                            <button ng-click="addSection()" class="btn btn-primary send-left" >
+                                <span class="glyphicon glyphicon-plus-sign"></span>
+                                Ajouter
+                            </button>
+                        </div>
+                        <br/>
+                        
+                        <div class="form-group">
+                            <label for="selectFormation">Formation : </label>
+                            <select name="selectFormation" id="selectFormation" ng-model="formation.idFormation" class="form-control">
+                                <option ng-repeat="option in listFormation" value="{{option.idFormation}}">
+                                    {{option.idFormation}} - {{option.nomFormation}} 
+                                </option>
+                            </select>
                         </div>
                         
-                        <ul>
-                            <li ng-repeat="a in arrayNum track by $index" class="ng-cloak">
+                        <div class="well well-sm spacer">
+                            Sessions a Crée : <span class="badge send-left"><b> {{arrayLength}} </b></span>
+                        </div>
+                        
+                        
+                        
+                        <ul class="list-group spacer ng-cloak">
+                            <li ng-repeat="a in arrayNum track by $index" class="ng-cloak list-group-item">
                                 <div class="spacer">
                                     <div class="panel panel-success">
                                         <div class="panel panel-heading">{{"Session Formation N°:"+a}}</div>
                                         
-                                            <div class="form-group panel-spacer">
-                                                <label>{{"Date Session N° "+a}}</label>
-                                                <input type="date" ng-model="arrayContent[$index].dateSession" class="form-control"/>
-                                            </div>
-                                            <div class="form-group panel-spacer">
-                                                <label>{{"Formateur Session N° "+a}}</label>
-                                                <select name="repeatSelectResponsable" id="repeatSelectResponsable" ng-model="arrayContent[$index].formateur.idUtilisateur" class="form-control">
-                                                    <option ng-repeat="option in listFormateurs" value="{{option.idUtilisateur}}">
-                                                        {{option.idUtilisateur}} - {{option.nomUtilisateur}} {{option.prenomUtilisateur}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            
-                                            <div class="form-group panel-spacer">
-                                                <label>{{"Fichiers Session N° "+a}}</label>
-                                                
-                                                <input type="file" file-model="{{'myFile' + $index}}" class="form-control" multiple/>
-                                                <button ng-click="uploadFile('myFile' + $index)" class="btn btn-block spacer">upload me</button>
-                                               
-<!--                                                <input type="file" id="file" name="file" multiple ng-change="angular.element(this).scope().getFileDetails(this)" class="form-control" />
-                                                       
-                                                <input type="button" ng-click="uploadFiles()" value="Upload" class="center-block btn btn-toolbar spacer"/>
-                                                {{files}}
-                                                <p>
-                                                    <progress id="pro" value="0" class="center-block spacer"></progress>
-                                                </p>-->
-                                            </div>    
-                                       
+                                        <div class="form-group panel-spacer">
+                                            <label>{{"Date Session N° "+a}}</label>
+                                            <input type="date" ng-model="arrayContent[$index].dateSession" class="form-control"/>
+                                        </div>
+                                        <div class="form-group panel-spacer">
+                                            <label>{{"Formateur Session N° "+a}}</label>
+                                            <select name="repeatSelectResponsable" id="repeatSelectResponsable" ng-model="arrayContent[$index].formateur.idUtilisateur" class="form-control">
+                                                <option ng-repeat="option in listFormateurs" value="{{option.idUtilisateur}}">
+                                                    {{option.idUtilisateur}} - {{option.nomUtilisateur}} {{option.prenomUtilisateur}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group panel-spacer">
+                                            <label>{{"Fichiers Session N° "+a}}</label>
+                                            <span class="file-upload-find">
+                                                <input type="file" file-model="{{'myFile' + $index}}" class="form-control file-upload-find" multiple/>
+                                            </span>
+                                            <button ng-click="uploadFile('myFile'+ $index , $index)" class="pure-button file-upload-upload"><span class="glyphicon glyphicon-upload"></span> Upload</button>
+                                        </div>    
+                                        
                                     </div>
                                 </div>
                             </li>
@@ -74,8 +90,11 @@ and open the template in the editor.
                         
                         
                     </div>
-                    <div class="panel panel-spacer">
-                        <button ng-click="Valider()()" class="btn btn-success bottom center-block">Valider</button>
+                    <div class=" panel-spacer" style="margin-bottom: 10px;">
+                        <button ng-click="Valider()()" class="btn btn-success bottom center-block">
+                            <span class="glyphicon glyphicon-ok-circle"></span>
+                            Valider
+                        </button>
                     </div>
                 </div>
             </div>

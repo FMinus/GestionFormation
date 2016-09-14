@@ -1,10 +1,10 @@
 angular.module('GestionFormation')
-        .controller('gestonSessionsFormation',['$http','$scope','fileUpload',function($http,$scope,fileUpload)
+        .controller('gestonSessionsFormation',['$http','$scope','fileUpload','$rootScope',function($http,$scope,fileUpload,$rootScope)
     {
         $scope.test = "myTest";
         $scope.formation = 
-                {
-                    idFormation:null, //fix
+        {
+            idFormation:null, //fix
             sessionFormations : null
         };
         
@@ -21,7 +21,18 @@ angular.module('GestionFormation')
         $scope.arrayNum = [];
         $scope.arrayContent = [];
         $scope.listFormateurs = [];
+        $scope.listFormation = [];
         $scope.listDocuments = [];
+        
+        $rootScope.currentUser;
+        
+        
+        $rootScope.$watch('currentUser',function()
+        {
+            $scope.user = $rootScope.currentUser;
+            $scope.getFormations($scope.user.emailUtilisateur);
+        });
+        
         
         $scope.addSection = function()
         {
@@ -33,8 +44,6 @@ angular.module('GestionFormation')
             
             $scope.arrayNum.push(num);
             $scope.arrayContent.push({dateSession : null,formateur:{idUtilisateur: null},documents: null});
-            //$scope.docs = [];
-            //console.log($scope.arrayContent);
         };
         
         $scope.deleteSection = function()
@@ -63,13 +72,26 @@ angular.module('GestionFormation')
                 
             });
         };
+        
+        $scope.getFormations = function(email)
+        {
+            $http.get("/responsableformations/findByEmail?email="+email)
+                    .success(function(data)
+            {
+                $scope.listFormation = data.formations;
+                
+            });
+        };
+        
+        
         $scope.getUtilisateurs();
         
         $scope.testSubmit = function(data)
         {
             for(var i=0; i<data.length;i++)
             {
-                console.log("date: "+data[i].dateSession+" - Formateur: "+data[i].formateur.idUtilisateur+" - docs: "+data[i].documents);
+                $scope.uploadFile('myFile'+ i , i);
+                console.log("date: "+data[i].dateSession+" - Formateur: "+data[i].formateur.idUtilisateur+" - docs: "+data[i].documents.nomDocument);
             }
             
         };
@@ -94,13 +116,25 @@ angular.module('GestionFormation')
             return result;
         };
         
-        $scope.uploadFile = function(filename)
+        $scope.uploadFile = function(filename,index)
         {
             var file = $scope[filename];
-            console.log('file is ' + JSON.stringify(file));
-            console.dir(file);
+            //console.log('file is ' + JSON.stringify(file));
+            //console.log('file is ' + filename + " - num : "+index);
+            //console.dir(file);
+            //console.log(file);
+            //console.log(index);
+            
+            $scope.arrayContent[index].documents = 
+                    {
+                        nomDocument:file.name,
+                        dateAjout: file.lastModified
+                    };
+            
             var uploadUrl = "http://httpbin.org/post";
             fileUpload.uploadFileToUrl(file, uploadUrl);
+            
+            
         };
         
         
