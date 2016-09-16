@@ -54,19 +54,22 @@ and open the template in the editor.
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="e in pageUtilisateurs.content">
+                                    <tr ng-repeat="e in pageUtilisateurs.content" class="clickable">
+                                        
                                         <td>{{e.idUtilisateur}}</td>
                                         <td>{{e.nomUtilisateur}}</td>
                                         <td>{{e.prenomUtilisateur}}</td>
                                         <td>{{e.joinDate|date:'yyyy-MM-dd'}}</td>
                                         <td>{{e.emailUtilisateur}}</td>
+                                        <td><button ng-click="SupprimerUser(e.idUtilisateur)">Supprimer</button></td>
+                                        
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="container spacer">
-                                <ul class="nav nav-pills">
+                                <ul class="nav nav-pills ">
                                     <li class ="clickable" ng-repeat="p in pages track by $index" ng-class="{active:$index==pageCourante}">
-                                        <a ng-click="goToPage($index)">{{$index}}</a>
+                                        <a ng-click="goToPage($index)">{{$index +1}}</a>
                                     </li>
                                 </ul>
                                 

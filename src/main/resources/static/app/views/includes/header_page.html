@@ -37,11 +37,13 @@
                             <ul class="dropdown-menu">
                                 <li><a >Edit Profile</a></li>
                                 <li><a >Send Mail</a></li>
-                                <li><a href="#">Emplois des Exams</a></li>
+                                <li><a href="#">Mes Collaborations</a></li>
                                 <li class="divider"></li>
-                                
+                                <li><a>Aide</a></li>
+                                <li> <a>Rapports</a></li>  
+                                <li class="divider"></li>
                                 <li><a ng-click="logout()">Logout</a></li>
-                                
+                                    
                             </ul>
                         </li>
                             
@@ -52,42 +54,65 @@
                     </ul>
                         
                         
-                    <!--TODO: WIP -->
+                        
                     <div ng-show="isAdmin()">
                         <ul class="nav navbar-nav navbar-right">                 
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a>1</a></li>
-                                    <li><a>2</a></li>
-                                    <li><a>3</a></li>
+                                    <li><a href="/app/views/Administrateur/listUtilisateurs.html">Gestion Utilisateurs</a></li>
+                                    <li><a href="#">Gestion des E-mails</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/app/views/Administrateur/ajoutFormation.html">Créer Formation</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
-                    <!-- WIP -->
-                        
-                    <nav class="col-sm-2 hidden-xs">
-                        <form class="navbar-form" role="search">
-                            <div class="input-group">
-                                <input  class="form-control pull-right" style="width: 300px; margin-right: 35px; border: 1px solid black; background-color: #e5e5e5;" placeholder="Search"/>
-                                <span class="input-group-btn">
-                                    <button type="reset" class="btn btn-default">
-                                        <span class="glyphicon glyphicon-remove">
-                                            <span class="sr-only">Close</span>
-                                        </span>
-                                    </button>
-                                        
-                                    <button  class="btn btn-default" value="Go">
-                                        <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                                        
-                                </span>
-                            </div>
-                        </form>
-                    </nav>
                         
                         
+                    <ul class="nav navbar-nav navbar-right" role="menu" aria-labelledby="dLabel">                 
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestion des Formations <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                <li><a href="/app/views/Administrateur/listFormations.html">List des Formations</a></li>
+                                    
+                                <li class="divider"></li>
+                                <li><a href="/app/views/Collaborateur/listCollaborations.html">Actions Collaborateur</a></li>
+                                <li><a href="">Actions Responsable</a></li>
+                                <li><a href="">Actions Formateur</a></li>
+                                    
+                                <li class="divider"></li>
+                            </ul>
+                        </li>
+                    </ul>
+                        
+                        
+                        
+                        
+                        
+                        
+                    <!--                    <nav class="col-sm-2 hidden-xs">
+                                            <form class="navbar-form" role="search">
+                                                <div class="input-group">
+                                                    <input  class="form-control pull-right" style="width: 200px; margin-right: 35px; border: 1px solid black; background-color: #e5e5e5;" placeholder="Search"/>
+                                                    <span class="input-group-btn">
+                                                        <button type="reset" class="btn btn-default">
+                                                            <span class="glyphicon glyphicon-remove">
+                                                                <span class="sr-only">Close</span>
+                                                            </span>
+                                                        </button>
+                                                            
+                                                        <button  class="btn btn-default" value="Go">
+                                                            <span class="glyphicon glyphicon-search"></span>
+                                                        </button>
+                                                            
+                                                    </span>
+                                                </div>
+                                            </form>
+                                        </nav>-->
+                                            
+                                            
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>

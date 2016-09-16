@@ -213,5 +213,14 @@ public class UtilisateurRestService
         
     }
     
+    @RequestMapping(value = "supprimer", method = RequestMethod.DELETE)
+    public void deleteUtilisateur(@RequestParam(value ="id") Long id) 
+    {
+        System.out.println("id : "+id);
+        Utilisateur user = new Utilisateur();
+        user.setIdUtilisateur(id);
+       utilisateurMetier.supprimerUtilisateur(user);
+    }
+    
     
 }

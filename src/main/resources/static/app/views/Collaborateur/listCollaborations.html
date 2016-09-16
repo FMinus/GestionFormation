@@ -23,7 +23,7 @@ and open the template in the editor.
         <div class="container" ng-controller="listCollaborationController">
             
             
-            <div class="" >
+            <div class="ng-cloak" >
                 <div class="spacer panel-spacer">
                     <div class="panel panel-info">
                         <div class="panel panel-heading ng-cloak">
@@ -34,46 +34,47 @@ and open the template in the editor.
                         <div class="panel panel-body">
                             
                             
-                            <form class="pure-form pure-form-aligned">
-                                <div class="pure-control-group">
-                                    <label>Mot Clé : </label>
-                                    <input type="text" ng-model="motCle"/>
-                                    <button class="btn btn-success" ng-click="recherche()"><span class="glyphicon glyphicon-search"></span></button>
-                                </div>
-                            </form>
-                            
-                            
-                            <table class="table table-striped spacer">
-                                <thead>
+                            <table class="table table-user-information">
+                                <tbody >
+                                   
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Nom Utilisateur</th>
-                                        <th>Prenom Utilisateur</th>
-                                        <th>Email Utilisateur</th>
-                                        <th>Formations</th>
+                                        <td><b>Id Collaboration</b></td>
+                                        <td>{{collaboration.idCollaborateur}} </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="c in pageCollaboration">
-                                        <td>{{c.idUtilisateur}}</td>
-                                        <td>{{c.nomUtilisateur}}</td>
-                                        <td>{{c.prenomUtilisateur}}</td>
-                                        <td>{{c.emailUtilisateur}}</td>
-                                        <td>{{c.formations}}</td>
-                                              
-                                       
-                                        
+                                    
+                                    <tr>
+                                        <td><b>Nom Complet</b></td>
+                                        <td>{{collaboration.collaborateur.nomUtilisateur}} <span> - </span>  {{collaboration.collaborateur.prenomUtilisateur}} </td>
                                     </tr>
+                                    
+                                    <tr>
+                                        <td><b>Date de Join : </b></td>
+                                        <td> {{collaboration.collaborateur.joinDate|date:'yyyy-MM-dd'}}</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><b>Email : </b></td>
+                                        <td>{{collaboration.collaborateur.emailUtilisateur}}</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><b>Formations : </b></td>
+                                        <td>
+                                            <div class="list-group">
+                                                <li ng-repeat="f in collaboration.formations" class="list-group-item">
+                                                    <h4 class="list-group-item-heading">{{f.idFormation}} : {{f.nomFormation}} <span class="send-left">{{f.dateFormation|date:'yyyy-MM-dd'}}</span></h4>
+                                                    <p class="list-group-item-text"> {{f.description}}</p>
+                                                </li>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                   
                                 </tbody>
                             </table>
-                            <div class="container spacer">
-                                <ul class="nav nav-pills">
-                                    <li class ="clickable" ng-repeat="p in pages track by $index" ng-class="{active:$index==pageCourante}">
-                                        <a ng-click="goToPage($index)">{{$index}}</a>
-                                    </li>
-                                </ul>
-                                
-                            </div> 
+                            
+                            
+                            
+                            
                         </div>
                     </div>
                 </div>

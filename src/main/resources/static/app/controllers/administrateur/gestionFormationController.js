@@ -9,7 +9,7 @@ myApp.controller("gestionFormationController",['$http','$scope',function($http, 
     $scope.formation = 
     {
         nomFormation : "",
-        Description: "",
+        description: "",
         dateFormation: "",
         responsableFormation: 
         {
@@ -71,4 +71,35 @@ myApp.controller("gestionFormationController",['$http','$scope',function($http, 
     };
     
     $scope.getUtilisateurs();
+    
+    
+    //List Formations
+    $scope.pageFormations = [];
+    $scope.pageCourante = 0;
+    $scope.size = 4;
+    $scope.pages = [];
+    
+    $scope.listFormations = function()
+    {
+        
+        $http.get("/formations/pageFormations?page="+$scope.pageCourante+"&size="+$scope.size)
+                .success(function(data)
+                {
+                    $scope.pageFormations = data;
+                    $scope.pages = new Array(data.totalPages);
+                });
+    };
+    
+     $scope.goToPage = function(p)
+    {
+        $scope.pageFormations = p;
+        $scope.listUtilisateurs();
+    };
+    
+    $scope.listFormations();
+    
+    $scope.test = function(i)
+    {
+        console.log(i);
+    };
 }]);

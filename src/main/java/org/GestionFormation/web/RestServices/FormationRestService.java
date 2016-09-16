@@ -88,8 +88,8 @@ public class FormationRestService
         Page<Formation> pageF = formationMetier.findFormations("%"+mc+"%",new PageRequest(page,size));
         //System.out.println("get list"+formationMetier.listFormations());
         
-        for(Formation f : pageF)
-            System.out.println("formation"+f);
+//        for(Formation f : pageF)
+//            System.out.println("formation"+f);
         
         return pageF;
     }

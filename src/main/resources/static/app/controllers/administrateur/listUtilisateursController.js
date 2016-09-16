@@ -4,7 +4,7 @@ myApp.controller("listUtilisateursController", function($http, $scope)
     $scope.test="myTest";
     $scope.pageUtilisateurs = [];
     $scope.pageCourante = 0;
-    $scope.size = 3;
+    $scope.size = 5;
     $scope.pages = [];
     $scope.motCle = "";
     
@@ -14,13 +14,13 @@ myApp.controller("listUtilisateursController", function($http, $scope)
         
         $http.get("/utilisateurs/pageUsers?page="+$scope.pageCourante+"&size="+$scope.size)
                 .success(function(data)
-                {
-                    $scope.pageUtilisateurs = data;
-                    $scope.pages = new Array(data.totalPages);
-                });
+        {
+            $scope.pageUtilisateurs = data;
+            $scope.pages = new Array(data.totalPages);
+        });
     };
     
-     $scope.goToPage = function(p)
+    $scope.goToPage = function(p)
     {
         $scope.pageCourante = p;
         $scope.recherche();
@@ -28,8 +28,20 @@ myApp.controller("listUtilisateursController", function($http, $scope)
         
     };
     
-    //$scope.listUtilisateurs();
+    $scope.test = function(i)
+    {
+        console.log("click : "+i);
+    };
     
+    $scope.SupprimerUser = function(i)
+    {
+        $http.delete("/utilisateurs/supprimer?id="+parseInt(i))
+                .success(function(data)
+        {
+            $scope.recherche();
+        });
+        
+    };
     
     
     
@@ -39,10 +51,10 @@ myApp.controller("listUtilisateursController", function($http, $scope)
     {
         $http.get("/utilisateurs/pageUsersOnly?page="+$scope.pageCourante+"&size="+$scope.size+"&mc="+$scope.motCle)
                 .success(function(data)
-                {
-                    $scope.pageUtilisateurs = data;
-                    $scope.pages = new Array(data.totalPages);
-                });
+        {
+            $scope.pageUtilisateurs = data;
+            $scope.pages = new Array(data.totalPages);
+        });
         
     };
     
