@@ -17,6 +17,7 @@ import org.GestionFormation.entities.Collaborateur;
 import org.GestionFormation.entities.Formation;
 import org.GestionFormation.entities.Utilisateur;
 import org.GestionFormation.entities.RoleUtilisateur;
+import org.GestionFormation.entities.SessionFormation;
 import org.GestionFormation.metier.CollaborateurMetier;
 import org.GestionFormation.metier.UtilisateurMetier;
 import org.GestionFormation.metier.RoleUtilisateurMetier;
@@ -174,6 +175,8 @@ public class UtilisateurRestService
         return utilisateurMetier.getRoles(idUser);
     }
     
+    
+    
     @RequestMapping("collaboration")
     public Collaborateur getCollaborateur(@RequestParam(value ="email") String email)
     {
@@ -222,5 +225,10 @@ public class UtilisateurRestService
        utilisateurMetier.supprimerUtilisateur(user);
     }
     
-    
+    @RequestMapping("sessions")
+    public List<SessionFormation> getSessionss(@RequestParam(value ="email") String email)
+    {
+        //TODO
+        return null;
+    }
 }

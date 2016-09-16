@@ -1,14 +1,13 @@
 var myApp = angular.module("GestionFormation");
-myApp.controller("listCollaborationController",['$http', '$scope','$rootScope', function($http, $scope,$rootScope)
+myApp.controller("listResponsablesController",['$http', '$scope','$rootScope', function($http, $scope,$rootScope)
     {
         $scope.test="myTest";
-        $scope.collaboration;
+        $scope.responsable;
         $scope.listFormations = [];
         $scope.pageCourante = 0;
         $scope.size = 3;
         $scope.pages = [];
-        
-        $scope.user;
+        $scope.motCle = "user1@mail.com";
         
         $rootScope.currentUser;
         
@@ -20,24 +19,24 @@ myApp.controller("listCollaborationController",['$http', '$scope','$rootScope', 
                 $scope.recherche();
         });
         
-        $scope.goToPage = function(p)
-        {
-            $scope.pageCourante = p;
-            $scope.recherche();
-        };
+//        $scope.goToPage = function(p)
+//        {
+//            $scope.pageCourante = p;
+//            $scope.recherche();
+//        };
         
         
         $scope.recherche = function()
         {
-            $http.get("/utilisateurs/collaboration?email="+$scope.user.emailUtilisateur)
+            $http.get("/responsableformations/findByEmail?email="+$scope.user.emailUtilisateur)
                     .success(function(data)
             {
-                $scope.collaboration = data;
-                $scope.pages = new Array(data.totalPages);
+                $scope.responsable = data;
+                //$scope.pages = new Array(data.totalPages);
             });
             
             
             
         };
-        
+        //$scope.recherche();
     }]);

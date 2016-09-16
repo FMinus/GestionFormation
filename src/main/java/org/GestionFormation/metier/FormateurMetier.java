@@ -16,4 +16,5 @@ public interface FormateurMetier
 {
     public Formateur saveFormateur(Formateur f);
     public List<Formateur> listFormateur();
+    public Formateur findFormateurByEmail(String email);
 }

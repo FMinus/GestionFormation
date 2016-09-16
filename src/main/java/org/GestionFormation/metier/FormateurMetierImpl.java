@@ -34,6 +34,12 @@ public class FormateurMetierImpl implements FormateurMetier
     {
         return formateurRepository.findAll();
     }
+
+    @Override
+    public Formateur findFormateurByEmail(String email)
+    {
+        return formateurRepository.findByFormateurEmailUtilisateur(email);
+    }
     
     
 }

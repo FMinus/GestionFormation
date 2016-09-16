@@ -33,7 +33,7 @@ public class ResponsableFormation implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idResp;
     
-    @OneToOne(fetch=FetchType.LAZY)
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="ResponsableFormation_ID")
     private Utilisateur responsable;
     
@@ -60,7 +60,7 @@ public class ResponsableFormation implements Serializable
         this.idResp = idResp;
     }
     
-    @JsonIgnore
+    //@JsonIgnore
     public Utilisateur getResponsable()
     {
         return responsable;

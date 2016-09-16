@@ -33,15 +33,18 @@ public class Absence implements Serializable
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CODE_SESSIONFORMATION")
     private SessionFormation sessionFormation;
+    
+    private boolean isPresent;
 
     public Absence()
     {
     }
 
-    public Absence(Collaborateur collaborateur, SessionFormation sessionFormation)
+    public Absence(Collaborateur collaborateur, SessionFormation sessionFormation,boolean isPresent)
     {
         this.collaborateur = collaborateur;
         this.sessionFormation = sessionFormation;
+        this.isPresent = isPresent;
     }
     
     
@@ -75,6 +78,17 @@ public class Absence implements Serializable
         this.sessionFormation = sessionFormation;
     }
 
+    public boolean isIsPresent()
+    {
+        return isPresent;
+    }
+
+    public void setIsPresent(boolean isPresent)
+    {
+        this.isPresent = isPresent;
+    }
+    
+    
     @Override
     public String toString()
     {

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -19,21 +20,30 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Ayoub
  */
 @RestController
+@RequestMapping(value = "/formateurs")
 public class FormateurRestService
 {
     @Autowired
     private FormateurMetier formateurMetier;
     
-    @RequestMapping(value = "/formateurs" , method = RequestMethod.POST)
+    @RequestMapping(value = "ajout" , method = RequestMethod.POST)
     public Formateur saveFormateur(@RequestBody Formateur f)
     {
         return formateurMetier.saveFormateur(f);
     }
     
-    @RequestMapping(value = "/formateurs" , method = RequestMethod.GET)
+    @RequestMapping(value = "list" , method = RequestMethod.GET)
     public List<Formateur> listFormateur()
     {
         return formateurMetier.listFormateur();
     }
+    
+    @RequestMapping(value = "findByEmail" , method = RequestMethod.GET)
+    public Formateur findByEmail(@RequestParam(name = "email") String email)
+    {
+        return formateurMetier.findFormateurByEmail(email);
+    }
+    
+    
     
 }

@@ -85,8 +85,19 @@
     left: 100%;
     margin-top: -1px;
 }	
-	
 
+.center-me {
+  margin: 0 auto;
+}
+
+.center-vertical-parent {
+  position: relative;
+}
+.center-vertical-child {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
 .file-upload-upload
 {
