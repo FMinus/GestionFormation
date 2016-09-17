@@ -98,7 +98,7 @@ public class SessionFormation implements Serializable
         this.dateSession = dateSession;
     }
     
-    @JsonIgnore
+    //@JsonIgnore
     public Collection<Document> getDocuments()
     {
         return documents;
@@ -108,6 +108,10 @@ public class SessionFormation implements Serializable
     public void setDocuments(Collection<Document> documents)
     {
         this.documents = documents;
+        
+//        this.documents.clear();
+//        if(documents!=null)
+//            this.documents.addAll(documents);
     }
     
     @JsonIgnore
@@ -122,7 +126,7 @@ public class SessionFormation implements Serializable
         this.absences = absences;
     }
     
-    @JsonIgnore
+    //@JsonIgnore
     public Formateur getFormateur()
     {
         return formateur;
