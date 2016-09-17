@@ -13,14 +13,11 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author Ayoub
  */
-public class SecurityUtils
+public final class SecurityUtils
 {
     
     
-    
-    
-    
-    public byte [] hashGenerator(String message) throws UnsupportedEncodingException, NoSuchAlgorithmException
+    public static byte [] hashGenerator(String message) throws UnsupportedEncodingException, NoSuchAlgorithmException
     {
         byte[] bytesOfMessage = message.getBytes("UTF-8");
         
@@ -30,7 +27,12 @@ public class SecurityUtils
         return thedigest;
     }
     
-    public StringBuffer SHAHasher(String message) throws NoSuchAlgorithmException
+    public static String hashStringGenerator(String message) throws UnsupportedEncodingException, NoSuchAlgorithmException
+    {
+       return hashGenerator(message).toString();
+    }
+    
+    public static StringBuffer SHAHasher(String message) throws NoSuchAlgorithmException
     {
         
 

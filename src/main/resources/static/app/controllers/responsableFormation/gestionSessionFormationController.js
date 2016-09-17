@@ -1,25 +1,17 @@
 angular.module('GestionFormation')
-        .controller('gestonSessionsFormation',['$http','$scope','fileUpload','$rootScope',function($http,$scope,fileUpload,$rootScope)
+        .controller('gestonSessionsFormation',['$http','$scope','fileUpload','$rootScope','properties',function($http,$scope,fileUpload,$rootScope,properties)
     {
         $scope.test = "myTest";
-        $scope.formation = 
-        {
-            idFormation:null, //fix
-            sessionFormations : null
-        };
         
-        $scope.session = 
-                {
-                    dateSession : null,
-            formation: null,
-            formateur: null,
-            documents: null,
-            absences: null
-        };
+        $scope.idFormation; 
+        
         
         $scope.arrayLength = 0;
         $scope.arrayNum = [];
         $scope.arrayContent = [];
+        
+        
+        //To populate the selects in the form
         $scope.listFormateurs = [];
         $scope.listFormation = [];
         $scope.listDocuments = [];
@@ -43,7 +35,7 @@ angular.module('GestionFormation')
                 num = '0'+num;
             
             $scope.arrayNum.push(num);
-            $scope.arrayContent.push({dateSession : null,formateur:{idUtilisateur: null},documents: null});
+            $scope.arrayContent.push({formation:{idFormation:null},dateSession : null,formateur:{formateur:{idUtilisateur: null}},documents: null});
         };
         
         $scope.deleteSection = function()
@@ -58,8 +50,7 @@ angular.module('GestionFormation')
         
         $scope.Valider = function()
         {
-            //console.log("valider"+$scope.arrayContent);
-            //$scope.preSubmit($scope.arrayContent);
+            
             $scope.testSubmit($scope.arrayContent);
         };
         
@@ -101,41 +92,60 @@ angular.module('GestionFormation')
             var result = [];
             for (i = 0; i < p.length; i++) 
             { 
-                result[i] = {nomDocument:p[i]};
+                result[i] = 
+                {
+                    nomDocument:p[i].name,
+                    dateAjout:p[i].lastModified
+                };
             }
             return result;
         };
         
-        $scope.preSubmit = function(p)
-        {
-            var result = [];
-            for (i = 0; i < p.length; i++) 
-            { 
-                $scope.arrayContent[i].documents = $scope.arrayDocuments($scope.arrayContent[i].documents);
-            }
-            return result;
-        };
+
         
         $scope.uploadFile = function(filename,index)
         {
             var file = $scope[filename];
-            //console.log('file is ' + JSON.stringify(file));
+            console.log('file is ' + JSON.stringify(file));
             //console.log('file is ' + filename + " - num : "+index);
             //console.dir(file);
-            //console.log(file);
-            //console.log(index);
             
-            $scope.arrayContent[index].documents = 
-                    {
+            if(file == null)
+            {
+                file = {name:null,lastModified:null};
+            }
+            
+            $scope.arrayContent[index].documents =  
+            [{
                         nomDocument:file.name,
                         dateAjout: file.lastModified
-                    };
+            }];
             
-            var uploadUrl = "http://httpbin.org/post";
-            fileUpload.uploadFileToUrl(file, uploadUrl);
+            var uploadUrl =  "/sessionFormations/ajout";
             
+            //temp properties.urlServer+
+            $scope.arrayContent[index].formateur.formateur.idUtilisateur = parseInt($scope.arrayContent[index].formateur.formateur.idUtilisateur);
+            $scope.arrayContent[index].formation.idFormation = parseInt($scope.idFormation);
+            
+            
+            
+            fileUpload.uploadFileToUrl(file, uploadUrl,$scope.arrayContent[index]);
+            //fileUpload.uploadFileToUrl(file, uploadUrl,$scope.session);
+            //console.log($scope.arrayContent[index]);
             
         };
+        
+        
+        
+        //        $scope.preSubmit = function(p)
+//        {
+//            var result = [];
+//            for (i = 0; i < p.length; i++) 
+//            { 
+//                $scope.arrayContent[i].documents = $scope.arrayDocuments($scope.arrayContent[i].documents);
+//            }
+//            return result;
+//        };
         
         
         

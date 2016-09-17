@@ -41,11 +41,7 @@ public class ResponsableFormationRestService
     @RequestMapping(value = "findByEmail" , method = RequestMethod.GET)
     public ResponsableFormation findResponsableFormationByEmail(@RequestParam(name = "email") String email)
     {
-        System.out.println("called to find responsable de : "+email);
-        ResponsableFormation resp = responsableFormationMetier.findByEmail(email);
-        if(resp == null)
-            System.out.println("not found");
-        return resp;
+        return responsableFormationMetier.findByEmail(email);
     }
     
     

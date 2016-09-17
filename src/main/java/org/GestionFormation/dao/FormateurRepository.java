@@ -17,4 +17,5 @@ import org.springframework.stereotype.Repository;
 public interface FormateurRepository extends JpaRepository<Formateur,Long>
 {
     public Formateur findByFormateurEmailUtilisateur(String emailUtilisateur);
+    public Formateur findByFormateurIdUtilisateur(Long idUtilisateur);
 }

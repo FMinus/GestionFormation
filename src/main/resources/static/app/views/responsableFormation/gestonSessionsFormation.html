@@ -41,7 +41,7 @@ and open the template in the editor.
                         
                         <div class="form-group">
                             <label for="selectFormation">Formation : </label>
-                            <select name="selectFormation" id="selectFormation" ng-model="formation.idFormation" class="form-control">
+                            <select name="selectFormation" id="selectFormation" ng-model="idFormation" class="form-control">
                                 <option ng-repeat="option in listFormation" value="{{option.idFormation}}">
                                     {{option.idFormation}} - {{option.nomFormation}} 
                                 </option>
@@ -66,7 +66,7 @@ and open the template in the editor.
                                         </div>
                                         <div class="form-group panel-spacer">
                                             <label>{{"Formateur Session N° "+a}}</label>
-                                            <select name="repeatSelectResponsable" id="repeatSelectResponsable" ng-model="arrayContent[$index].formateur.idUtilisateur" class="form-control">
+                                            <select name="repeatSelectResponsable" id="repeatSelectResponsable" ng-model="arrayContent[$index].formateur.formateur.idUtilisateur" class="form-control">
                                                 <option ng-repeat="option in listFormateurs" value="{{option.idUtilisateur}}">
                                                     {{option.idUtilisateur}} - {{option.nomUtilisateur}} {{option.prenomUtilisateur}}
                                                 </option>
